@@ -48,18 +48,19 @@ import {
   cilCheckAlt,
 } from '@coreui/icons'
 
-import avatar1 from 'src/assets/images/avatars/1.jpg'
-import avatar2 from 'src/assets/images/avatars/2.jpg'
-import avatar3 from 'src/assets/images/avatars/3.jpg'
-import avatar4 from 'src/assets/images/avatars/4.jpg'
-import avatar5 from 'src/assets/images/avatars/5.jpg'
-import avatar6 from 'src/assets/images/avatars/6.jpg'
+import group from '../../assets/brand/group.png'
+import box from '../../assets/brand/box.png'
+import puls from '../../assets/brand/puls.png'
+import history from '../../assets/brand/history.png'
+import check from '../../assets/brand/check_circle.png'
+import error from '../../assets/brand/error.png'
+import not from '../../assets/brand/vector.png'
 
 import WidgetsBrand from '../widgets/WidgetsBrand'
 import WidgetsDropdown from '../widgets/WidgetsDropdown'
 import MainChart from './MainChart'
 import { CChartPie } from '@coreui/react-chartjs'
-import SearchBar from '../../components/Search'
+import SearchBar from '../../components/UserStatsCard'
 
 const Dashboard = () => {
   const progressExample = [
@@ -134,24 +135,24 @@ const Dashboard = () => {
   const tableExample = [
     {
       user: { name: 'Quintin Ed', new: true, registered: 'Jan 1, 2023' },
-      country: { name: 'India', flag: cilXCircle },
+      country: `<img src={box} />`,
       usage: {
         value: 74,
         period: 'Jun 11, 2023 - Jul 10, 2023',
         color: '#0048ff',
       },
-      payment: { name: 'Stripe', icon: cibCcStripe },
+      // payment: { name: 'Stripe', icon: cibCcStripe },
       activity: '1 hour ago',
     },
     {
       user: { name: 'Enéas Kwadwo', new: true, registered: 'Jan 1, 2023' },
-      country: { name: 'France', flag: cilCheckAlt },
+      country: `<img src={box} />`,
       usage: {
         value: 98,
         period: 'Jun 11, 2023 - Jul 10, 2023',
         color: '#0048ff',
       },
-      payment: { name: 'PayPal', icon: cibCcPaypal },
+      // payment: { name: 'PayPal', icon: cibCcPaypal },
       activity: 'Last month',
     },
     {
@@ -160,13 +161,13 @@ const Dashboard = () => {
         new: true,
         registered: 'Jan 1, 2023',
       },
-      country: { name: 'Spain', flag: cifEs },
+      country: `<img src={box} />`,
       usage: {
         value: 22,
         period: 'Jun 11, 2023 - Jul 10, 2023',
         color: '#0048ff',
       },
-      payment: { name: 'Google Wallet', icon: cibCcApplePay },
+      // payment: { name: 'Google Wallet', icon: cibCcApplePay },
       activity: 'Last week',
     },
     {
@@ -175,76 +176,112 @@ const Dashboard = () => {
         new: true,
         registered: 'Jan 1, 2023',
       },
-      country: { name: 'Poland', flag: cifPl },
+      country: `<img src={box} />`,
       usage: {
         value: 43,
         period: 'Jun 11, 2023 - Jul 10, 2023',
         color: '#0048ff',
       },
-      payment: { name: 'Amex', icon: cibCcAmex },
+      // payment: { name: 'Amex', icon: cibCcAmex },
       activity: 'Last week',
     },
   ]
 
+  const styles = {
+    font: {
+      fontSize: 20,
+    },
+    icons: {
+      height: 50,
+      width: 50,
+      backgroundColor: '#ebf1ff',
+      borderRadius: 10,
+      textAlign: 'center',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+  }
+
   return (
     <>
-      <CRow style={{display:'flex',alignItems:'flex-end'}}>
+      <h4 id="traffic" className="card-title mb-0">
+        Hello Fazi 👋🏼,
+      </h4>
+      <CRow style={{ display: 'flex', alignItems: 'flex-end' }}>
         <CCol xs={2}>
           <CWidgetStatsC
             className="mb-4"
-            icon={<CIcon icon={cilGroup} height={36} style={{display:'flex'}}/>}
+            icon={
+              <div style={styles.icons}>
+                <img src={group} style={{ textAlign: 'center' }} />
+              </div>
+            }
             text="+25%"
             value="89.9K"
             title="Users"
+            style={{ boxShadow: '4px 4px 15px 15px rgba(0, 0, 0, 0.05)', borderWidth: 0 }}
           />
         </CCol>
         <CCol xs={2}>
           <CWidgetStatsC
-          // style={{height:'60%'}}
+            // style={{height:'60%'}}
             className="mb-4"
-            icon={<CIcon icon={cilChartPie} height={36} style={{display:'flex'}} />}
+            icon={<div style={{...styles.icons, backgroundColor:'#fce6e6'}}>
+            <img src={box} style={{ textAlign: 'center' }} />
+          </div>}
             text="Widget helper text"
             title="Widget title"
             value="89.9K"
-          />
-        </CCol>
-        <CCol xs={2}>
-          <CWidgetStatsC
-            className="mb-4"
-            icon={<CIcon icon={cilChartPie} height={36} style={{display:'flex'}} />}
-            text="Widget helper text"
-            title="Widget title"
-            value="89.9K"
+            style={{ boxShadow: '4px 4px 15px 15px rgba(0, 0, 0, 0.05)', borderWidth: 0 }}
           />
         </CCol>
         <CCol xs={2}>
           <CWidgetStatsC
             className="mb-4"
-            icon={<CIcon icon={cilChartPie} height={36} style={{display:'flex'}} />}
+            icon={<div style={styles.icons}>
+            <img src={puls} style={{ textAlign: 'center' }} />
+          </div>}
             text="Widget helper text"
             title="Widget title"
             value="89.9K"
+            style={{ boxShadow: '4px 4px 15px 15px rgba(0, 0, 0, 0.05)', borderWidth: 0 }}
+          />
+        </CCol>
+        <CCol xs={2}>
+          <CWidgetStatsC
+            className="mb-4"
+            icon={<div style={{...styles.icons,backgroundColor:'#e9fbf6'}}>
+            <img src={history} style={{ textAlign: 'center' }} />
+          </div>}
+            text="Widget  text"
+            title="Widget title"
+            value="89.9K"
+            style={{ boxShadow: '4px 4px 15px 15px rgba(0, 0, 0, 0.05)', borderWidth: 0 }}
           />
         </CCol>
         <CCol xs={4}>
           <h4 className="card-title mb-2 color-black">Sessions By Company</h4>
-        <CCard className="mb-4">
-          <CCardBody>
-            <CChartPie
-              data={{
-                labels: ['Red', 'Green', 'Yellow'],
-                datasets: [
-                  {
-                    data: [300, 50, 100],
-                    backgroundColor: ['#0048ff','#df0404', '#20c997'],
-                    // hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
-                  },
-                ],
-              }}
-            />
-          </CCardBody>
-        </CCard>
-      </CCol>
+          <CCard className="mb-4">
+            <CCardBody
+              style={{ boxShadow: '4px 4px 15px 15px rgba(0, 0, 0, 0.05)', borderWidth: 0 }}
+            >
+              <CChartPie
+                data={{
+                  labels: ['Red', 'Green', 'Yellow'],
+                  datasets: [
+                    {
+                      data: [300, 50, 100],
+                      backgroundColor: ['#0048ff', '#df0404', '#20c997'],
+                      // hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+                    },
+                  ],
+                }}
+                style={{ borderWidth: 0 }}
+              />
+            </CCardBody>
+          </CCard>
+        </CCol>
       </CRow>
       {/* <CRow lg={12} style={{display:'flex',justifyContent:'space-around'}}>
     <CCol xs={3}>
@@ -318,81 +355,93 @@ const Dashboard = () => {
           </CCardBody>
       </CCol>
     </CRow> */}
-      <CCard className="mb-4">
-      {/* <WidgetsDropdown className="mb-4" /> */}
-      <br />
-      <CCol sm={5}>
-        <h4 id="traffic" className="card-title mb-2 color-black">
-          User Logs
-        </h4>
-      </CCol>
-      <div className="md-5"></div>
-      <CTable align="middle" className="mb-0 border" hover responsive>
-        <CTableHead className="text-nowrap">
-          <CTableRow>
-            <CTableHeaderCell >
-              {/* <CIcon icon={cilPeople} /> */}
-            </CTableHeaderCell >
-            <CTableHeaderCell >User</CTableHeaderCell>
-            <CTableHeaderCell className="text-center">Status</CTableHeaderCell>
-            <CTableHeaderCell ></CTableHeaderCell>
-            <CTableHeaderCell >Activity</CTableHeaderCell>
-            <CTableHeaderCell >Usage</CTableHeaderCell>
-          </CTableRow>
-        </CTableHead>
-        <CTableBody>
-          {tableExample.map((item, index) => (
-            <CTableRow v-for="item in tableItems" key={index}>
-              <CTableDataCell className="text-center">
-                {/* <CAvatar size="md" src={item.avatar.src} status={item.avatar.status} /> */}
-              </CTableDataCell>
-              <CTableDataCell>
-                <div>{item.user.name}</div>
-                {/* <div className="small text-body-secondary text-nowrap">
+      <CCard
+        className="mb-4"
+        style={{
+          boxShadow: '4px 4px 15px 15px rgba(0, 0, 0, 0.05)',
+          borderWidth: 0,
+          borderRadius: 10,
+        }}
+      >
+        {/* <WidgetsDropdown className="mb-4" /> */}
+        <br />
+        <CCol sm={5}>
+          <h4 id="traffic" className="card-title mb-2 color-black">
+            User Logs
+          </h4>
+        </CCol>
+        <div className="md-5"></div>
+        <CTable align="middle" className="mb-0 " hover responsive>
+          <CTableHead className="text-nowrap">
+            <CTableRow>
+              <CTableHeaderCell>{/* <CIcon icon={cilPeople} /> */}</CTableHeaderCell>
+              <CTableHeaderCell>User</CTableHeaderCell>
+              <CTableHeaderCell className="text-center">Status</CTableHeaderCell>
+              <CTableHeaderCell></CTableHeaderCell>
+              <CTableHeaderCell>Activity</CTableHeaderCell>
+              <CTableHeaderCell>Usage</CTableHeaderCell>
+            </CTableRow>
+          </CTableHead>
+          <CTableBody>
+            {tableExample.map((item, index) => (
+              <CTableRow v-for="item in tableItems" key={index}>
+                <CTableDataCell className="text-center">
+                  {/* <CAvatar size="md" src={item.avatar.src} status={item.avatar.status} /> */}
+                </CTableDataCell>
+                <CTableDataCell>
+                  <div>{item.user.name}</div>
+                  {/* <div className="small text-body-secondary text-nowrap">
                           <span>{item.user.new ? 'New' : 'Recurring'}</span> | Registered:{' '}
                           {item.user.registered}
                         </div> */}
-              </CTableDataCell>
-              <CTableDataCell className="text-center">
-                <CIcon size="xl" icon={item.country.flag} title={item.country.name} />
-              </CTableDataCell>
+                </CTableDataCell>
+                <CTableDataCell className="text-center">
+                  <CIcon size="xl" icon={item.country} />
+                </CTableDataCell>
 
-              <CTableDataCell className="text-center">
-                {/* <CIcon size="xl" icon={item.payment.icon} /> */}
-              </CTableDataCell>
-              <CTableDataCell>
-                <div className="small text-body-secondary text-nowrap">Last login</div>
-                <div className="fw-semibold text-nowrap">{item.activity}</div>
-              </CTableDataCell>
-              <CTableDataCell>
-                <div className="d-flex justify-content-between text-nowrap">
-                  <div className="fw-semibold">{item.usage.value}%</div>
-                  <div className="ms-3">
-                    <small className="text-body-secondary">{item.usage.period}</small>
-                  </div>
-                </div>
-                <CProgress color={item.usage.color} value={item.usage.value} />
-              </CTableDataCell>
-            </CTableRow>
-          ))}
-        </CTableBody>
-      </CTable>
-      <br />
+                <CTableDataCell className="text-center">
+                  {/* <CIcon size="xl" icon={item.payment.icon} /> */}
+                </CTableDataCell>
+                <CTableDataCell>
+      
+                  <div className="fw-semibold text-nowrap">{item.activity}</div>
+                </CTableDataCell>
+                <CTableDataCell style={{width:'30vw'}}>
+                  {/* <div className="d-flex justify-content-between text-nowrap">
+                    <div className="fw-semibold">{item.usage.value}%</div> */}
+                    {/* <div className="ms-3">
+                      <small className="text-body-secondary"></small>
+                    </div> */}
+                  {/* </div> */}
+                  <CProgress color={item.usage.color} value={item.usage.value} />
+                </CTableDataCell>
+              </CTableRow>
+            ))}
+          </CTableBody>
+        </CTable>
+        <br />
       </CCard>
-      <CCard className="mb-4">
-      <CCardBody>
-        <CRow>
-          <CCol sm={5}>
-            <h4 id="traffic" className="card-title mb-0">
-              Performence
-            </h4>
-            {/* <div className="small text-body-secondary">January - July 2023</div> */}
-          </CCol>
-          <CCol sm={7} className="d-none d-md-block">
-            {/* <CButton color="primary" className="float-end">
+      <CCard
+        className="mb-4"
+        style={{
+          boxShadow: '4px 4px 15px 15px rgba(0, 0, 0, 0.05)',
+          borderWidth: 0,
+          borderRadius: 10,
+        }}
+      >
+        <CCardBody>
+          <CRow>
+            <CCol sm={5}>
+              <h4 id="traffic" className="card-title mb-0">
+                Performence
+              </h4>
+              {/* <div className="small text-body-secondary">January - July 2023</div> */}
+            </CCol>
+            <CCol sm={7} className="d-none d-md-block">
+              {/* <CButton color="primary" className="float-end">
                 <CIcon icon={cilCloudDownload} />
               </CButton> */}
-            {/* <CButtonGroup className="float-end me-3">
+              {/* <CButtonGroup className="float-end me-3">
                 {['Day', 'Month', 'Year'].map((value) => (
                   <CButton
                     color="outline-secondary"
@@ -404,11 +453,11 @@ const Dashboard = () => {
                   </CButton>
                 ))}
               </CButtonGroup> */}
-          </CCol>
-        </CRow>
-        <MainChart />
-      </CCardBody>
-      {/* <CCardFooter>
+            </CCol>
+          </CRow>
+          <MainChart />
+        </CCardBody>
+        {/* <CCardFooter>
           <CRow
             xs={{ cols: 1, gutter: 4 }}
             sm={{ cols: 2 }}
@@ -534,9 +583,7 @@ const Dashboard = () => {
           </CCard>
         </CCol>
       </CRow> */}
-      <div style={{ padding: '20px' }}>
-        {/* <SearchBar /> */}
-      </div>
+      <div style={{ padding: '20px' }}>{/* <SearchBar /> */}</div>
     </>
   )
 }

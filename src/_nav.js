@@ -14,13 +14,15 @@ import {
   cilStar,
 } from '@coreui/icons'
 import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
+import { PiUser, PiDatabase, PiBuildings } from "react-icons/pi";
+import { IoDocumentTextOutline, IoHelpCircleOutline } from "react-icons/io5";
 
 const _nav = [
   {
     component: CNavItem,
     name: 'Dashboard',
     to: '/dashboard',
-    icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
+    icon: <PiBuildings className="nav-icon" />,
     badge: {
       color: 'info',
     },
@@ -49,7 +51,7 @@ const _nav = [
     component: CNavGroup,
     name: 'Base',
     to: '/base',
-    icon: <CIcon icon={cilPuzzle} customClassName="nav-icon" />,
+    icon: <PiUser className="nav-icon"  />,
     items: [
       {
         component: CNavItem,
@@ -132,7 +134,8 @@ const _nav = [
     component: CNavGroup,
     name: 'Buttons',
     to: '/buttons',
-    icon: <CIcon icon={cilCursor} customClassName="nav-icon" />,
+    icon: <IoDocumentTextOutline className="nav-icon"/>
+    ,
     items: [
       {
         component: CNavItem,
@@ -202,12 +205,12 @@ const _nav = [
     component: CNavItem,
     name: 'Charts',
     to: '/charts',
-    icon: <CIcon icon={cilChartPie} customClassName="nav-icon" />,
+    icon: <PiUser className="nav-icon"  />,
   },
   {
     component: CNavGroup,
     name: 'Icons',
-    icon: <CIcon icon={cilStar} customClassName="nav-icon" />,
+    icon: <IoHelpCircleOutline className="nav-icon" />,
     items: [
       {
         component: CNavItem,
@@ -233,7 +236,7 @@ const _nav = [
   {
     component: CNavGroup,
     name: 'Notifications',
-    icon: <CIcon icon={cilBell} customClassName="nav-icon" />,
+    icon: <PiDatabase className="nav-icon" />,
     items: [
       {
         component: CNavItem,

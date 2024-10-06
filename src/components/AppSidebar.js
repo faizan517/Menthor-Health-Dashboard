@@ -15,6 +15,8 @@ import { AppSidebarNav } from './AppSidebarNav'
 
 import { logo } from 'src/assets/brand/logo'
 import { sygnet } from 'src/assets/brand/sygnet'
+import menthorHealth from '../assets/brand/mentorhealth.png'
+// import mentorImage from '../../../assets/brand/mentorhealth2.png' // Import the image here
 
 // sidebar nav config
 import navigation from '../_nav'
@@ -34,11 +36,17 @@ const AppSidebar = () => {
         dispatch({ type: 'set', sidebarShow: visible })
       }}
     >
-      <CSidebarHeader className="border-bottom">
+      <CSidebarHeader
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          marginBottom: 20,
+        }}
+      >
+        {/* <div style={{height:100}}></div> */}
         <CSidebarBrand to="/">
-          {/* <CIcon customClassName="sidebar-brand-full" icon={logo} height={32} />
-          <CIcon customClassName="sidebar-brand-narrow" icon={sygnet} height={32} /> */}
-          {/* <img src={require()} /> */}
+          <img src={menthorHealth} alt="Mentor Health" height={50} />
         </CSidebarBrand>
         <CCloseButton
           className="d-lg-none"
