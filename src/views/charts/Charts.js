@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { CCard, CCardBody, CCardHeader } from '@coreui/react'
-import { CircularProgressbar, buildStyles } from 'react-circular-progressbar'
+import { CCard} from '@coreui/react'
 import 'react-circular-progressbar/dist/styles.css'
 import { useMediaQuery } from "react-responsive";
+import { CSmartPagination } from '@coreui/react-pro'
+
 
 // import axios from 'axios';
 import {
@@ -14,15 +15,13 @@ import {
   CTableDataCell,
   CBadge,
   CFormInput,
-  CPagination,
   CContainer,
   CRow,
   CCol,
   CFormSelect,
-  CPaginationItem,
 } from '@coreui/react'
 import UserStatsCard from '../../components/UserStatsCard'
-// import WidgetsDropdown from '../../widgets/WidgetsDropdown';
+import SearchBar from '../../components/search';
 
 const styles = {
   cardBody: {
@@ -58,6 +57,11 @@ const styles = {
     fontWeight: 500,
     fontSize: 14,
   },
+  title: {
+    fontFamily: 'poppins',
+    fontWeight: 500,
+    fontSize: 14,
+  },
   status: {
     height: 30,
     width: 70,
@@ -72,6 +76,17 @@ const styles = {
     fontFamily:'poppins',
     fontSize:14
   },
+  mainHeading:{
+    fontFamily:'poppins',
+    fontWeight:600,
+    fontSize:22
+  },
+  secHeading:{
+    fontFamily:'poppins',
+    fontWeight:400,
+    fontSize:14,
+    color:'rgba(22, 192, 152, 1)'
+  }
 }
 
 const UserTable = () => {
@@ -229,8 +244,8 @@ const UserTable = () => {
       >
         <CRow className="my-4 p-3">
           <CCol md={8}>
-            <h2>All Users</h2>
-            <p>Active Members</p>
+            <h2 style={styles.mainHeading}>All Users</h2>
+            <p style={styles.secHeading}>Active Members</p>
           </CCol>
           <CCol
             md={4}
@@ -242,6 +257,7 @@ const UserTable = () => {
               value={search}
               onChange={handleSearch}
               className="me-2"
+              style={{width:'250px',backgroundColor:'rgba(249, 251, 255, 1)'}}
             />
             <CFormSelect value={sortBy} onChange={handleSortChange}>
               <option value="newest">Sort by: Newest</option>
@@ -263,12 +279,12 @@ const UserTable = () => {
           </CTableHead>
           <CTableBody>
             {users.map((user) => (
-              <CTableRow key={user.id}>
-                <CTableDataCell>{user.name}</CTableDataCell>
-                <CTableDataCell>{user.company}</CTableDataCell>
-                <CTableDataCell>{user.phone}</CTableDataCell>
-                <CTableDataCell>{user.email}</CTableDataCell>
-                <CTableDataCell>{user.city}</CTableDataCell>
+              <CTableRow key={user.id} >
+                <CTableDataCell style={styles.title}>{user.name}</CTableDataCell>
+                <CTableDataCell style={styles.title}>{user.company}</CTableDataCell>
+                <CTableDataCell style={styles.title}>{user.phone}</CTableDataCell>
+                <CTableDataCell style={styles.title}>{user.email}</CTableDataCell>
+                <CTableDataCell style={styles.title}>{user.city}</CTableDataCell>
                 <CTableDataCell>
                   {user.isActive ? (
                     <CBadge style={styles.status}>Active</CBadge>
@@ -280,76 +296,24 @@ const UserTable = () => {
                       borderColor: 'rgba(223, 4, 4, 1)',
                       color: 'rgba(223, 4, 4, 1)',
                       fontFamily:'poppins',
-                      fontSize:14}} color="danger">Inactive</CBadge>
+                      fontSize:14}} >Inactive</CBadge>
                   )}
                 </CTableDataCell>
               </CTableRow>
             ))}
           </CTableBody>
         </CTable>
-
-        <CPagination className="justify-right-center">
-          <CPaginationItem
-            disabled={currentPage === 1}
-            onClick={() => setCurrentPage(currentPage - 1)}
-            style={{ cursor: 'pointer' }}
-          >
-            Previous
-          </CPaginationItem>
-          <CPaginationItem>{currentPage}</CPaginationItem>
-          <CPaginationItem
-            style={{ cursor: 'pointer' }}
-            onClick={() => setCurrentPage(currentPage + 1)}
-          >
-            Next
-          </CPaginationItem>
-        </CPagination>
+        <CSmartPagination
+          
+          size="sm"
+    activePage={currentPage}
+    pages={2}
+    onActivePageChange={setCurrentPage}
+    className="pagination"
+  />
       </CCard>
-      {/* <WidgetsDropdown /> */}
     </CContainer>
   )
 }
 
 export default UserTable
-
-//   <CCard className="mb-4">
-//   <CCardHeader>Sessions By Company</CCardHeader>
-//   <CCardBody style={styles.cardBody}>
-//     <div style={styles.circularContainer}>
-//       {/* Nested Circular Progress Bars */}
-//       <div style={{ position: 'relative', height: '150px', width: '150px' }}>
-//         {options.map((option, index) => (
-//           <div
-//             key={index}
-//             style={{
-//               position: 'absolute',
-//               top: 0,
-//               left: 0,
-//               width: '100%',
-//               height: '100%',
-//               transform: `scale(${1 - index * 0.2})`,
-//             }}
-//           >
-//             <CircularProgressbar
-//               value={option.value}
-//               styles={buildStyles({
-//                 pathColor: option.color,
-//                 trailColor: '#edf0f5',
-//               })}
-//             />
-//           </div>
-//         ))}
-//       </div>
-//     </div>
-//     <ul style={styles.optionsList}>
-//       {options.map((option, index) => (
-//         <li key={index} style={styles.optionItem}>
-//           {option.label}
-//           <div style={styles.optionValue}>
-//             8,085 <span style={styles.percentage}>{option.value}%</span>
-//           </div>
-//         </li>
-//       ))}
-//     </ul>
-//   </CCardBody>
-// </CCard>

@@ -3,6 +3,10 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import {
   CCloseButton,
+  CHeader,
+  CHeaderNav,
+  CNavItem,
+  CNavLink,
   CSidebar,
   CSidebarBrand,
   CSidebarFooter,
@@ -20,6 +24,7 @@ import menthorHealth from '../assets/brand/mentorhealth.png'
 
 // sidebar nav config
 import navigation from '../_nav'
+import { AppHeaderDropdown } from './header'
 
 const AppSidebar = () => {
   const dispatch = useDispatch()
@@ -53,13 +58,19 @@ const AppSidebar = () => {
           dark
           onClick={() => dispatch({ type: 'set', sidebarShow: false })}
         />
-      </CSidebarHeader>
+      </CSidebarHeader >
       <AppSidebarNav items={navigation} />
-      <CSidebarFooter className="border-top d-none d-lg-flex">
+      <CHeaderNav style={{marginLeft:10}}>
+          <AppHeaderDropdown />
+      <CNavItem>
+            <CNavLink href="#" style={{padding:6}}>Jhon Sam</CNavLink>
+          </CNavItem>
+        </CHeaderNav>
+      {/* <CSidebarFooter className="border-top d-none d-lg-flex">
         <CSidebarToggler
           onClick={() => dispatch({ type: 'set', sidebarUnfoldable: !unfoldable })}
         />
-      </CSidebarFooter>
+      </CSidebarFooter> */}
     </CSidebar>
   )
 }

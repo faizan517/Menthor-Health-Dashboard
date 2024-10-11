@@ -26,7 +26,7 @@ const MainChart = () => {
     })
   }, [chartRef])
 
-  const random = () => Math.round(Math.random() * 100)
+  const random = () => Math.round(Math.random() * 200)
 
   return (
     <>
@@ -34,14 +34,14 @@ const MainChart = () => {
         ref={chartRef}
         style={{ height: '300px', marginTop: '40px' }}
         data={{
-          labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
           datasets: [
             {
               label: 'My First dataset',
               backgroundColor: `rgba(${getStyle('--cui-info-rgb')}, .1)`,
-              borderColor: getStyle('--cui-info'),
-              pointHoverBackgroundColor: getStyle('--cui-info'),
-              borderWidth: 2,
+              borderColor: '#0048ff',
+              pointHoverBackgroundColor: 'white',
+              borderWidth: 5,
               data: [
                 random(50, 200),
                 random(50, 200),
@@ -50,8 +50,10 @@ const MainChart = () => {
                 random(50, 200),
                 random(50, 200),
                 random(50, 200),
+                random(50, 200),
+                
               ],
-              fill: true,
+              // fill: true,
             },
             // {
             //   label: 'My Second dataset',
@@ -119,9 +121,9 @@ const MainChart = () => {
             },
             point: {
               radius: 0,
-              hitRadius: 10,
-              hoverRadius: 4,
-              hoverBorderWidth: 3,
+              hitRadius: 50,
+              hoverRadius: 7,
+              hoverBorderWidth: 5,
             },
           },
         }}

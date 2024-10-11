@@ -1,15 +1,10 @@
 import React from 'react'
-import classNames from 'classnames'
 
 import {
-  CAvatar,
-  CButton,
-  CButtonGroup,
   CCard,
   CCardBody,
-  CCardFooter,
-  CCardHeader,
   CCol,
+  CContainer,
   CProgress,
   CRow,
   CTable,
@@ -20,32 +15,13 @@ import {
   CTableRow,
   CWidgetStatsC,
 } from '@coreui/react'
-import CIcon from '@coreui/icons-react'
 import {
-  cibCcAmex,
-  cibCcApplePay,
-  cibCcMastercard,
-  cibCcPaypal,
-  cibCcStripe,
-  cibCcVisa,
   cibGoogle,
   cibFacebook,
   cibLinkedin,
-  cifBr,
-  cifEs,
-  cifFr,
-  cifIn,
-  cifPl,
-  cifUs,
   cibTwitter,
-  cilCloudDownload,
-  cilPeople,
   cilUser,
   cilUserFemale,
-  cilChartPie,
-  cilGroup,
-  cilXCircle,
-  cilCheckAlt,
 } from '@coreui/icons'
 
 import group from '../../assets/brand/group.png'
@@ -56,13 +32,13 @@ import check from '../../assets/brand/check_circle.png'
 import error from '../../assets/brand/error.png'
 import not from '../../assets/brand/vector.png'
 
-import WidgetsBrand from '../widgets/WidgetsBrand'
-import WidgetsDropdown from '../widgets/WidgetsDropdown'
+
 import MainChart from './MainChart'
 import { CChartPie } from '@coreui/react-chartjs'
-import SearchBar from '../../components/UserStatsCard'
+import { useMediaQuery } from 'react-responsive'
 
 const Dashboard = () => {
+  const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
   const progressExample = [
     { title: 'Visits', value: '29.703 Users', percent: 40, color: 'success' },
     { title: 'Unique', value: '24.093 Users', percent: 20, color: 'info' },
@@ -135,24 +111,20 @@ const Dashboard = () => {
   const tableExample = [
     {
       user: { name: 'Quintin Ed', new: true, registered: 'Jan 1, 2023' },
-      country: `<img src={box} />`,
+      country: check,
       usage: {
         value: 74,
-        period: 'Jun 11, 2023 - Jul 10, 2023',
-        color: '#0048ff',
+        color: 'red',
       },
-      // payment: { name: 'Stripe', icon: cibCcStripe },
       activity: '1 hour ago',
     },
     {
       user: { name: 'Enéas Kwadwo', new: true, registered: 'Jan 1, 2023' },
-      country: `<img src={box} />`,
+      country: error,
       usage: {
         value: 98,
-        period: 'Jun 11, 2023 - Jul 10, 2023',
         color: '#0048ff',
       },
-      // payment: { name: 'PayPal', icon: cibCcPaypal },
       activity: 'Last month',
     },
     {
@@ -161,13 +133,11 @@ const Dashboard = () => {
         new: true,
         registered: 'Jan 1, 2023',
       },
-      country: `<img src={box} />`,
+      country: check,
       usage: {
         value: 22,
-        period: 'Jun 11, 2023 - Jul 10, 2023',
         color: '#0048ff',
       },
-      // payment: { name: 'Google Wallet', icon: cibCcApplePay },
       activity: 'Last week',
     },
     {
@@ -176,20 +146,18 @@ const Dashboard = () => {
         new: true,
         registered: 'Jan 1, 2023',
       },
-      country: `<img src={box} />`,
+      country: not,
       usage: {
         value: 43,
-        period: 'Jun 11, 2023 - Jul 10, 2023',
         color: '#0048ff',
       },
-      // payment: { name: 'Amex', icon: cibCcAmex },
       activity: 'Last week',
     },
   ]
 
   const styles = {
-    font: {
-      fontSize: 20,
+    heading: {
+      fontFamily:'poppins',fontWeight:500,fontSize:24
     },
     icons: {
       height: 50,
@@ -204,12 +172,14 @@ const Dashboard = () => {
   }
 
   return (
-    <>
-      <h4 id="traffic" className="card-title mb-0">
-        Hello Fazi 👋🏼,
-      </h4>
-      <CRow style={{ display: 'flex', alignItems: 'flex-end' }}>
-        <CCol xs={2}>
+    <CContainer>
+    <div style={{widht:'10vw'}}>
+      <text id="traffic" className="card-title mb-0" style={styles.heading}>
+        Hello Admin 👋🏼,
+      </text>
+    </div>
+      <CRow sm={12} md={6} lg={12} style={{ display: 'flex', alignItems: 'flex-end' }}>
+        <CCol sm={6} md={2} lg={2}>
           <CWidgetStatsC
             className="mb-4"
             icon={
@@ -220,10 +190,10 @@ const Dashboard = () => {
             text="+25%"
             value="89.9K"
             title="Users"
-            style={{ boxShadow: '4px 4px 15px 15px rgba(0, 0, 0, 0.05)', borderWidth: 0 }}
+            style={{ boxShadow: '4px 4px 15px 15px rgba(0, 0, 0, 0.05)', borderWidth: 0, fontSize: isMobile ? '12px': '    '  }}
           />
         </CCol>
-        <CCol xs={2}>
+        <CCol sm={2} md={2} lg={2}>
           <CWidgetStatsC
             // style={{height:'60%'}}
             className="mb-4"
@@ -231,38 +201,44 @@ const Dashboard = () => {
             <img src={box} style={{ textAlign: 'center' }} />
           </div>}
             text="Widget helper text"
-            title="Widget title"
+            title="Company"
             value="89.9K"
-            style={{ boxShadow: '4px 4px 15px 15px rgba(0, 0, 0, 0.05)', borderWidth: 0 }}
+            style={{ boxShadow: '4px 4px 15px 15px rgba(0, 0, 0, 0.05)', borderWidth: 0, fontSize: isMobile ? '12px': '    '  }}
           />
         </CCol>
-        <CCol xs={2}>
+        <CCol sm={2} md={2} lg={2}>
           <CWidgetStatsC
             className="mb-4"
             icon={<div style={styles.icons}>
             <img src={puls} style={{ textAlign: 'center' }} />
           </div>}
             text="Widget helper text"
-            title="Widget title"
+            title="Bonus Rate"
             value="89.9K"
-            style={{ boxShadow: '4px 4px 15px 15px rgba(0, 0, 0, 0.05)', borderWidth: 0 }}
+            style={{ boxShadow: '4px 4px 15px 15px rgba(0, 0, 0, 0.05)', borderWidth: 0, fontSize: isMobile ? '13px': '    ' }}
           />
         </CCol>
-        <CCol xs={2}>
+        <CCol sm={2} md={2} lg={2}>
           <CWidgetStatsC
             className="mb-4"
             icon={<div style={{...styles.icons,backgroundColor:'#e9fbf6'}}>
             <img src={history} style={{ textAlign: 'center' }} />
           </div>}
             text="Widget  text"
-            title="Widget title"
+            title="Session Rate"
             value="89.9K"
-            style={{ boxShadow: '4px 4px 15px 15px rgba(0, 0, 0, 0.05)', borderWidth: 0 }}
+            style={{ boxShadow: '4px 4px 15px 15px rgba(0, 0, 0, 0.05)', borderWidth: 0, fontSize: isMobile ? '12px': '    '  }}
           />
         </CCol>
-        <CCol xs={4}>
+        {/* style={{display:'flex',flexDirection:'column',justifyContent:'center'}} */}
+        <CCol sm={2} md={4} lg={4} > 
           <h4 className="card-title mb-2 color-black">Sessions By Company</h4>
-          <CCard className="mb-4">
+          <CCard className="mb-4"  style={{
+          boxShadow: '4px 4px 15px 15px rgba(0, 0, 0, 0.05)',
+          borderWidth: 0,
+          borderRadius: 10,
+          marginTop:10
+        }}>
             <CCardBody
               style={{ boxShadow: '4px 4px 15px 15px rgba(0, 0, 0, 0.05)', borderWidth: 0 }}
             >
@@ -283,97 +259,25 @@ const Dashboard = () => {
           </CCard>
         </CCol>
       </CRow>
-      {/* <CRow lg={12} style={{display:'flex',justifyContent:'space-around'}}>
-    <CCol xs={3}>
-          <CCardHeader>Pie Chart</CCardHeader>
-          <CCardBody>
-            <CChartPie
-              data={{
-                labels: ['Red', 'Green', 'Yellow'],
-                datasets: [
-                  {
-                    data: [300, 50, 100],
-                    backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
-                    hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
-                  },
-                ],
-              }}
-            />
-          </CCardBody>
-      </CCol>
-    <CCol xs={3}>
-          <CCardHeader>Pie Chart</CCardHeader>
-          <CCardBody>
-            <CChartPie
-              data={{
-                labels: ['Red', 'Green', 'Yellow'],
-                datasets: [
-                  {
-                    data: [300, 50, 100],
-                    backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
-                    hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
-                  },
-                ],
-              }}
-            />
-          </CCardBody>
-      </CCol>
-    </CRow>
-    <CRow lg={12} style={{display:'flex',justifyContent:'space-around',marginTop:20}}>
-    <CCol xs={3}>
-          <CCardHeader>Pie Chart</CCardHeader>
-          <CCardBody>
-            <CChartPie
-              data={{
-                labels: ['Red', 'Green', 'Yellow'],
-                datasets: [
-                  {
-                    data: [300, 50, 100],
-                    backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
-                    hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
-                  },
-                ],
-              }}
-            />
-          </CCardBody>
-      </CCol>
-    <CCol xs={3}>
-          <CCardHeader>Pie Chart</CCardHeader>
-          <CCardBody>
-            <CChartPie
-              data={{
-                labels: ['Red', 'Green', 'Yellow'],
-                datasets: [
-                  {
-                    data: [300, 50, 100],
-                    backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
-                    hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
-                  },
-                ],
-              }}
-            />
-          </CCardBody>
-      </CCol>
-    </CRow> */}
+
       <CCard
         className="mb-4"
         style={{
           boxShadow: '4px 4px 15px 15px rgba(0, 0, 0, 0.05)',
           borderWidth: 0,
           borderRadius: 10,
+          marginTop:10
         }}
       >
-        {/* <WidgetsDropdown className="mb-4" /> */}
         <br />
-        <CCol sm={5}>
-          <h4 id="traffic" className="card-title mb-2 color-black">
+        <CCol sm={3}>
+          <h4 id="traffic" className="card-title mb-3 color-black" style={{paddingLeft:20}}>
             User Logs
           </h4>
         </CCol>
-        <div className="md-5"></div>
-        <CTable align="middle" className="mb-0 " hover responsive>
+        <CTable align="middle" className="mb-3 "  hover responsive>
           <CTableHead className="text-nowrap">
-            <CTableRow>
+            <CTableRow >
               <CTableHeaderCell>{/* <CIcon icon={cilPeople} /> */}</CTableHeaderCell>
               <CTableHeaderCell>User</CTableHeaderCell>
               <CTableHeaderCell className="text-center">Status</CTableHeaderCell>
@@ -382,37 +286,27 @@ const Dashboard = () => {
               <CTableHeaderCell>Usage</CTableHeaderCell>
             </CTableRow>
           </CTableHead>
-          <CTableBody>
+          <CTableBody className="p-5">
             {tableExample.map((item, index) => (
-              <CTableRow v-for="item in tableItems" key={index}>
+              <CTableRow v-for="item in tableItems" key={index} >
                 <CTableDataCell className="text-center">
-                  {/* <CAvatar size="md" src={item.avatar.src} status={item.avatar.status} /> */}
                 </CTableDataCell>
                 <CTableDataCell>
                   <div>{item.user.name}</div>
-                  {/* <div className="small text-body-secondary text-nowrap">
-                          <span>{item.user.new ? 'New' : 'Recurring'}</span> | Registered:{' '}
-                          {item.user.registered}
-                        </div> */}
                 </CTableDataCell>
-                <CTableDataCell className="text-center">
-                  <CIcon size="xl" icon={item.country} />
-                </CTableDataCell>
+               <CTableDataCell className="text-center">
+            <img
+              src={item.country} />
+                </CTableDataCell>  
 
                 <CTableDataCell className="text-center">
-                  {/* <CIcon size="xl" icon={item.payment.icon} /> */}
                 </CTableDataCell>
                 <CTableDataCell>
       
                   <div className="fw-semibold text-nowrap">{item.activity}</div>
                 </CTableDataCell>
                 <CTableDataCell style={{width:'30vw'}}>
-                  {/* <div className="d-flex justify-content-between text-nowrap">
-                    <div className="fw-semibold">{item.usage.value}%</div> */}
-                    {/* <div className="ms-3">
-                      <small className="text-body-secondary"></small>
-                    </div> */}
-                  {/* </div> */}
+                 
                   <CProgress color={item.usage.color} value={item.usage.value} />
                 </CTableDataCell>
               </CTableRow>
@@ -421,6 +315,7 @@ const Dashboard = () => {
         </CTable>
         <br />
       </CCard>
+      
       <CCard
         className="mb-4"
         style={{
@@ -432,159 +327,17 @@ const Dashboard = () => {
         <CCardBody>
           <CRow>
             <CCol sm={5}>
-              <h4 id="traffic" className="card-title mb-0">
+              <h4 id="traffic" className="card-title mb-0" style={{fontFamily:'poppins'}}>
                 Performence
               </h4>
-              {/* <div className="small text-body-secondary">January - July 2023</div> */}
             </CCol>
             <CCol sm={7} className="d-none d-md-block">
-              {/* <CButton color="primary" className="float-end">
-                <CIcon icon={cilCloudDownload} />
-              </CButton> */}
-              {/* <CButtonGroup className="float-end me-3">
-                {['Day', 'Month', 'Year'].map((value) => (
-                  <CButton
-                    color="outline-secondary"
-                    key={value}
-                    className="mx-0"
-                    active={value === 'Month'}
-                  >
-                    {value}
-                  </CButton>
-                ))}
-              </CButtonGroup> */}
             </CCol>
           </CRow>
           <MainChart />
         </CCardBody>
-        {/* <CCardFooter>
-          <CRow
-            xs={{ cols: 1, gutter: 4 }}
-            sm={{ cols: 2 }}
-            lg={{ cols: 4 }}
-            xl={{ cols: 5 }}
-            className="mb-2 text-center"
-          >
-            {progressExample.map((item, index, items) => (
-              <CCol
-                className={classNames({
-                  'd-none d-xl-block': index + 1 === items.length,
-                })}
-                key={index}
-              >
-                <div className="text-body-secondary">{item.title}</div>
-                <div className="fw-semibold text-truncate">
-                  {item.value} ({item.percent}%)
-                </div>
-                <CProgress thin className="mt-2" color={item.color} value={item.percent} />
-              </CCol>
-            ))}
-          </CRow>
-        </CCardFooter> */}
       </CCard>
-      {/* <WidgetsBrand className="mb-4" withCharts /> */}
-      {/* <CRow>
-        <CCol xs>
-          <CCard className="mb-4">
-            <CCardHeader>Traffic {' & '} Sales</CCardHeader>
-            <CCardBody> */}
-      {/* <CRow> */}
-      {/* <CCol xs={12} md={6} xl={6}>
-                  <CRow>
-                    <CCol xs={6}>
-                      <div className="border-start border-start-4 border-start-info py-1 px-3">
-                        <div className="text-body-secondary text-truncate small">New Clients</div>
-                        <div className="fs-5 fw-semibold">9,123</div>
-                      </div>
-                    </CCol>
-                    <CCol xs={6}>
-                      <div className="border-start border-start-4 border-start-danger py-1 px-3 mb-3">
-                        <div className="text-body-secondary text-truncate small">
-                          Recurring Clients
-                        </div>
-                        <div className="fs-5 fw-semibold">22,643</div>
-                      </div>
-                    </CCol>
-                  </CRow>
-                  <hr className="mt-0" />
-                  {progressGroupExample1.map((item, index) => (
-                    <div className="progress-group mb-4" key={index}>
-                      <div className="progress-group-prepend">
-                        <span className="text-body-secondary small">{item.title}</span>
-                      </div>
-                      <div className="progress-group-bars">
-                        <CProgress thin color="info" value={item.value1} />
-                        <CProgress thin color="danger" value={item.value2} />
-                      </div>
-                    </div>
-                  ))}
-                </CCol> */}
-      {/* <CCol xs={12} md={6} xl={6}> */}
-      {/* <CRow>
-                    <CCol xs={6}>
-                      <div className="border-start border-start-4 border-start-warning py-1 px-3 mb-3">
-                        <div className="text-body-secondary text-truncate small">Pageviews</div>
-                        <div className="fs-5 fw-semibold">78,623</div>
-                      </div>
-                    </CCol>
-                    <CCol xs={6}>
-                      <div className="border-start border-start-4 border-start-success py-1 px-3 mb-3">
-                        <div className="text-body-secondary text-truncate small">Organic</div>
-                        <div className="fs-5 fw-semibold">49,123</div>
-                      </div>
-                    </CCol>
-                  </CRow> */}
-
-      {/* <hr className="mt-0" /> */}
-
-      {/* {progressGroupExample2.map((item, index) => (
-                    <div className="progress-group mb-4" key={index}>
-                      <div className="progress-group-header">
-                        <CIcon className="me-2" icon={item.icon} size="lg" />
-                        <span>{item.title}</span>
-                        <span className="ms-auto fw-semibold">{item.value}%</span>
-                      </div>
-                      <div className="progress-group-bars">
-                        <CProgress thin color="warning" value={item.value} />
-                      </div>
-                    </div>
-                  ))} */}
-      {/* <div className="mb-5"></div>
-                  <CCardHeader>Best Acting Companies</CCardHeader>
-                  <div className="mb-3"></div>
-                  {progressGroupExample3.map((item, index) => (
-                    <div className="progress-group" key={index}>
-                      <div className="progress-group-header">
-                        <CIcon className="me-2" icon={item.icon} size="lg" />
-                        <span>{item.title}</span>
-                        <span className="ms-auto fw-semibold">
-                          {item.value}{' '}
-                          <span className="text-body-secondary small">({item.percent}%)</span>
-                        </span>
-                      </div>
-                      <div className="progress-group-bars">
-                        <CProgress thin color="success" value={item.percent} />
-                      </div>
-                    </div>
-                  ))}
-                </CCol>
-                <CCol xs={12} md={6} xl={6}>
-                <div className="mb-5"></div>
-                  <CCardHeader>Best Acting Companies</CCardHeader>
-                  <div className="mb-4"></div>
-                <CTable columns={columns} items={items} />
-                  </CCol>
-              </CRow> */}
-      {/* 
-              <br />
-
-               */}
-      {/* </CCardBody>
-          </CCard>
-        </CCol>
-      </CRow> */}
-      <div style={{ padding: '20px' }}>{/* <SearchBar /> */}</div>
-    </>
+    </CContainer>
   )
 }
 

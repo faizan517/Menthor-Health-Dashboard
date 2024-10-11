@@ -1,13 +1,18 @@
 import React from 'react';
 import { FaUsers, FaUser } from 'react-icons/fa'; // Icons for total users and members
+import user from '../../assets/brand/user.png'
+import Twouser from '../../assets/brand/2user.png'
+import { useMediaQuery } from 'react-responsive';
 
 const UserStatsCard = ({}) => {
+  const isMobile = useMediaQuery({ query: '(max-width: 767px)' });
   // Styles as JS objects
   const styles = {
     container: {
       display: 'flex',
       justifyContent: 'space-around',
       alignItems: 'center',
+      alignSelf:'center',
       backgroundColor: '#fff',
       padding: '20px 30px',
       borderRadius: '12px',
@@ -34,16 +39,21 @@ const UserStatsCard = ({}) => {
     statTitle: {
       margin: 0,
       fontSize: '14px',
-      color: '#9C9C9C',
+      color: 'rgba(172, 172, 172, 1)',
+      fintFamily:'poppins',
+      fontWeight:400,
     },
     statValue: {
       margin: 0,
-      fontSize: '24px',
-      fontWeight: 'bold',
+      fontSize: 32,
+      fontWeight: 600,
+      fontFamily:'poppins',
     },
     statChange: {
       fontSize: '12px',
       color: '#9C9C9C',
+      fontWeight: 700,
+      fontFamily:'poppins',
     },
     positiveChange: {
       color: '#4CAF50', // Green for positive change
@@ -56,6 +66,7 @@ const UserStatsCard = ({}) => {
       height: '50px',
       backgroundColor: '#F0F0F0',
     },
+
   };
   const stats = [
     {
@@ -73,15 +84,15 @@ const UserStatsCard = ({}) => {
   ];
 
   return (
-    <div style={styles.container}>
+    <div style={{...styles.container, flexDirection: isMobile ? 'column' : ''}}>
       {stats.map((stat, index) => (
         <React.Fragment key={index}>
           <div style={styles.section}>
             <div style={styles.iconCircle}>
               {stat.icon === 'users' ? (
-                <FaUsers size={30} color="#A6DBD9" />
+                <img src={Twouser} color="#A6DBD9" />
               ) : (
-                <FaUser size={30} color="#A6DBD9" />
+                <img src={user} color="#A6DBD9" />
               )}
             </div>
             <div style={styles.statsDetails}>
