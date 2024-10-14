@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux'
 
 import { CSpinner, useColorModes } from '@coreui/react'
 import './scss/style.scss'
+import Color from './utils/Color';
 
 // Containers
 const DefaultLayout = React.lazy(() => import('./layout/DefaultLayout'))
@@ -38,7 +39,7 @@ const App = () => {
       <Suspense
         fallback={
           <div className="pt-3 text-center">
-            <CSpinner color="primary" variant="grow" />
+            <CSpinner style={{backgroundColor:Color.primary}} variant="grow" />
           </div>
         }
       >
@@ -47,7 +48,7 @@ const App = () => {
           <Route exact path="/register" name="Register Page" element={<Register />} />
           <Route exact path="/404" name="Page 404" element={<Page404 />} />
           <Route exact path="/500" name="Page 500" element={<Page500 />} />
-          <Route path="*" name="Home" element={<DefaultLayout />} />
+          <Route exact path="*" name="Home" element={<DefaultLayout />} />
         </Routes>
       </Suspense>
     </HashRouter>

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import mentorImage from '../../../assets/brand/mentorhealth2.png' // Import the image here
 import { FcGoogle } from "react-icons/fc";
 import { PiEyeSlashThin,PiEyeThin } from "react-icons/pi";
+import { useNavigate } from "react-router-dom";
 
 
 const Login = () => {
@@ -9,6 +10,11 @@ const Login = () => {
   const [password, setPassword] = useState('')
   const [errors, setErrors] = useState({})
   const [showPassword, setShowPassword] = useState(false)
+  const navigate = useNavigate();
+
+  function handleClick() {
+    navigate("/home");
+  }
 
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -19,22 +25,22 @@ const Login = () => {
     event.preventDefault()
     let formErrors = {}
 
-    if (!email) {
-      formErrors.email = 'Email is required'
-    } else if (!validateEmail(email)) {
-      formErrors.email = 'Must be a valid email'
-    }
+    // if (!email) {
+    //   formErrors.email = 'Email is required'
+    // } else if (!validateEmail(email)) {
+    //   formErrors.email = 'Must be a valid email'
+    // }
 
-    if (!password) {
-      formErrors.password = 'Password is required'
-    }
+    // if (!password) {
+    //   formErrors.password = 'Password is required'
+    // }
 
-    if (Object.keys(formErrors).length === 0) {
-      console.log('Form submitted:', { email, password })
-      // Handle login logic here
-    } else {
-      setErrors(formErrors)
-    }
+    // if (Object.keys(formErrors).length === 0) {
+    //   console.log('Form submitted:', { email, password })
+    //   // Handle login logic here
+    // } else {
+    //   setErrors(formErrors)
+    // }
   }
 
   // Inline styles
@@ -206,7 +212,7 @@ const Login = () => {
               Forgot password?
             </a>
           </div>
-          <button type="submit" style={styles.signinButton}>
+          <button type="submit" style={styles.signinButton} onClick={handleClick}>
             Sign In
           </button>
         </form>

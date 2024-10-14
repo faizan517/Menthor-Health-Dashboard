@@ -30,12 +30,14 @@ import puls from '../../assets/brand/puls.png'
 import history from '../../assets/brand/history.png'
 import check from '../../assets/brand/check_circle.png'
 import error from '../../assets/brand/error.png'
-import not from '../../assets/brand/vector.png'
+import not from '../../assets/brand/red.png'
 
 
 import MainChart from './MainChart'
 import { CChartPie } from '@coreui/react-chartjs'
 import { useMediaQuery } from 'react-responsive'
+import Color from '../../utils/Color'
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 
 const Dashboard = () => {
   const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
@@ -114,7 +116,7 @@ const Dashboard = () => {
       country: check,
       usage: {
         value: 74,
-        color: 'red',
+        color: Color.primary,
       },
       activity: '1 hour ago',
     },
@@ -123,7 +125,7 @@ const Dashboard = () => {
       country: error,
       usage: {
         value: 98,
-        color: '#0048ff',
+        color: Color.primary,
       },
       activity: 'Last month',
     },
@@ -136,7 +138,7 @@ const Dashboard = () => {
       country: check,
       usage: {
         value: 22,
-        color: '#0048ff',
+        color: Color.primary,
       },
       activity: 'Last week',
     },
@@ -149,11 +151,16 @@ const Dashboard = () => {
       country: not,
       usage: {
         value: 43,
-        color: '#0048ff',
+        color: Color.primary,
       },
       activity: 'Last week',
     },
   ]
+  const options = [
+    { label: 'Option 1', value: 13, color: '#007bff' },
+    { label: 'Option 2', value: 30, color: '#dc3545' },
+    { label: 'Option 3', value: 25, color: '#28a745' },
+  ];
 
   const styles = {
     heading: {
@@ -168,6 +175,33 @@ const Dashboard = () => {
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
+    },
+    cardBody: {
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+    },
+    circularContainer: {
+      width: '150px',
+    },
+    optionsList: {
+      listStyle: 'none',
+      padding: 0,
+      margin: 0,
+    },
+    optionItem: {
+      marginBottom: '10px',
+      fontWeight: 'bold',
+      fontSize: '16px',
+      color: '#4d4d4d',
+    },
+    optionValue: {
+      fontSize: '20px',
+      color: '#3a3a3a',
+    },
+    percentage: {
+      fontSize: '14px',
+      color: '#6c757d',
     },
   }
 
@@ -248,7 +282,7 @@ const Dashboard = () => {
                   datasets: [
                     {
                       data: [300, 50, 100],
-                      backgroundColor: ['#0048ff', '#df0404', '#20c997'],
+                      backgroundColor: [Color.primary, '#df0404', '#20c997'],
                       // hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
                     },
                   ],
@@ -256,6 +290,51 @@ const Dashboard = () => {
                 style={{ borderWidth: 0 }}
               />
             </CCardBody>
+
+            {/* <WidgetsDropdown /> */}
+      {/* <CCard className="mb-4"> */}
+      {/* <CCardHeader>Sessions By Company</CCardHeader> */}
+      {/* <CCardBody style={styles.cardBody}>
+        <div style={styles.circularContainer}>
+          Nested Circular Progress Bars
+          <div style={{ position: 'relative', height: '150px', width: '150px' }}>
+            {options.map((option, index) => (
+              <div
+                key={index}
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: '100%',
+                  height: '100%',
+                  transform: `scale(${1 - index * 0.4})`,
+                }}
+              >
+                <CircularProgressbar
+                  value={option.value}
+                  styles={buildStyles({
+                    pathColor: option.color,
+                    trailColor: '#edf0f5',
+                  })}
+        strokeWidth={10}
+
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+        <ul style={styles.optionsList}>
+          {options.map((option, index) => (
+            <li key={index} style={styles.optionItem}>
+              {option.label}
+              <div style={styles.optionValue}>
+                8,085 <span style={styles.percentage}>{option.value}%</span>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </CCardBody> */}
+    {/* </CCard> */}
           </CCard>
         </CCol>
       </CRow>

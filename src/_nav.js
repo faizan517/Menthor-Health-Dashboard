@@ -14,15 +14,76 @@ import {
   cilStar,
 } from '@coreui/icons'
 import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
-import { PiUser, PiDatabase, PiBuildings } from "react-icons/pi";
+import { PiUser, PiDatabase, PiBuildings, PiChartBar, PiTable } from "react-icons/pi";
 import { IoDocumentTextOutline, IoHelpCircleOutline } from "react-icons/io5";
+import { RiDashboardHorizontalLine } from "react-icons/ri";
 
 const _nav = [
   {
     component: CNavItem,
     name: 'Dashboard',
     to: '/dashboard',
+    icon: <RiDashboardHorizontalLine className="nav-icon" />,
+    badge: {
+      color: 'info',
+    },
+  },
+  {
+    component: CNavItem,
+    name: 'ManageForm',
+    to: '/manageForm',
+    icon: <PiTable className="nav-icon" />,
+    badge: {
+      color: 'info',
+    },
+  },
+  {
+    component: CNavItem,
+    name: 'Companies',
+    to: '/companies',
     icon: <PiBuildings className="nav-icon" />,
+    badge: {
+      color: 'info',
+    },
+  },
+  {
+    component: CNavItem,
+    name: 'User Management',
+    to: '/charts',
+    icon: <PiUser className="nav-icon"  />,
+  },
+  {
+    component: CNavItem,
+    name: 'Reports',
+    to: '/reports',
+    icon: <IoDocumentTextOutline className="nav-icon" />,
+    badge: {
+      color: 'info',
+    },
+  },
+  {
+    component: CNavItem,
+    name: 'Analytics',
+    to: '/analytics',
+    icon: <PiChartBar className="nav-icon" />,
+    badge: {
+      color: 'info',
+    },
+  },
+  {
+    component: CNavItem,
+    name: 'Data Export',
+    to: '/dataExport',
+    icon: <PiDatabase className="nav-icon" />,
+    badge: {
+      color: 'info',
+    },
+  },
+  {
+    component: CNavItem,
+    name: 'Help & Support',
+    to: '/support',
+    icon: <IoHelpCircleOutline className="nav-icon" />,
     badge: {
       color: 'info',
     },
@@ -47,113 +108,113 @@ const _nav = [
   //   component: CNavTitle,
   //   name: 'Components',
   // },
-  {
-    component: CNavGroup,
-    name: 'Base',
-    to: '/base',
-    icon: <PiUser className="nav-icon"  />,
-    items: [
-      {
-        component: CNavItem,
-        name: 'Accordion',
-        to: '/base/accordion',
-      },
-      {
-        component: CNavItem,
-        name: 'Breadcrumb',
-        to: '/base/breadcrumbs',
-      },
-      {
-        component: CNavItem,
-        name: 'Cards',
-        to: '/base/cards',
-      },
-      {
-        component: CNavItem,
-        name: 'Carousel',
-        to: '/base/carousels',
-      },
-      {
-        component: CNavItem,
-        name: 'Collapse',
-        to: '/base/collapses',
-      },
-      {
-        component: CNavItem,
-        name: 'List group',
-        to: '/base/list-groups',
-      },
-      {
-        component: CNavItem,
-        name: 'Navs & Tabs',
-        to: '/base/navs',
-      },
-      {
-        component: CNavItem,
-        name: 'Pagination',
-        to: '/base/paginations',
-      },
-      {
-        component: CNavItem,
-        name: 'Placeholders',
-        to: '/base/placeholders',
-      },
-      {
-        component: CNavItem,
-        name: 'Popovers',
-        to: '/base/popovers',
-      },
-      {
-        component: CNavItem,
-        name: 'Progress',
-        to: '/base/progress',
-      },
-      {
-        component: CNavItem,
-        name: 'Spinners',
-        to: '/base/spinners',
-      },
-      {
-        component: CNavItem,
-        name: 'Tables',
-        to: '/base/tables',
-      },
-      {
-        component: CNavItem,
-        name: 'Tabs',
-        to: '/base/tabs',
-      },
-      {
-        component: CNavItem,
-        name: 'Tooltips',
-        to: '/base/tooltips',
-      },
-    ],
-  },
-  {
-    component: CNavGroup,
-    name: 'Buttons',
-    to: '/buttons',
-    icon: <IoDocumentTextOutline className="nav-icon"/>
-    ,
-    items: [
-      {
-        component: CNavItem,
-        name: 'Buttons',
-        to: '/buttons/buttons',
-      },
-      {
-        component: CNavItem,
-        name: 'Buttons groups',
-        to: '/buttons/button-groups',
-      },
-      {
-        component: CNavItem,
-        name: 'Dropdowns',
-        to: '/buttons/dropdowns',
-      },
-    ],
-  },
+  // {
+  //   component: CNavGroup,
+  //   name: 'Base',
+  //   to: '/base',
+  //   icon: <PiUser className="nav-icon"  />,
+  //   items: [
+  //     {
+  //       component: CNavItem,
+  //       name: 'Accordion',
+  //       to: '/base/accordion',
+  //     },
+  //     {
+  //       component: CNavItem,
+  //       name: 'Breadcrumb',
+  //       to: '/base/breadcrumbs',
+  //     },
+  //     {
+  //       component: CNavItem,
+  //       name: 'Cards',
+  //       to: '/base/cards',
+  //     },
+  //     {
+  //       component: CNavItem,
+  //       name: 'Carousel',
+  //       to: '/base/carousels',
+  //     },
+  //     {
+  //       component: CNavItem,
+  //       name: 'Collapse',
+  //       to: '/base/collapses',
+  //     },
+  //     {
+  //       component: CNavItem,
+  //       name: 'List group',
+  //       to: '/base/list-groups',
+  //     },
+  //     {
+  //       component: CNavItem,
+  //       name: 'Navs & Tabs',
+  //       to: '/base/navs',
+  //     },
+  //     {
+  //       component: CNavItem,
+  //       name: 'Pagination',
+  //       to: '/base/paginations',
+  //     },
+  //     {
+  //       component: CNavItem,
+  //       name: 'Placeholders',
+  //       to: '/base/placeholders',
+  //     },
+  //     {
+  //       component: CNavItem,
+  //       name: 'Popovers',
+  //       to: '/base/popovers',
+  //     },
+  //     {
+  //       component: CNavItem,
+  //       name: 'Progress',
+  //       to: '/base/progress',
+  //     },
+  //     {
+  //       component: CNavItem,
+  //       name: 'Spinners',
+  //       to: '/base/spinners',
+  //     },
+  //     {
+  //       component: CNavItem,
+  //       name: 'Tables',
+  //       to: '/base/tables',
+  //     },
+  //     {
+  //       component: CNavItem,
+  //       name: 'Tabs',
+  //       to: '/base/tabs',
+  //     },
+  //     {
+  //       component: CNavItem,
+  //       name: 'Tooltips',
+  //       to: '/base/tooltips',
+  //     },
+  //   ],
+  // },
+  // {
+  //   component: CNavGroup,
+  //   name: 'Buttons',
+  //   to: '/buttons',
+  //   icon: <IoDocumentTextOutline className="nav-icon"/>
+  //   ,
+  //   items: [
+  //     {
+  //       component: CNavItem,
+  //       name: 'Buttons',
+  //       to: '/buttons/buttons',
+  //     },
+  //     {
+  //       component: CNavItem,
+  //       name: 'Buttons groups',
+  //       to: '/buttons/button-groups',
+  //     },
+  //     {
+  //       component: CNavItem,
+  //       name: 'Dropdowns',
+  //       to: '/buttons/dropdowns',
+  //     },
+  //   ],
+  // },
   // {
   //   component: CNavGroup,
   //   name: 'Forms',
@@ -201,38 +262,33 @@ const _nav = [
   //     },
   //   ],
   // },
-  {
-    component: CNavItem,
-    name: 'Charts',
-    to: '/charts',
-    icon: <PiUser className="nav-icon"  />,
-  },
-  {
-    component: CNavGroup,
-    name: 'Icons',
-    icon: <IoHelpCircleOutline className="nav-icon" />,
-    items: [
-      {
-        component: CNavItem,
-        name: 'CoreUI Free',
-        to: '/icons/coreui-icons',
-        badge: {
-          color: 'success',
-          text: 'NEW',
-        },
-      },
-      {
-        component: CNavItem,
-        name: 'CoreUI Flags',
-        to: '/icons/flags',
-      },
-      {
-        component: CNavItem,
-        name: 'CoreUI Brands',
-        to: '/icons/brands',
-      },
-    ],
-  },
+  
+  // {
+  //   component: CNavGroup,
+  //   name: 'Icons',
+  //   icon: <IoHelpCircleOutline className="nav-icon" />,
+  //   items: [
+  //     {
+  //       component: CNavItem,
+  //       name: 'CoreUI Free',
+  //       to: '/icons/coreui-icons',
+  //       badge: {
+  //         color: 'success',
+  //         text: 'NEW',
+  //       },
+  //     },
+  //     {
+  //       component: CNavItem,
+  //       name: 'CoreUI Flags',
+  //       to: '/icons/flags',
+  //     },
+  //     {
+  //       component: CNavItem,
+  //       name: 'CoreUI Brands',
+  //       to: '/icons/brands',
+  //     },
+  //   ],
+  // },
   // {
   //   component: CNavGroup,
   //   name: 'Notifications',
@@ -260,20 +316,19 @@ const _nav = [
   //     },
   //   ],
   // },
-  {
-    component: CNavItem,
-    name: 'Widgets',
-    to: '/widgets',
-    icon: <CIcon icon={cilCalculator} customClassName="nav-icon" />,
-    badge: {
-      color: 'info',
-      text: 'NEW',
-    },
-  },
-  {
-    component: CNavTitle,
-    name: 'Extras',
-  },
+  // {
+  //   component: CNavItem,
+  //   name: 'Widgets',
+  //   to: '/widgets',
+  //   icon: <CIcon icon={cilCalculator} customClassName="nav-icon" />,
+  //   badge: {
+  //     color: 'info',
+  //   },
+  // },
+  // {
+  //   component: CNavTitle,
+  //   name: 'Extras',
+  // },
   {
     component: CNavGroup,
     name: 'Pages',

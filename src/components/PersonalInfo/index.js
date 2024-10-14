@@ -11,6 +11,7 @@ import {
   CFormSelect,
   CFormInput,
 } from '@coreui/react'
+import Color from '../../utils/Color'
 
 const styles = {
   input: {
@@ -175,13 +176,13 @@ const Info = () => {
         </CRow>
 
         <div className="d-flex justify-content-end">
-          <CButton type="submit" style={{ backgroundColor: '#0048ff', color: 'white' }} className="px-5">
+          <CButton type="submit" style={{ backgroundColor: Color.primary, color: 'white' }} className="px-5">
             Next
           </CButton>
         </div>
 
         <div className="d-flex justify-content-start mt-2">
-          <CButton type="button" style={{ backgroundColor: '#0048ff', color: 'white' }} className="px-5">
+          <CButton type="button" style={{ backgroundColor: Color.primary, color: 'white' }} className="px-5">
             Skip
           </CButton>
         </div>

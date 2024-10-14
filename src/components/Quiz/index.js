@@ -4,8 +4,10 @@ import '../Quiz/style.css'
 // import Info from '../PersonalInfo'
 import './style.css'
 import { useForm } from 'react-hook-form'
-import { MdKeyboardDoubleArrowRight ,MdKeyboardDoubleArrowLeft} from "react-icons/md";
+// import { MdKeyboardDoubleArrowRight ,MdKeyboardDoubleArrowLeft} from "react-icons/md";
 import { useMediaQuery } from 'react-responsive'
+import { Tab, Tabs } from 'react-tabs-scrollable'
+import "react-tabs-scrollable/dist/rts.css";
 
 
 const styles = {
@@ -21,7 +23,7 @@ const styles = {
      fontFamily: 'Inter', 
      fontWeight: 400,
      fontSize: 14, 
-     marginBottom: 20 
+     marginBottom: 20,
     },
   answerText: {
     padding: 10,
@@ -47,23 +49,23 @@ const styles = {
       borderTop: '2px solid #ddd',
       paddingTop:30,
     },
-    tab: {
-      // padding: '10px',
-      // width:'200px',
-      cursor: 'pointer',
-      backgroundColor: '#f0f0f0',
-      color: '#333',
-      borderBottomRightRadius:10,
-      borderBottomLeftRadius:10,
-      textAlign:'center'
+    // tab: {
+    //   // padding: '10px',
+    //   // width:'200px',
+    //   cursor: 'pointer',
+    //   backgroundColor: '#f0f0f0',
+    //   color: '#333',
+    //   borderBottomRightRadius:10,
+    //   borderBottomLeftRadius:10,
+    //   textAlign:'center'
   
-    },
-    activeTab: {
-      backgroundColor: '#006eff',
-      color: 'white',
-      // fontFamily: 'Inter',
-      fontWeight: 700,
-    },
+    // },
+    // activeTab: {
+    //   backgroundColor: '#006eff',
+    //   color: 'white',
+    //   // fontFamily: 'Inter',
+    //   fontWeight: 700,
+    // },
     mainHead: {
       fontFamily: 'Inter',
       fontWeight: 700,
@@ -100,7 +102,7 @@ const styles = {
     tab: {
       flexShrink: 0,
       // width: `${tabWidth}px`,
-      padding: '5px 10px',
+      // padding: '5px 5px',
       cursor: 'pointer',
       backgroundColor: '#f0f0f0',
       borderBottomRightRadius: '10px',
@@ -1107,42 +1109,39 @@ const DynamicForm = () => {
     setCurrentTab(index);
   };
 
+  const onTabClick = (e, index) => {
+    console.log(e);
+    setCurrentTab(index);
+  };
   
 
   return (
-    <>
-      Tab navigation
-      <CRow sm={6} lg={12} style={{...styles.tabsWrapper}}>
-      {/* Left Arrow */}
-      <CCol style={styles.arrowButton} onClick={scrollLeft}>
-        <MdKeyboardDoubleArrowLeft size={20} />
-      </CCol>
+    < >
+      {/* Tab navigation */}
+      {/* <CRow style={{...styles.tabsWrapper}}> */}
 
       {/* Tabs Container */}
-      <CCol lg={11} md={10} sm={6} style={styles.tabsContainer} ref={tabsContainerRef}>
-        {formStructure.map((tab, index) => (
-          <CCol
-          md={3}
-          sm={4}
-          lg={3}
-            key={index}
-            style={{
-              ...styles.tab,
-              ...(currentTab === index ? styles.activeTab : {}),
-              
-            }}
-            onClick={() => handleTabClick(index)}
-          >
-            <span style={{ fontSize: isMobile ? 14: 20 }}>{tab.subheading}</span>
-          </CCol>
+      {/* <CCol style={{...styles.tabsContainer,overflowX : isMobile? 'scroll':'hidden'}} ref={tabsContainerRef}> */}        
+             <Tabs activeTab={currentTab} 
+            //  hideNavBtnsOnMobile={true}
+              //  style={{ backgroundColor: 'pink' , padding: '10px', }} // Tab container styling
+               onTabClick={onTabClick}>
+        {/* generating an array to loop through it  */}
+        {formStructure.map((item,index) => (
+          <Tab key={item}  style={{
+            backgroundColor: currentTab === index ? 'blue' : 'white',  // Active tab background color
+            color: currentTab === index ? 'white' : 'black',  // Active tab text color
+            cursor: 'pointer',
+            borderRadius:0,
+            borderBottomRightRadius: 10,
+            borderBottomLeftRadius: 10,
+            transition: 'background-color 0.3s ease',
+          }}>{item.subheading}</Tab>
         ))}
-      </CCol>
-
-      {/* Right Arrow */}
-      <CCol style={styles.arrowButton} onClick={scrollRight}>
-        <MdKeyboardDoubleArrowRight size={20} />
-      </CCol>
-    </CRow>
+      </Tabs>
+{/* </CCol> */}
+    {/* </CRow> */}
+    
       <CContainer
         style={{
           boxShadow: '4px 4px 15px 15px rgba(0, 0, 0, 0.05)',
@@ -1179,6 +1178,7 @@ const DynamicForm = () => {
                       {question.options.map((option, index) => (
                         <label key={index} style={styles.answerFont}>
                           <input
+                          style={{marginRight:10}}
                             type="radio"
                             name={`question-${question.id}`}
                             value={option.answer}
@@ -1203,6 +1203,7 @@ const DynamicForm = () => {
                       {question.options.map((option, index) => (
                         <label key={index} style={styles.answerFont}>
                           <input
+                            style={{marginRight:10}}
                             type="checkbox"
                             name={`question-${question.id}`}
                             value={option.answer}

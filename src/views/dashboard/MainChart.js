@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react'
 
 import { CChartLine } from '@coreui/react-chartjs'
 import { getStyle } from '@coreui/utils'
+import Color from '../../utils/Color'
 
 const MainChart = () => {
   const chartRef = useRef(null)
@@ -39,7 +40,7 @@ const MainChart = () => {
             {
               label: 'My First dataset',
               backgroundColor: `rgba(${getStyle('--cui-info-rgb')}, .1)`,
-              borderColor: '#0048ff',
+              borderColor: Color.primary,
               pointHoverBackgroundColor: 'white',
               borderWidth: 5,
               data: [
