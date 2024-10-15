@@ -1,5 +1,15 @@
-import { CButton, CCol, CContainer, CForm, CFormFeedback, CFormInput, CFormLabel, CFormSelect, CRow } from '@coreui/react'
-import React, { useState,useRef } from 'react'
+import {
+  CButton,
+  CCol,
+  CContainer,
+  CForm,
+  CFormFeedback,
+  CFormInput,
+  CFormLabel,
+  CFormSelect,
+  CRow,
+} from '@coreui/react'
+import React, { useState, useRef } from 'react'
 import '../Quiz/style.css'
 // import Info from '../PersonalInfo'
 import './style.css'
@@ -7,25 +17,24 @@ import { useForm } from 'react-hook-form'
 // import { MdKeyboardDoubleArrowRight ,MdKeyboardDoubleArrowLeft} from "react-icons/md";
 import { useMediaQuery } from 'react-responsive'
 import { Tab, Tabs } from 'react-tabs-scrollable'
-import "react-tabs-scrollable/dist/rts.css";
+import 'react-tabs-scrollable/dist/rts.css'
 import Color from '../../utils/Color'
 
-
 const styles = {
-  heading: { 
-    padding: 10, 
-    fontFamily: 'Inter', 
-    fontWeight: 400, 
-    fontSize: 14, 
-    marginBottom: 20
-   },
-  answerFont: { 
+  heading: {
     padding: 10,
-     fontFamily: 'Inter', 
-     fontWeight: 400,
-     fontSize: 14, 
-     marginBottom: 20,
-    },
+    fontFamily: 'Inter',
+    fontWeight: 400,
+    fontSize: 14,
+    marginBottom: 20,
+  },
+  answerFont: {
+    padding: 10,
+    fontFamily: 'Inter',
+    fontWeight: 400,
+    fontSize: 14,
+    marginBottom: 20,
+  },
   answerText: {
     padding: 10,
     fontFamily: 'Inter',
@@ -36,88 +45,88 @@ const styles = {
     width: '632px',
     borderRadius: 5,
   },
-  answerCheck: { 
+  answerCheck: {
     padding: 10,
-     fontFamily: 'Inter', 
-     fontWeight: 400,
-     fontSize: 14, 
-     marginBottom: 20 
-    },
-    tabs: {
-      display: 'flex',
-      justifyContent: 'center',
-      marginTop: '30px',
-      borderTop: '2px solid #ddd',
-      paddingTop:30,
-    },
-    // tab: {
-    //   // padding: '10px',
-    //   // width:'200px',
-    //   cursor: 'pointer',
-    //   backgroundColor: '#f0f0f0',
-    //   color: '#333',
-    //   borderBottomRightRadius:10,
-    //   borderBottomLeftRadius:10,
-    //   textAlign:'center'
-  
-    // },
-    // activeTab: {
-    //   backgroundColor: '#006eff',
-    //   color: 'white',
-    //   // fontFamily: 'Inter',
-    //   fontWeight: 700,
-    // },
-    mainHead: {
-      fontFamily: 'Inter',
-      fontWeight: 700,
-      fontSize: '35px',
-      textAlign: 'justify',
-      lineHeight:1.3
-    },
-    tabHead:{
-      fontFamily: 'Inter',
-      fontWeight: 400,
-      fontSize: '20px',
-      textAlign: 'justify',
-    },
-    tabsWrapper: {
-      display: 'flex',
-      alignItems: 'center',
-      position: 'relative',
-      marginTop: '30px',
-      borderTop: '2px solid #ddd',
-      paddingTop:30,
-    },
-    arrowButton: {
-      cursor: 'pointer',
-      padding: '10px',
-      zIndex: 1,
-    },
-    tabsContainer: {
-      display: 'flex',
-      overflowX: 'hidden', // Hide overflowing tabs
-      // whiteSpace: 'nowrap',
-      scrollBehavior: 'smooth',
-      width: `${5 * 200}px`, // Visible width for 5 tabs
-    },
-    tab: {
-      // flexShrink: 0,
-      // width: `${tabWidth}px`,
-      // padding: '5px 5px',
-      cursor: 'pointer',
-      backgroundColor: '#f0f0f0',
-      borderBottomRightRadius: '10px',
-      borderBottomLeftRadius: '10px',
-      // margin: '0 5px',
-      textAlign: 'center',
-      display:'flex',
-      alignItems:'center',
-      justifyContent:'center'
-    },
-    activeTab: {
-      backgroundColor: '#007bff',
-      color: '#fff',
-    },
+    fontFamily: 'Inter',
+    fontWeight: 400,
+    fontSize: 14,
+    marginBottom: 20,
+  },
+  tabs: {
+    display: 'flex',
+    justifyContent: 'center',
+    marginTop: '30px',
+    borderTop: '2px solid #ddd',
+    paddingTop: 30,
+  },
+  // tab: {
+  //   // padding: '10px',
+  //   // width:'200px',
+  //   cursor: 'pointer',
+  //   backgroundColor: '#f0f0f0',
+  //   color: '#333',
+  //   borderBottomRightRadius:10,
+  //   borderBottomLeftRadius:10,
+  //   textAlign:'center'
+
+  // },
+  // activeTab: {
+  //   backgroundColor: '#006eff',
+  //   color: 'white',
+  //   // fontFamily: 'Inter',
+  //   fontWeight: 700,
+  // },
+  mainHead: {
+    fontFamily: 'Inter',
+    fontWeight: 700,
+    fontSize: '35px',
+    textAlign: 'justify',
+    lineHeight: 1.3,
+  },
+  tabHead: {
+    fontFamily: 'Inter',
+    fontWeight: 400,
+    fontSize: '20px',
+    textAlign: 'justify',
+  },
+  tabsWrapper: {
+    display: 'flex',
+    alignItems: 'center',
+    position: 'relative',
+    marginTop: '30px',
+    borderTop: '2px solid #ddd',
+    paddingTop: 30,
+  },
+  arrowButton: {
+    cursor: 'pointer',
+    padding: '10px',
+    zIndex: 1,
+  },
+  tabsContainer: {
+    display: 'flex',
+    overflowX: 'hidden', // Hide overflowing tabs
+    // whiteSpace: 'nowrap',
+    scrollBehavior: 'smooth',
+    width: `${5 * 200}px`, // Visible width for 5 tabs
+  },
+  tab: {
+    // flexShrink: 0,
+    // width: `${tabWidth}px`,
+    // padding: '5px 5px',
+    cursor: 'pointer',
+    backgroundColor: '#f0f0f0',
+    borderBottomRightRadius: '10px',
+    borderBottomLeftRadius: '10px',
+    // margin: '0 5px',
+    textAlign: 'center',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  activeTab: {
+    backgroundColor: '#007bff',
+    color: '#fff',
+  },
 }
 
 const formStructure = [
@@ -917,11 +926,10 @@ const formStructure = [
   },
 ]
 
-
 const Info = ({ onInputChange }) => {
   const {
     register,
-    handleSubmit, 
+    handleSubmit,
     formState: { errors },
   } = useForm()
 
@@ -935,7 +943,7 @@ const Info = ({ onInputChange }) => {
         alignItems: 'center',
       }}
     >
-      <CForm >
+      <CForm>
         {/* <CRow className="mb-3"> */}
         <CRow className="mb-3">
           <CCol md={6}>
@@ -958,7 +966,6 @@ const Info = ({ onInputChange }) => {
                 style={styles.input}
                 type="text"
                 onChange={(e) => onInputChange('firstName', e.target.value)}
-
               />
               <CFormFeedback invalid>{errors.firstName?.message}</CFormFeedback>
             </div>
@@ -979,18 +986,22 @@ const Info = ({ onInputChange }) => {
           <CCol md={6}>
             <div className="mb-3" style={styles.inputCon}>
               <CFormLabel style={styles.title}>Company Name</CFormLabel>
-              <CFormInput style={styles.input} type="text" 
-                              onChange={(e) => onInputChange('companyName', e.target.value)}
-                              />
+              <CFormInput
+                style={styles.input}
+                type="text"
+                onChange={(e) => onInputChange('companyName', e.target.value)}
+              />
             </div>
           </CCol>
 
           <CCol md={6}>
             <div className="mb-3" style={styles.inputCon}>
               <CFormLabel style={styles.title}>Occupation</CFormLabel>
-              <CFormInput style={styles.input} type="text"
-                              onChange={(e) => onInputChange('occupation', e.target.value)}
-                              />
+              <CFormInput
+                style={styles.input}
+                type="text"
+                onChange={(e) => onInputChange('occupation', e.target.value)}
+              />
             </div>
           </CCol>
         </CRow>
@@ -1052,109 +1063,111 @@ const Info = ({ onInputChange }) => {
         </CRow>
       </CForm>
     </CContainer>
-  );
-};
+  )
+}
 
-const DynamicForm = () => {
-  const [responses, setResponses] = useState({});
-  const [totalMarks, setTotalMarks] = useState(null);
-  const [currentTab, setCurrentTab] = useState(0);
-  const tabsContainerRef = useRef(null);
-  const isMobile = useMediaQuery({ query: '(max-width: 767px)' });
-
+const DynamicForm = (props) => {
+  const {isActive,styles,isReport} = props
+  const [responses, setResponses] = useState({})
+  const [totalMarks, setTotalMarks] = useState(null)
+  const [currentTab, setCurrentTab] = useState(0)
+  const tabsContainerRef = useRef(null)
+  const isMobile = useMediaQuery({ query: '(max-width: 767px)' })
 
   const scrollLeft = () => {
     if (tabsContainerRef.current) {
-      tabsContainerRef.current.scrollBy({ left: -350, behavior: 'smooth' });
+      tabsContainerRef.current.scrollBy({ left: -350, behavior: 'smooth' })
     }
-  };
+  }
 
   // Function to scroll the tabs to the right
   const scrollRight = () => {
     if (tabsContainerRef.current) {
-      tabsContainerRef.current.scrollBy({ left: 350, behavior: 'smooth' });
+      tabsContainerRef.current.scrollBy({ left: 350, behavior: 'smooth' })
     }
-  };
-
+  }
 
   // Handle input changes for various question types including Info component
   const handleInputChange = (field, value) => {
-    setResponses((prev) => ({ ...prev, [field]: value }));
-  };
+    setResponses((prev) => ({ ...prev, [field]: value }))
+  }
 
   const handleSubmit = (event) => {
-    event.preventDefault();
-    let marks = 0;
+    event.preventDefault()
+    let marks = 0
 
     // Calculate marks for questions
     formStructure.forEach((section) => {
       section.questions.forEach((question) => {
-        const response = responses[question.id];
+        const response = responses[question.id]
 
         if (question.questionType === 'mcq' && response) {
-          marks += response; // MCQ marks
+          marks += response // MCQ marks
         } else if (question.questionType === 'multicheck' && response) {
-          marks += response.reduce((sum, mark) => sum + mark, 0); // Sum multicheck marks
+          marks += response.reduce((sum, mark) => sum + mark, 0) // Sum multicheck marks
         } else if (question.questionType === 'text' && response) {
-          marks += question.marks; // Assign full marks for text response
+          marks += question.marks // Assign full marks for text response
         }
-      });
-    });
+      })
+    })
 
-    setTotalMarks(marks);
-    console.log('Total Marks:', marks);
-    console.log('Responses:', responses);
-  };
+    setTotalMarks(marks)
+    console.log('Total Marks:', marks)
+    console.log('Responses:', responses)
+  }
 
   const handleTabClick = (index) => {
-    setCurrentTab(index);
-  };
+    setCurrentTab(index)
+  }
 
   const onTabClick = (e, index) => {
-    console.log(e);
-    setCurrentTab(index);
-  };
-  
+    console.log(e)
+    setCurrentTab(index)
+  }
 
   return (
-    < >
+    <>
       {/* Tab navigation */}
-      <CRow style={{ ...styles.tabsWrapper }}>
-  {/* Tabs Container */}
-  <div
-    ref={tabsContainerRef}
-    style={{
-      display: 'flex',
-      overflowX: isMobile ? 'scroll' : 'hidden', // Enable scrolling on mobile view
-      whiteSpace: 'nowrap',  // Keep tabs in a single row
-      width: '100%',         // Make sure the container is 100% width
-    }}
-  >
-    <Tabs activeTab={currentTab} onTabClick={onTabClick}     navBtnStyle={{backgroundColor:Color.primary,border:'none'}}	>
-      {/* Generating an array to loop through it */}
-      {formStructure.map((item, index) => (
-        <Tab
-          key={item.subheading}
+      {isActive && (<CRow style={{ ...styles.tabsWrapper }}>
+        {/* Tabs Container */}
+        <div
+          ref={tabsContainerRef}
           style={{
-            backgroundColor: currentTab === index ? Color.primary : 'white', // Active tab background color
-            color: currentTab === index ? 'white' : 'black',          // Active tab text color
-            padding: '10px 20px', // Padding for the tabs
-            cursor: 'pointer',
-            margin: '0 5px',      // Add margin between tabs
-            borderRadius: 0,
-            borderBottomRightRadius: 10,
-            borderBottomLeftRadius: 10,
-            transition: 'background-color 0.3s ease',
-            flexShrink: 0,        // Prevent shrinking when resizing
+            display: 'flex',
+            overflowX: isMobile ? 'scroll' : 'hidden', // Enable scrolling on mobile view
+            whiteSpace: 'nowrap', // Keep tabs in a single row
+            width: '100%', // Make sure the container is 100% width
           }}
         >
-          {item.subheading}
-        </Tab>
-      ))}
-    </Tabs>
-  </div>
-</CRow>
-    
+          <Tabs
+            activeTab={currentTab}
+            onTabClick={onTabClick}
+            navBtnStyle={{ backgroundColor: Color.primary, border: 'none' }}
+          >
+            {/* Generating an array to loop through it */}
+            {formStructure.map((item, index) => (
+              <Tab
+                key={item.subheading}
+                style={{
+                  backgroundColor: currentTab === index ? Color.primary : 'white', // Active tab background color
+                  color: currentTab === index ? 'white' : 'black', // Active tab text color
+                  padding: '10px 20px', // Padding for the tabs
+                  cursor: 'pointer',
+                  margin: '0 5px', // Add margin between tabs
+                  borderRadius: 0,
+                  borderBottomRightRadius: 10,
+                  borderBottomLeftRadius: 10,
+                  transition: 'background-color 0.3s ease',
+                  flexShrink: 0, // Prevent shrinking when resizing
+                }}
+              >
+                {item.subheading}
+              </Tab>
+            ))}
+          </Tabs>
+        </div>
+      </CRow>)}
+
       <CContainer
         style={{
           boxShadow: '4px 4px 15px 15px rgba(0, 0, 0, 0.05)',
@@ -1162,6 +1175,7 @@ const DynamicForm = () => {
           borderRadius: 10,
           textAlign: 'left',
           marginTop: 40,
+          ...styles,
         }}
       >
         <CRow>
@@ -1191,7 +1205,7 @@ const DynamicForm = () => {
                       {question.options.map((option, index) => (
                         <label key={index} style={styles.answerFont}>
                           <input
-                          style={{marginRight:10}}
+                            style={{ marginRight: 10 }}
                             type="radio"
                             name={`question-${question.id}`}
                             value={option.answer}
@@ -1216,18 +1230,18 @@ const DynamicForm = () => {
                       {question.options.map((option, index) => (
                         <label key={index} style={styles.answerFont}>
                           <input
-                            style={{marginRight:10}}
+                            style={{ marginRight: 10 }}
                             type="checkbox"
                             name={`question-${question.id}`}
                             value={option.answer}
                             onChange={(e) => {
-                              const currentMarks = responses[question.id] || [];
+                              const currentMarks = responses[question.id] || []
                               handleInputChange(
                                 question.id,
                                 e.target.checked
                                   ? [...currentMarks, option.marks]
-                                  : currentMarks.filter((mark) => mark !== option.marks)
-                              );
+                                  : currentMarks.filter((mark) => mark !== option.marks),
+                              )
                             }}
                           />
                           {option.answer}
@@ -1242,13 +1256,18 @@ const DynamicForm = () => {
 
           <div className="d-flex justify-content-end">
             {currentTab === formStructure.length - 1 ? (
-              <CButton
+              isReport ?(<CButton
+                style={{ backgroundColor: '#0048ff', color: 'white' }}
+                className="mb-3 mt-3"
+              >
+                PDF
+              </CButton>):(<CButton
                 style={{ backgroundColor: '#0048ff', color: 'white' }}
                 type="submit"
                 className="mb-3 mt-3"
               >
                 Submit
-              </CButton>
+              </CButton>)
             ) : (
               <>
                 <div style={{ display: 'flex', justifyContent: 'space-between', width: '100vw' }}>
@@ -1283,7 +1302,7 @@ const DynamicForm = () => {
         )}
       </CContainer>
     </>
-  );
-};
+  )
+}
 
-export default DynamicForm;
+export default DynamicForm

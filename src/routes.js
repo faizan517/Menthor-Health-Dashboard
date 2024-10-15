@@ -8,7 +8,8 @@ const CompanyCreation = React.lazy(() => import('./views/Companies/CompanyCreati
 const GeneratedForm = React.lazy(() => import('./views/Companies/GeneratedForm'))
 const EmployeeForm  = React.lazy(() => import('./views/Companies/EmployeeForm'))
 const SubAdmin  = React.lazy(() => import('./views/charts/SubAdmin'))
-
+const Reports  = React.lazy(() => import('./views/Reports/Reports'))
+const CompaniesReports  = React.lazy(() => import('./views/Reports/CompanyReports'))
 const Colors = React.lazy(() => import('./views/theme/colors/Colors'))
 const Typography = React.lazy(() => import('./views/theme/typography/Typography'))
 
@@ -66,6 +67,8 @@ const routes = [
   { path: '/employeeForm', name: 'EmployeeForm', element: EmployeeForm },
   { path: '/companiesDetails', name: 'CompaniesDetails', element: CompaniesDetails },
   { path: '/generatedForm', name: 'GeneratedForm', element: GeneratedForm },
+  { path: '/reports', name: 'Reports', element: Reports },
+  { path: '/companiesReports', name: 'CompaniesReports', element: CompaniesReports },
   { path: '/companyCreation', name: 'CompanyCreation', element: CompanyCreation},
   { path: '/subAdmin', name: 'SubAdmin', element: SubAdmin },
   { path: '/theme', name: 'Theme', element: Colors, exact: true },

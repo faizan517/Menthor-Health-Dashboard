@@ -1,0 +1,14 @@
+@media (max-width: 768px) {
+    .dynamic-form-wrapper {
+      width: 100%; /* Full width on small screens */
+      padding: 10px;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .dynamic-form-wrapper {
+      width: 66%; /* 2/3 width on medium and larger screens */
+      padding: 20px;
+    }
+  }
+  
