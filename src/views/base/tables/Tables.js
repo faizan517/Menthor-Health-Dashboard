@@ -121,7 +121,7 @@ const Tables = () => {
                     <CTableDataCell>Cell</CTableDataCell>
                     <CTableDataCell>Cell</CTableDataCell>
                   </CTableRow>
-                  <CTableRow color="dark">
+                  <CTableRow >
                     <CTableHeaderCell scope="row">Dark</CTableHeaderCell>
                     <CTableDataCell>Cell</CTableDataCell>
                     <CTableDataCell>Cell</CTableDataCell>
@@ -283,7 +283,7 @@ const Tables = () => {
               </CTable>
             </DocsExample>
             <DocsExample href="components/table#hoverable-rows">
-              <CTable color="dark" hover>
+              <CTable  hover>
                 <CTableHead>
                   <CTableRow>
                     <CTableHeaderCell scope="col">#</CTableHeaderCell>
@@ -387,7 +387,7 @@ const Tables = () => {
               </CTable>
             </DocsExample>
             <DocsExample href="components/table#active-tables">
-              <CTable color="dark">
+              <CTable >
                 <CTableHead>
                   <CTableRow>
                     <CTableHeaderCell scope="col">#</CTableHeaderCell>
@@ -543,7 +543,7 @@ const Tables = () => {
               </CTable>
             </DocsExample>
             <DocsExample href="components/table#tables-without-borders">
-              <CTable color="dark" borderless>
+              <CTable  borderless>
                 <CTableHead>
                   <CTableRow>
                     <CTableHeaderCell scope="col">#</CTableHeaderCell>
@@ -815,7 +815,7 @@ const Tables = () => {
             </DocsExample>
             <DocsExample href="components/table#table-head">
               <CTable>
-                <CTableHead color="dark">
+                <CTableHead >
                   <CTableRow>
                     <CTableHeaderCell scope="col">#</CTableHeaderCell>
                     <CTableHeaderCell scope="col">Class</CTableHeaderCell>

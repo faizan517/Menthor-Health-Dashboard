@@ -8,6 +8,7 @@ import { useForm } from 'react-hook-form'
 import { useMediaQuery } from 'react-responsive'
 import { Tab, Tabs } from 'react-tabs-scrollable'
 import "react-tabs-scrollable/dist/rts.css";
+import Color from '../../utils/Color'
 
 
 const styles = {
@@ -1129,13 +1130,13 @@ const DynamicForm = () => {
       width: '100%',         // Make sure the container is 100% width
     }}
   >
-    <Tabs activeTab={currentTab} onTabClick={onTabClick}>
+    <Tabs activeTab={currentTab} onTabClick={onTabClick}     navBtnStyle={{backgroundColor:Color.primary,border:'none'}}	>
       {/* Generating an array to loop through it */}
       {formStructure.map((item, index) => (
         <Tab
           key={item.subheading}
           style={{
-            backgroundColor: currentTab === index ? 'blue' : 'white', // Active tab background color
+            backgroundColor: currentTab === index ? Color.primary : 'white', // Active tab background color
             color: currentTab === index ? 'white' : 'black',          // Active tab text color
             padding: '10px 20px', // Padding for the tabs
             cursor: 'pointer',
