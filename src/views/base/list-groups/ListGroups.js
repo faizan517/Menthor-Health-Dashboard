@@ -185,7 +185,6 @@ const ListGroups = () => {
                   'warning',
                   'info',
                   'light',
-                  'dark',
                 ].map((color, index) => (
                   <CListGroupItem color={color} key={index}>
                     A simple {color} list group item
@@ -212,7 +211,6 @@ const ListGroups = () => {
                   'warning',
                   'info',
                   'light',
-                  'dark',
                 ].map((color, index) => (
                   <CListGroupItem as="a" href="#" color={color} key={index}>
                     A simple {color} list group item

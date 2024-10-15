@@ -146,7 +146,6 @@ const Placeholders = () => {
               <CPlaceholder color="warning" xs={12} />
               <CPlaceholder color="info" xs={12} />
               <CPlaceholder color="light" xs={12} />
-              <CPlaceholder color="dark" xs={12} />
             </DocsExample>
           </CCardBody>
         </CCard>

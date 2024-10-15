@@ -177,7 +177,7 @@ const Tables = () => {
               These classes can also be added to table variants:
             </p>
             <DocsExample href="components/table#striped-rows">
-              <CTable color="dark" striped>
+              <CTable  striped>
                 <CTableHead>
                   <CTableRow>
                     <CTableHeaderCell scope="col">#</CTableHeaderCell>
@@ -778,7 +778,7 @@ const Tables = () => {
           <CCardBody>
             <p className="text-body-secondary small">
               Similar to tables and dark tables, use the modifier prop{' '}
-              <code>color=&#34;light&#34;</code> or <code>color=&#34;dark&#34;</code> to make{' '}
+              <code>color=&#34;light&#34;</code> or <code></code> to make{' '}
               <code>&lt;CTableHead&gt;</code>s appear light or dark gray.
             </p>
             <DocsExample href="components/table#table-head">

@@ -29,7 +29,6 @@ const Spinners = () => {
               <CSpinner color="warning" />
               <CSpinner color="info" />
               <CSpinner color="light" />
-              <CSpinner color="dark" />
             </DocsExample>
           </CCardBody>
         </CCard>
@@ -59,7 +58,6 @@ const Spinners = () => {
               <CSpinner color="warning" variant="grow" />
               <CSpinner color="info" variant="grow" />
               <CSpinner color="light" variant="grow" />
-              <CSpinner color="dark" variant="grow" />
             </DocsExample>
           </CCardBody>
         </CCard>

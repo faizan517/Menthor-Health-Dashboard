@@ -35,7 +35,6 @@ const Alerts = () => {
               <CAlert color="warning">A simple warning alert—check it out!</CAlert>
               <CAlert color="info">A simple info alert—check it out!</CAlert>
               <CAlert color="light">A simple light alert—check it out!</CAlert>
-              <CAlert color="dark">A simple dark alert—check it out!</CAlert>
             </DocsExample>
           </CCardBody>
         </CCard>
@@ -79,10 +78,7 @@ const Alerts = () => {
                 A simple light alert with <CAlertLink href="#">an example link</CAlertLink>. Give it
                 a click if you like.
               </CAlert>
-              <CAlert color="dark">
-                A simple dark alert with <CAlertLink href="#">an example link</CAlertLink>. Give it
-                a click if you like.
-              </CAlert>
+             
             </DocsExample>
           </CCardBody>
         </CCard>

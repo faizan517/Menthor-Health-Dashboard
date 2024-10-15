@@ -77,7 +77,6 @@ const Badges = () => {
               <CBadge color="warning">warning</CBadge>
               <CBadge color="info">info</CBadge>
               <CBadge color="light">light</CBadge>
-              <CBadge color="dark">dark</CBadge>
             </DocsExample>
           </CCardBody>
         </CCard>
@@ -107,9 +106,6 @@ const Badges = () => {
               </CBadge>
               <CBadge color="light" shape="rounded-pill">
                 light
-              </CBadge>
-              <CBadge color="dark" shape="rounded-pill">
-                dark
               </CBadge>
             </DocsExample>
           </CCardBody>

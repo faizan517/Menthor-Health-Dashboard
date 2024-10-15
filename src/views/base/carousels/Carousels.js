@@ -177,8 +177,8 @@ const Carousels = () => {
               with the <code>filter</code> CSS property. Captions and controls have additional Sass
               variables that customize the <code>color</code> and <code>background-color</code>.
             </p>
-            <DocsExample href="components/carousel/#dark-variant">
-              <CCarousel controls indicators dark>
+            <DocsExample>
+              <CCarousel controls indicators >
                 <CCarouselItem>
                   <img className="d-block w-100" src={slidesLight[0]} alt="slide 1" />
                   <CCarouselCaption className="d-none d-md-block">

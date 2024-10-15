@@ -582,7 +582,6 @@ const Cards = () => {
                   { color: 'warning' },
                   { color: 'info', textColor: 'white' },
                   { color: 'light' },
-                  { color: 'dark', textColor: 'white' },
                 ].map((item, index) => (
                   <CCol lg={4} key={index}>
                     <CCard color={item.color} textColor={item.textColor} className="mb-3">
@@ -616,7 +615,6 @@ const Cards = () => {
                   { color: 'warning', textColor: 'warning' },
                   { color: 'info', textColor: 'info' },
                   { color: 'light' },
-                  { color: 'dark' },
                 ].map((item, index) => (
                   <CCol lg={4} key={index}>
                     <CCard textColor={item.textColor} className={`mb-3 border-${item.color}`}>
@@ -650,7 +648,6 @@ const Cards = () => {
                   { color: 'warning', textColor: 'warning' },
                   { color: 'info', textColor: 'info' },
                   { color: 'light' },
-                  { color: 'dark' },
                 ].map((item, index) => (
                   <CCol lg={4} key={index}>
                     <CCard
