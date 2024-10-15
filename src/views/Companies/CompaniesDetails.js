@@ -3,7 +3,6 @@ import { CCard } from '@coreui/react'
 import 'react-circular-progressbar/dist/styles.css'
 import { useMediaQuery } from 'react-responsive'
 import { CSmartPagination } from '@coreui/react-pro'
-import { useNavigate } from "react-router-dom";
 
 // import axios from 'axios';
 import {
@@ -21,10 +20,10 @@ import {
   CFormSelect,
 } from '@coreui/react'
 import UserStatsCard from '../../components/UserStatsCard'
-import { CiCirclePlus } from 'react-icons/ci'
+import SearchBar from '../../components/search'
+import { useNavigate } from 'react-router-dom'
 import { LuPlus } from 'react-icons/lu'
-// import SearchBar from '../../components/search'
-
+import { PiPencilSimple } from 'react-icons/pi'
 
 const styles = {
   cardBody: {
@@ -64,10 +63,11 @@ const styles = {
     fontFamily: 'poppins',
     fontWeight: 500,
     fontSize: 14,
+    cursor:'pointer'
   },
   status: {
     height: 30,
-    width: 70,
+    width: 100,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -92,25 +92,27 @@ const styles = {
   },
 }
 
-const UserTable = () => {
-  const navigate = useNavigate();
-
+const CompaniesDetails = () => {
   const [users, setUsers] = useState([])
   const [search, setSearch] = useState('')
   const [sortBy, setSortBy] = useState('newest')
   const [currentPage, setCurrentPage] = useState(1)
   const usersPerPage = 8
   const isMobile = useMediaQuery({ query: '(max-width: 767px)' })
+  const navigate = useNavigate();
+
   function handleClick() {
-    navigate("/subAdmin");
+    navigate("/employeeForm");
   }
-  
+  function companyCreation() {
+    navigate("/companyCreation");
+  }
 
   const dummyUsers = [
     {
       id: 1,
-      name: 'John Doe',
-      company: 'Company A',
+      name: 'Jane Cooper',
+      company: 'Methologik(Pvt) Ltd',
       phone: '123-456-7890',
       email: 'john@example.com',
       city: 'New York',
@@ -118,8 +120,8 @@ const UserTable = () => {
     },
     {
       id: 2,
-      name: 'Jane Smith',
-      company: 'Company B',
+      name: 'Floyd Miles',
+      company: 'Methologik(Pvt) Ltd',
       phone: '987-654-3210',
       email: 'jane@example.com',
       city: 'Los Angeles',
@@ -128,7 +130,7 @@ const UserTable = () => {
     {
       id: 3,
       name: 'Michael Johnson',
-      company: 'Company C',
+      company: 'Methologik(Pvt) Ltd',
       phone: '456-789-1230',
       email: 'michael@example.com',
       city: 'Chicago',
@@ -137,7 +139,7 @@ const UserTable = () => {
     {
       id: 4,
       name: 'Emily Davis',
-      company: 'Company D',
+      company: 'Methologik(Pvt) Ltd',
       phone: '321-654-9870',
       email: 'emily@example.com',
       city: 'Houston',
@@ -146,7 +148,7 @@ const UserTable = () => {
     {
       id: 5,
       name: 'William Brown',
-      company: 'Company E',
+      company: 'Methologik(Pvt) Ltd',
       phone: '654-321-0987',
       email: 'william@example.com',
       city: 'Phoenix',
@@ -155,7 +157,7 @@ const UserTable = () => {
     {
       id: 6,
       name: 'Olivia Jones',
-      company: 'Company F',
+      company: 'Methologik(Pvt) Ltd',
       phone: '789-123-4567',
       email: 'olivia@example.com',
       city: 'Philadelphia',
@@ -164,7 +166,7 @@ const UserTable = () => {
     {
       id: 7,
       name: 'James Garcia',
-      company: 'Company G',
+      company: 'Methologik(Pvt) Ltd',
       phone: '234-567-8901',
       email: 'james@example.com',
       city: 'San Antonio',
@@ -173,7 +175,7 @@ const UserTable = () => {
     {
       id: 8,
       name: 'Sophia Martinez',
-      company: 'Company H',
+      company: 'Methologik(Pvt) Ltd',
       phone: '890-123-4567',
       email: 'sophia@example.com',
       city: 'San Diego',
@@ -182,7 +184,7 @@ const UserTable = () => {
     {
       id: 9,
       name: 'David Rodriguez',
-      company: 'Company I',
+      company: 'Methologik(Pvt) Ltd',
       phone: '567-890-1234',
       email: 'david@example.com',
       city: 'Dallas',
@@ -191,7 +193,7 @@ const UserTable = () => {
     {
       id: 10,
       name: 'Ava Hernandez',
-      company: 'Company J',
+      company: 'Methologik(Pvt) Ltd',
       phone: '901-234-5678',
       email: 'ava@example.com',
       city: 'San Jose',
@@ -253,13 +255,11 @@ const UserTable = () => {
       >
         <CRow className="my-4 p-3">
           <CCol md={7}>
-            <h2 style={styles.mainHeading}>All Users</h2>
-            <p style={styles.secHeading}>Active Members</p>
+            <h2 style={styles.mainHeading}>Methologik Pvt Ltd</h2>
+            <p style={styles.secHeading}>Active companies</p>
           </CCol>
           <CCol md={2} className="d-flex justify-content-center align-items-center" style={{ height:40,width:40,borderRadius:10,backgroundColor:'rgba(249, 251, 255, 1)' }}>
-          {/* <button> */}
-          <LuPlus size={40} style={{cursor:'pointer'}} onClick={handleClick} />
-          {/* </button> */}
+          <PiPencilSimple size={20} style={{ cursor: 'pointer' }} onClick={companyCreation}  />
           </CCol>
           <CCol md={3} className="d-flex justify-content-flex-end" style={{ height: '40px' }}>
             <CFormInput
@@ -294,7 +294,7 @@ const UserTable = () => {
           </CTableHead>
           <CTableBody>
             {users.map((user) => (
-              <CTableRow key={user.id}>
+              <CTableRow key={user.id} onClick={handleClick}>
                 <CTableDataCell style={styles.title}>{user.name}</CTableDataCell>
                 <CTableDataCell style={styles.title}>{user.company}</CTableDataCell>
                 <CTableDataCell style={styles.title}>{user.phone}</CTableDataCell>
@@ -302,7 +302,7 @@ const UserTable = () => {
                 <CTableDataCell style={styles.title}>{user.city}</CTableDataCell>
                 <CTableDataCell>
                   {user.isActive ? (
-                    <CBadge style={styles.status}>Active</CBadge>
+                    <CBadge style={styles.status}>completed</CBadge>
                   ) : (
                     <CBadge
                       style={{
@@ -316,7 +316,7 @@ const UserTable = () => {
                         fontSize: 14,
                       }}
                     >
-                      Inactive
+                      Incomplete
                     </CBadge>
                   )}
                 </CTableDataCell>
@@ -339,4 +339,4 @@ const UserTable = () => {
   )
 }
 
-export default UserTable
+export default CompaniesDetails

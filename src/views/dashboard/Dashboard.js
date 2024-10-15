@@ -38,6 +38,7 @@ import { CChartPie } from '@coreui/react-chartjs'
 import { useMediaQuery } from 'react-responsive'
 import Color from '../../utils/Color'
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import PieChart from '../../components/PieChart'
 
 const Dashboard = () => {
   const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
@@ -273,23 +274,7 @@ const Dashboard = () => {
           borderRadius: 10,
           marginTop:10
         }}>
-            <CCardBody
-              style={{ boxShadow: '4px 4px 15px 15px rgba(0, 0, 0, 0.05)', borderWidth: 0 }}
-            >
-              <CChartPie
-                data={{
-                  labels: ['Red', 'Green', 'Yellow'],
-                  datasets: [
-                    {
-                      data: [300, 50, 100],
-                      backgroundColor: [Color.primary, '#df0404', '#20c997'],
-                      // hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
-                    },
-                  ],
-                }}
-                style={{ borderWidth: 0 }}
-              />
-            </CCardBody>
+            <PieChart/>
 
             {/* <WidgetsDropdown /> */}
       {/* <CCard className="mb-4"> */}

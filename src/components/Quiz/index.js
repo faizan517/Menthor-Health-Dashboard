@@ -97,10 +97,10 @@ const styles = {
       overflowX: 'hidden', // Hide overflowing tabs
       // whiteSpace: 'nowrap',
       scrollBehavior: 'smooth',
-      // width: `${5 * 200}px`, // Visible width for 5 tabs
+      width: `${5 * 200}px`, // Visible width for 5 tabs
     },
     tab: {
-      flexShrink: 0,
+      // flexShrink: 0,
       // width: `${tabWidth}px`,
       // padding: '5px 5px',
       cursor: 'pointer',
@@ -1118,29 +1118,41 @@ const DynamicForm = () => {
   return (
     < >
       {/* Tab navigation */}
-      {/* <CRow style={{...styles.tabsWrapper}}> */}
-
-      {/* Tabs Container */}
-      {/* <CCol style={{...styles.tabsContainer,overflowX : isMobile? 'scroll':'hidden'}} ref={tabsContainerRef}> */}        
-             <Tabs activeTab={currentTab} 
-            //  hideNavBtnsOnMobile={true}
-              //  style={{ backgroundColor: 'pink' , padding: '10px', }} // Tab container styling
-               onTabClick={onTabClick}>
-        {/* generating an array to loop through it  */}
-        {formStructure.map((item,index) => (
-          <Tab key={item}  style={{
-            backgroundColor: currentTab === index ? 'blue' : 'white',  // Active tab background color
-            color: currentTab === index ? 'white' : 'black',  // Active tab text color
+      <CRow style={{ ...styles.tabsWrapper }}>
+  {/* Tabs Container */}
+  <div
+    ref={tabsContainerRef}
+    style={{
+      display: 'flex',
+      overflowX: isMobile ? 'scroll' : 'hidden', // Enable scrolling on mobile view
+      whiteSpace: 'nowrap',  // Keep tabs in a single row
+      width: '100%',         // Make sure the container is 100% width
+    }}
+  >
+    <Tabs activeTab={currentTab} onTabClick={onTabClick}>
+      {/* Generating an array to loop through it */}
+      {formStructure.map((item, index) => (
+        <Tab
+          key={item.subheading}
+          style={{
+            backgroundColor: currentTab === index ? 'blue' : 'white', // Active tab background color
+            color: currentTab === index ? 'white' : 'black',          // Active tab text color
+            padding: '10px 20px', // Padding for the tabs
             cursor: 'pointer',
-            borderRadius:0,
+            margin: '0 5px',      // Add margin between tabs
+            borderRadius: 0,
             borderBottomRightRadius: 10,
             borderBottomLeftRadius: 10,
             transition: 'background-color 0.3s ease',
-          }}>{item.subheading}</Tab>
-        ))}
-      </Tabs>
-{/* </CCol> */}
-    {/* </CRow> */}
+            flexShrink: 0,        // Prevent shrinking when resizing
+          }}
+        >
+          {item.subheading}
+        </Tab>
+      ))}
+    </Tabs>
+  </div>
+</CRow>
     
       <CContainer
         style={{
@@ -1174,7 +1186,7 @@ const DynamicForm = () => {
                   </p>
 
                   {question.questionType === 'mcq' && (
-                    <div>
+                    <CCol xs={12}>
                       {question.options.map((option, index) => (
                         <label key={index} style={styles.answerFont}>
                           <input
@@ -1187,7 +1199,7 @@ const DynamicForm = () => {
                           {option.answer}
                         </label>
                       ))}
-                    </div>
+                    </CCol>
                   )}
 
                   {question.questionType === 'text' && (
