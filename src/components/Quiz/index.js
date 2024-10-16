@@ -1130,19 +1130,20 @@ const DynamicForm = (props) => {
   return (
     <>
       {/* Tab navigation */}
-      <CRow lg={12} style={{...styles.tabsWrapper}}>
+      {!isActive && (  <CRow lg={10} xl={12} md={10} style={{...styles.tabsWrapper}}>
       {/* Left Arrow */}
       <CCol style={{...styles.arrowButton,display: isMobile ? 'none':''}} onClick={scrollLeft}>
         <MdKeyboardDoubleArrowLeft size={20} />
       </CCol>
 
       {/* Tabs Container */}
-      <CCol lg={11} md={9} sm={9}  style={{...styles.tabsContainer,overflowX : isMobile? 'scroll':'hidden'}} ref={tabsContainerRef}>
+      <CCol lg={7} xl={11} md={9} sm={9}  style={{...styles.tabsContainer,overflowX : isMobile? 'scroll':'hidden'}} ref={tabsContainerRef}>
         {formStructure.map((tab, index) => (
           <CCol
           md={4}
           
           lg={3}
+          xl={3}
             key={index}
             style={{
               ...styles.tab,
@@ -1160,7 +1161,7 @@ const DynamicForm = (props) => {
       <CCol style={{...styles.arrowButton,display: isMobile ? 'none':''}} onClick={scrollRight}>
         <MdKeyboardDoubleArrowRight size={20} />
       </CCol>
-    </CRow>
+    </CRow>)}
 
       <CContainer
         style={{

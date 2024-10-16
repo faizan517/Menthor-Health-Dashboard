@@ -23,6 +23,7 @@ import {
 import CIcon from '@coreui/icons-react'
 
 import avatar8 from './../../assets/images/avatars/8.jpg'
+import { FaPowerOff } from 'react-icons/fa6'
 
 const AppHeaderDropdown = () => {
   return (
@@ -31,8 +32,8 @@ const AppHeaderDropdown = () => {
         <CAvatar src={avatar8} size="md" />
       </CDropdownToggle>
       <CDropdownMenu className="pt-0" placement="bottom-end">
-        <CDropdownHeader className="bg-body-secondary fw-semibold mb-2">Account</CDropdownHeader>
-        <CDropdownItem href="#">
+        {/* <CDropdownHeader className="bg-body-secondary fw-semibold mb-2">Account</CDropdownHeader> */}
+        {/* <CDropdownItem href="#">
           <CIcon icon={cilBell} className="me-2" />
           Updates
           <CBadge color="info" className="ms-2">
@@ -83,10 +84,12 @@ const AppHeaderDropdown = () => {
             42
           </CBadge>
         </CDropdownItem>
-        <CDropdownDivider />
+        <CDropdownDivider /> */}
         <CDropdownItem href="#">
-          <CIcon icon={cilLockLocked} className="me-2" />
-          Lock Account
+        <FaPowerOff  size={25} color='red' className='p-1 text-align-center' />
+          <span style={{fontFamily:'poppins',fontWeight:500}}>
+          Logout
+          </span>
         </CDropdownItem>
       </CDropdownMenu>
     </CDropdown>

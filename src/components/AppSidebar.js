@@ -32,7 +32,7 @@ const AppSidebar = () => {
   const sidebarShow = useSelector((state) => state.sidebarShow)
 
   return (
-    <CSidebar
+    <CSidebar 
       className="border-end"
       position="fixed"
       unfoldable={unfoldable}

@@ -257,7 +257,7 @@ const Companies = () => {
         <CRow className="my-4 p-3">
           <CCol sm={3} md={5} lg={5 } xl={7}>
             <h2 style={styles.mainHeading}>Companies</h2>
-            <p style={styles.secHeading}>Active companies</p>
+            <p style={styles.secHeading}>Active Companies</p>
           </CCol>
           <CCol sm={2} md={6} lg={6} xl={5}>
             <div className="d-flex justify-content-flex-end " > 

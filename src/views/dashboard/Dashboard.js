@@ -274,7 +274,7 @@ const Dashboard = () => {
           borderRadius: 10,
           marginTop:10
         }}>
-            <PieChart/>
+            <PieChart styling={{display:'flex',paddigLeft:10}}/>
 
 
           </CCard>

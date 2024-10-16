@@ -252,11 +252,13 @@ const Reports = () => {
         }}
       >
         <CRow className="my-4 p-3">
-          <CCol md={7}>
-            <h2 style={styles.mainHeading}>Companies</h2>
+        <CCol sm={3} md={5} lg={5 } xl={7}>
+        <h2 style={styles.mainHeading}>Companies</h2>
             <p style={styles.secHeading}>Active companies</p>
           </CCol>
           <CCol md={3} className="d-flex justify-content-flex-end" style={{ height: '40px' }}>
+          <div className="d-flex justify-content-flex-end " > 
+
             <CFormInput
               placeholder="Search"
               value={search}
@@ -273,6 +275,7 @@ const Reports = () => {
               <option value="newest">Sort by: Newest</option>
               <option value="oldest">Sort by: Oldest</option>
             </CFormSelect>
+             </div>
           </CCol>
         </CRow>
 
