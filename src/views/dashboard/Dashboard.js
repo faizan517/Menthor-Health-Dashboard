@@ -213,7 +213,7 @@ const Dashboard = () => {
         Hello Admin 👋🏼,
       </text>
     </div>
-      <CRow sm={12} md={6} lg={12} style={{ display: 'flex', alignItems: 'flex-end' }}>
+      <CRow sm={12} md={6} lg={12} style={{ display: 'flex', alignItems: 'flex-end',flex:'wrap' }}>
         <CCol sm={6} md={2} lg={2}>
           <CWidgetStatsC
             className="mb-4"
@@ -248,7 +248,7 @@ const Dashboard = () => {
             <img src={puls} style={{ textAlign: 'center' }} />
           </div>}
             text="Widget helper text"
-            title="Bonus Rate"
+            title="Bonus"
             value="89.9K"
             style={{ boxShadow: '4px 4px 15px 15px rgba(0, 0, 0, 0.05)', borderWidth: 0, fontSize: isMobile ? '13px': '    ' }}
           />
@@ -260,7 +260,7 @@ const Dashboard = () => {
             <img src={history} style={{ textAlign: 'center' }} />
           </div>}
             text="Widget  text"
-            title="Session Rate"
+            title="Session"
             value="89.9K"
             style={{ boxShadow: '4px 4px 15px 15px rgba(0, 0, 0, 0.05)', borderWidth: 0, fontSize: isMobile ? '12px': '    '  }}
           />
@@ -276,50 +276,7 @@ const Dashboard = () => {
         }}>
             <PieChart/>
 
-            {/* <WidgetsDropdown /> */}
-      {/* <CCard className="mb-4"> */}
-      {/* <CCardHeader>Sessions By Company</CCardHeader> */}
-      {/* <CCardBody style={styles.cardBody}>
-        <div style={styles.circularContainer}>
-          Nested Circular Progress Bars
-          <div style={{ position: 'relative', height: '150px', width: '150px' }}>
-            {options.map((option, index) => (
-              <div
-                key={index}
-                style={{
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  width: '100%',
-                  height: '100%',
-                  transform: `scale(${1 - index * 0.4})`,
-                }}
-              >
-                <CircularProgressbar
-                  value={option.value}
-                  styles={buildStyles({
-                    pathColor: option.color,
-                    trailColor: '#edf0f5',
-                  })}
-        strokeWidth={10}
 
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-        <ul style={styles.optionsList}>
-          {options.map((option, index) => (
-            <li key={index} style={styles.optionItem}>
-              {option.label}
-              <div style={styles.optionValue}>
-                8,085 <span style={styles.percentage}>{option.value}%</span>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </CCardBody> */}
-    {/* </CCard> */}
           </CCard>
         </CCol>
       </CRow>

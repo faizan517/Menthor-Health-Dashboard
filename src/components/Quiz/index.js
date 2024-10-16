@@ -35,6 +35,7 @@ const styles = {
     fontSize: 14,
     marginBottom: 20,
   },
+  
   answerText: {
     padding: 10,
     fontFamily: 'Inter',
@@ -1067,7 +1068,7 @@ const Info = ({ onInputChange }) => {
 }
 
 const DynamicForm = (props) => {
-  const {isActive,styles,isReport} = props
+  const {isActive,styling,isReport,} = props
   const [responses, setResponses] = useState({})
   const [totalMarks, setTotalMarks] = useState(null)
   const [currentTab, setCurrentTab] = useState(0)
@@ -1128,7 +1129,7 @@ const DynamicForm = (props) => {
   return (
     <>
       {/* Tab navigation */}
-      {isActive && (<CRow style={{ ...styles.tabsWrapper }}>
+      {!isActive && (<CRow style={{ ...styles.tabsWrapper }}>
         {/* Tabs Container */}
         <div
           ref={tabsContainerRef}
@@ -1175,7 +1176,7 @@ const DynamicForm = (props) => {
           borderRadius: 10,
           textAlign: 'left',
           marginTop: 40,
-          ...styles,
+          ...styling,
         }}
       >
         <CRow>

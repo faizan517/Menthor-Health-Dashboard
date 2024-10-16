@@ -5,6 +5,7 @@ const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
 const Companies = React.lazy(() => import('./views/Companies/index'))
 const CompaniesDetails = React.lazy(() => import('./views/Companies/CompaniesDetails'))
 const CompanyCreation = React.lazy(() => import('./views/Companies/CompanyCreation'))
+const FilledCompanyCreation = React.lazy(() => import('./views/Companies/FilledCompaniesCreation'))
 const GeneratedForm = React.lazy(() => import('./views/Companies/GeneratedForm'))
 const EmployeeForm  = React.lazy(() => import('./views/Companies/EmployeeForm'))
 const SubAdmin  = React.lazy(() => import('./views/charts/SubAdmin'))
@@ -70,6 +71,7 @@ const routes = [
   { path: '/reports', name: 'Reports', element: Reports },
   { path: '/companiesReports', name: 'CompaniesReports', element: CompaniesReports },
   { path: '/companyCreation', name: 'CompanyCreation', element: CompanyCreation},
+  { path: '/filledCompanyCreation', name: 'FilledCompanyCreation', element: FilledCompanyCreation},
   { path: '/subAdmin', name: 'SubAdmin', element: SubAdmin },
   { path: '/theme', name: 'Theme', element: Colors, exact: true },
   { path: '/theme/colors', name: 'Colors', element: Colors },

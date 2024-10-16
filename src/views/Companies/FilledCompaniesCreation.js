@@ -7,11 +7,12 @@ import {
   CFormFeedback,
   CFormInput,
   CFormLabel,
-  CFormSelect,
   CRow,
 } from '@coreui/react'
 import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 import { PiPencilSimple } from 'react-icons/pi'
+
 
 const styles = {
   heading: {
@@ -105,12 +106,18 @@ const styles = {
   },
 }
 
-const SubAdmin = ({ onInputChange }) => {
+const CompanyCreation = ({ onInputChange, companyName, companyAddress, companyEmail, companyType, city, isFilled }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm()
+
+  const navigate = useNavigate()
+
+  function handleClick() {
+    navigate('/generatedForm')
+  }
 
   return (
     <CContainer
@@ -120,133 +127,85 @@ const SubAdmin = ({ onInputChange }) => {
         borderRadius: 10,
         textAlign: 'left',
         marginTop: 40,
+        display: 'flex',
+        flexDirection: 'column',
       }}
     >
       <CForm>
-        {/* <CRow className="mb-3"> */}
-
-            {/* <CCol lg={11} style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center',marginTop:20 }}>
+        
+          <CCol
+            md={11}
+            style={{
+              display: 'flex',
+              justifyContent: 'flex-end',
+              textAlign: 'right',
+              marginTop: 20,
+            }}
+          >
             <PiPencilSimple size={20} style={{ cursor: 'pointer' }} />
-          </CCol> */}
-        <CRow className="mb-3 " style={{display:'flex',justifyContent:'center'}}>
-          <CCol md={5} className="mb-3 mt-5">
-            <div className="mb-3" style={styles.inputCon}>
-              <CFormLabel style={styles.title}>Role</CFormLabel>
-              <CFormSelect
-                style={styles.input}
-                aria-label="Default select example"
-                options={[
-                  'Select Admin',
-                  { label: 'Super Admin', value: '1' },
-                  { label: 'Admin', value: '2' },
-                ]}
-                onChange={(e) => onInputChange('firstName', e.target.value)}
-              />
-              <CFormFeedback invalid>{errors.gender?.message}</CFormFeedback>
-            </div>
           </CCol>
-          <CCol lg={5} style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center',marginTop:20 }}>
-          <PiPencilSimple size={20} style={{ cursor: 'pointer' }} />
-
-          </CCol>
-          
-        </CRow>
-        <CRow className="mb-3 " style={{display:'flex',justifyContent:'center'}}>
-          <CCol md={5}>
+        <CRow className="mb-3" style={{display:'flex',justifyContent:'center'}}>
+          <CCol md={5} className="mb-3 mt-2">
             <div className="mb-3" style={styles.inputCon}>
-              <CFormLabel style={styles.title}>First Name</CFormLabel>
+              <CFormLabel style={styles.title}>Company Name</CFormLabel>
               <CFormInput
                 style={styles.input}
+                value="mentor health" // Controlled component
                 type="text"
-                onChange={(e) => onInputChange('firstName', e.target.value)}
+                onChange={(e) => onInputChange('companyName', e.target.value)}
               />
               <CFormFeedback invalid>{errors.firstName?.message}</CFormFeedback>
             </div>
           </CCol>
-          <CCol md={5}>
+          <CCol md={5} className="mb-3 mt-2" >
             <div className="mb-3" style={styles.inputCon}>
-              <CFormLabel style={styles.title}>Last Name</CFormLabel>
+              <CFormLabel style={styles.title}>Company Address</CFormLabel>
               <CFormInput
                 style={styles.input}
+                value="123 zyx" // Controlled component
                 type="text"
-                onChange={(e) => onInputChange('lastName', e.target.value)}
+                onChange={(e) => onInputChange('companyAddress', e.target.value)}
               />
               <CFormFeedback invalid>{errors.lastName?.message}</CFormFeedback>
             </div>
           </CCol>
         </CRow>
-        <CRow className="mb-3 " style={{display:'flex',justifyContent:'center'}}>
-          <CCol md={5}>
+        <CRow className="mb-3" style={{display:'flex',justifyContent:'center'}}>
+          <CCol md={5} >
             <div className="mb-3" style={styles.inputCon}>
-              <CFormLabel style={styles.title}>Date of Birth</CFormLabel>
+              <CFormLabel style={styles.title}>Company Email</CFormLabel>
               <CFormInput
                 style={styles.input}
-                type="date"
-                onChange={(e) => onInputChange('dob', e.target.value)}
-              />
-              <CFormFeedback invalid>{errors.dob?.message}</CFormFeedback>
-            </div>
-          </CCol>
-          <CCol md={5}>
-            <div className="mb-3" style={styles.inputCon}>
-              <CFormLabel style={styles.title}>Gender</CFormLabel>
-              <CFormSelect
-                style={styles.input}
-                aria-label="Default select example"
-                options={[
-                  'Open this select menu',
-                  { label: 'Male', value: '1' },
-                  { label: 'Female', value: '2' },
-                ]}
-                onChange={(e) => onInputChange('firstName', e.target.value)}
-              />
-              <CFormFeedback invalid>{errors.gender?.message}</CFormFeedback>
-            </div>
-          </CCol>
-        </CRow>
-
-        <CRow className="mb-3 " style={{display:'flex',justifyContent:'center'}}>
-          <CCol md={5}>
-            <div className="mb-3" style={styles.inputCon}>
-              <CFormLabel style={styles.title}>Designation</CFormLabel>
-              <CFormInput
-                style={styles.input}
-                type="text"
-                onChange={(e) => onInputChange('companyName', e.target.value)}
-              />
-            </div>
-          </CCol>
-
-          <CCol md={5}>
-            <div className="mb-3" style={styles.inputCon}>
-              <CFormLabel style={styles.title}>Email</CFormLabel>
-              <CFormInput
-                style={styles.input}
+                value="info@mentorhealth.com" // Controlled component
                 type="email"
-                onChange={(e) => onInputChange('occupation', e.target.value)}
+                onChange={(e) => onInputChange('companyEmail', e.target.value)}
+              />
+            </div>
+          </CCol>
+
+          <CCol md={5} >
+            <div className="mb-3" style={styles.inputCon}>
+              <CFormLabel style={styles.title}>Company Type</CFormLabel>
+              <CFormInput
+                style={styles.input}
+                value="IT" // Controlled component
+                type="text"
+                onChange={(e) => onInputChange('companyType', e.target.value)}
               />
             </div>
           </CCol>
         </CRow>
 
-        <CRow className="mb-3 " style={{display:'flex',justifyContent:'center'}}>
-          <CCol md={5}>
+        <CRow className="mb-3">
+          <CCol md={1}></CCol>
+          <CCol md={5} >
             <div className="mb-3" style={styles.inputCon}>
-              <CFormLabel style={styles.title}>Password</CFormLabel>
+              <CFormLabel style={styles.title}>City</CFormLabel>
               <CFormInput
                 style={styles.input}
-                type="password"
-                onChange={(e) => onInputChange('occupation', e.target.value)}
-              />
-            </div>
-          </CCol>
-          <CCol md={5}>
-            <div className="mb-3" style={styles.inputCon}>
-              <CFormLabel style={styles.title}>Confirm Password</CFormLabel>
-              <CFormInput
-                style={styles.input}
-                type="password"
-                onChange={(e) => onInputChange('occupation', e.target.value)}
+                value="Karachi" // Controlled component
+                type="text"
+                onChange={(e) => onInputChange('city', e.target.value)}
               />
             </div>
           </CCol>
@@ -263,11 +222,10 @@ const SubAdmin = ({ onInputChange }) => {
           </text>
         </CRow>
         <div className="d-flex justify-content-end">
-          {/* {currentTab === formStructure.length - 1 ? ( */}
           <CButton
             style={{ backgroundColor: '#0048ff', color: 'white' }}
-            type="submit"
             className="mb-3 mt-3"
+            onClick={handleClick}
           >
             Submit
           </CButton>
@@ -277,4 +235,4 @@ const SubAdmin = ({ onInputChange }) => {
   )
 }
 
-export default SubAdmin
+export default CompanyCreation

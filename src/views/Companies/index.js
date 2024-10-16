@@ -255,30 +255,32 @@ const Companies = () => {
         }}
       >
         <CRow className="my-4 p-3">
-          <CCol md={7}>
+          <CCol sm={3} md={5} lg={5 } xl={7}>
             <h2 style={styles.mainHeading}>Companies</h2>
             <p style={styles.secHeading}>Active companies</p>
           </CCol>
-          <CCol md={2} className="d-flex justify-content-center align-items-center" style={{ height:40,width:40,borderRadius:10,backgroundColor:'rgba(249, 251, 255, 1)' }}>
-          <LuPlus size={40} style={{cursor:'pointer'}} onClick={companyCreation} />
-          </CCol>
-          <CCol md={3} className="d-flex justify-content-flex-end" style={{ height: '40px' }}>
+          <CCol sm={2} md={6} lg={6} xl={5}>
+            <div className="d-flex justify-content-flex-end " > 
+          <div  className="me-2 d-flex justify-content-center align-items-center" style={{borderRadius:10,backgroundColor:'rgba(249, 251, 255, 1)',padding:10 }}>
+          <LuPlus size={20} style={{cursor:'pointer'}} onClick={companyCreation} />
+          </div>
             <CFormInput
               placeholder="Search"
               value={search}
               onChange={handleSearch}
               className="me-2"
-              style={{ width: '250px', backgroundColor: 'rgba(249, 251, 255, 1)' }}
+              style={{ width:isMobile ? '100px' : '250px', backgroundColor: 'rgba(249, 251, 255, 1)' }}
             />
 
             <CFormSelect
               value={sortBy}
               onChange={handleSortChange}
-              style={{ width: '100px', backgroundColor: 'rgba(249, 251, 255, 1)' }}
+              style={{ width: isMobile ? '50px' : '100px', backgroundColor: 'rgba(249, 251, 255, 1)' }}
             >
               <option value="newest">Sort by: Newest</option>
               <option value="oldest">Sort by: Oldest</option>
             </CFormSelect>
+            </div>
           </CCol>
         </CRow>
 

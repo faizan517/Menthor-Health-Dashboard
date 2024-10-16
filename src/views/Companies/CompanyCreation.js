@@ -1,17 +1,18 @@
 import React from 'react'
 import {
-    CButton,
+  CButton,
   CCol,
   CContainer,
   CForm,
   CFormFeedback,
   CFormInput,
   CFormLabel,
-  CFormSelect,
   CRow,
 } from '@coreui/react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
+import { PiPencilSimple } from 'react-icons/pi'
+
 
 const styles = {
   heading: {
@@ -105,105 +106,120 @@ const styles = {
   },
 }
 
-const CompanyCreation = ({ onInputChange }) => {
+const CompanyCreation = ({ onInputChange, companyName, companyAddress, companyEmail, companyType, city, isFilled }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm()
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   function handleClick() {
-    navigate("/generatedForm");
+    navigate('/filledCompanyCreation')
   }
+
   return (
     <CContainer
-    style={{
-      boxShadow: '4px 4px 15px 15px rgba(0, 0, 0, 0.05)',
-      borderWidth: 0,
-      borderRadius: 10,
-      textAlign: 'left',
-      marginTop: 40,
-    }}
-  >
-      <CForm >
-        <CRow className="mb-3 mt-5">
-          <CCol md={6} className="mb-3 mt-5">
+    
+      style={{
+        boxShadow: '4px 4px 15px 15px rgba(0, 0, 0, 0.05)',
+        borderWidth: 0,
+        borderRadius: 10,
+        textAlign: 'left',
+        marginTop: 40,
+        display: 'flex',
+        flexDirection: 'column',
+      }}
+    >
+      <CForm>
+        <CRow className="mb-3 mt-5" style={{display:'flex',justifyContent:'center'}}>
+          <CCol md={5} className="mb-3 mt-2">
             <div className="mb-3" style={styles.inputCon}>
               <CFormLabel style={styles.title}>Company Name</CFormLabel>
               <CFormInput
                 style={styles.input}
+                value={companyName} // Controlled component
                 type="text"
-                onChange={(e) => onInputChange('firstName', e.target.value)}
+                onChange={(e) => onInputChange('companyName', e.target.value)}
               />
               <CFormFeedback invalid>{errors.firstName?.message}</CFormFeedback>
             </div>
           </CCol>
-          <CCol md={6} className="mb-3 mt-5">
+          <CCol md={5} className="mb-3 mt-2" >
             <div className="mb-3" style={styles.inputCon}>
               <CFormLabel style={styles.title}>Company Address</CFormLabel>
               <CFormInput
                 style={styles.input}
+                value={companyAddress} // Controlled component
                 type="text"
-                onChange={(e) => onInputChange('lastName', e.target.value)}
+                onChange={(e) => onInputChange('companyAddress', e.target.value)}
               />
               <CFormFeedback invalid>{errors.lastName?.message}</CFormFeedback>
             </div>
           </CCol>
         </CRow>
-        <CRow className="mb-3">
-          <CCol md={6}>
+        <CRow className="mb-3" style={{display:'flex',justifyContent:'center'}}>
+          <CCol md={5} >
             <div className="mb-3" style={styles.inputCon}>
               <CFormLabel style={styles.title}>Company Email</CFormLabel>
               <CFormInput
                 style={styles.input}
+                value={companyEmail} // Controlled component
                 type="email"
-                onChange={(e) => onInputChange('companyName', e.target.value)}
+                onChange={(e) => onInputChange('companyEmail', e.target.value)}
               />
             </div>
           </CCol>
 
-          <CCol md={6}>
+          <CCol md={5} >
             <div className="mb-3" style={styles.inputCon}>
               <CFormLabel style={styles.title}>Company Type</CFormLabel>
               <CFormInput
                 style={styles.input}
+                value={companyType} // Controlled component
                 type="text"
-                onChange={(e) => onInputChange('occupation', e.target.value)}
+                onChange={(e) => onInputChange('companyType', e.target.value)}
               />
             </div>
           </CCol>
         </CRow>
 
         <CRow className="mb-3">
-          <CCol md={6}>
+          <CCol md={1}></CCol>
+          <CCol md={5} >
             <div className="mb-3" style={styles.inputCon}>
               <CFormLabel style={styles.title}>City</CFormLabel>
               <CFormInput
                 style={styles.input}
+                value={city} // Controlled component
                 type="text"
-                onChange={(e) => onInputChange('occupation', e.target.value)}
+                onChange={(e) => onInputChange('city', e.target.value)}
               />
             </div>
           </CCol>
-          <text style={{ ...styles.title, textAlign: 'left', fontSize: 16, fontWeight: 500,color:'white' }}>
+          <text
+            style={{
+              ...styles.title,
+              textAlign: 'left',
+              fontSize: 16,
+              fontWeight: 500,
+              color: 'white',
+            }}
+          >
             Table for BMI formula calculation and ranges given below
           </text>
         </CRow>
         <div className="d-flex justify-content-end">
-            {/* {currentTab === formStructure.length - 1 ? ( */}
-              <CButton
-                style={{ backgroundColor: '#0048ff', color: 'white' }}
-                // type="submit"
-                className="mb-3 mt-3"
-                onClick={handleClick}
-              >
-                Submit
-              </CButton>
-              </div>
+          <CButton
+            style={{ backgroundColor: '#0048ff', color: 'white' }}
+            className="mb-3 mt-3"
+            onClick={handleClick}
+          >
+            Submit
+          </CButton>
+        </div>
       </CForm>
-      
     </CContainer>
   )
 }

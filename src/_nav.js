@@ -61,15 +61,15 @@ const _nav = [
       color: 'info',
     },
   },
-  {
-    component: CNavItem,
-    name: 'Analytics',
-    to: '/analytics',
-    icon: <PiChartBar className="nav-icon" />,
-    badge: {
-      color: 'info',
-    },
-  },
+  // {
+  //   component: CNavItem,
+  //   name: 'Analytics',
+  //   to: '/analytics',
+  //   icon: <PiChartBar className="nav-icon" />,
+  //   badge: {
+  //     color: 'info',
+  //   },
+  // },
   {
     component: CNavItem,
     name: 'Data Export',
@@ -351,7 +351,7 @@ const _nav = [
       },
       {
         component: CNavItem,
-        name: 'Error 500',
+        name: 'Quiz',
         to: '/500',
       },
     ],

@@ -3,6 +3,8 @@ import mentorImage from '../../../assets/brand/mentorhealth2.png' // Import the 
 import { FcGoogle } from "react-icons/fc";
 import { PiEyeSlashThin,PiEyeThin } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
+import { CContainer } from '@coreui/react';
+import { useMediaQuery } from 'react-responsive';
 
 
 const Login = () => {
@@ -11,6 +13,7 @@ const Login = () => {
   const [errors, setErrors] = useState({})
   const [showPassword, setShowPassword] = useState(false)
   const navigate = useNavigate();
+  const isMobile = useMediaQuery({ query: '(max-width: 767px)' });
 
   function handleClick() {
     navigate("/home");
@@ -22,6 +25,7 @@ const Login = () => {
   }
 
   const handleSubmit = (event) => {
+    
     event.preventDefault()
     let formErrors = {}
 
@@ -158,7 +162,7 @@ const Login = () => {
   }
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+    <div  style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
       <div style={styles.container}>
         
         <h4 style={styles.title}>Sign in</h4>
@@ -223,11 +227,11 @@ const Login = () => {
           </a>
         </p>
       </div>
-      <div
+      {!isMobile &&( <div
         style={{
           height: '100vh',
           width: '50vw',
-          backgroundColor: 'red',
+          // backgroundColor: 'red',
           borderBottomLeftRadius: '20%',
           display: 'flex',
           alignItems: 'center',
@@ -236,10 +240,10 @@ const Login = () => {
         }}
       >
         <div>
-          <img src={mentorImage} alt="Mentor Health" style={{ textAlign: 'center', }} height={150} />{' '}
+          <img src={mentorImage} alt="Mentor Health" style={{ textAlign: 'center', }} height={140} />{' '}
           {/* Use the imported image */}
         </div>
-      </div>
+      </div>)}
     </div>
   )
 }

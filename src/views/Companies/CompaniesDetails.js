@@ -63,7 +63,7 @@ const styles = {
     fontFamily: 'poppins',
     fontWeight: 500,
     fontSize: 14,
-    cursor:'pointer'
+    cursor: 'pointer',
   },
   status: {
     height: 30,
@@ -99,13 +99,13 @@ const CompaniesDetails = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const usersPerPage = 8
   const isMobile = useMediaQuery({ query: '(max-width: 767px)' })
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   function handleClick() {
-    navigate("/employeeForm");
+    navigate('/employeeForm')
   }
   function companyCreation() {
-    navigate("/companyCreation");
+    navigate('/filledCompanyCreation')
   }
 
   const dummyUsers = [
@@ -254,14 +254,15 @@ const CompaniesDetails = () => {
         }}
       >
         <CRow className="my-4 p-3">
-          <CCol md={7}>
+        <CCol sm={3} md={5} lg={5} xl={7}>
             <h2 style={styles.mainHeading}>Methologik Pvt Ltd</h2>
             <p style={styles.secHeading}>Active companies</p>
           </CCol>
-          <CCol md={2} className="d-flex justify-content-center align-items-center" style={{ height:40,width:40,borderRadius:10,backgroundColor:'rgba(249, 251, 255, 1)' }}>
-          <PiPencilSimple size={20} style={{ cursor: 'pointer' }} onClick={companyCreation}  />
-          </CCol>
-          <CCol md={3} className="d-flex justify-content-flex-end" style={{ height: '40px' }}>
+          <CCol sm={2} md={6} lg={6} xl={5}>
+            <div className="d-flex justify-content-flex-end " > 
+          <div  className="me-2 d-flex justify-content-center align-items-center" style={{borderRadius:10,backgroundColor:'rgba(249, 251, 255, 1)',padding:10 }}>
+          <PiPencilSimple size={20} style={{ cursor: 'pointer' }} onClick={companyCreation} />
+          </div>
             <CFormInput
               placeholder="Search"
               value={search}
@@ -278,6 +279,7 @@ const CompaniesDetails = () => {
               <option value="newest">Sort by: Newest</option>
               <option value="oldest">Sort by: Oldest</option>
             </CFormSelect>
+            </div>
           </CCol>
         </CRow>
 
@@ -324,7 +326,7 @@ const CompaniesDetails = () => {
             ))}
           </CTableBody>
         </CTable>
-        
+
         <CSmartPagination
           size="sm"
           activePage={currentPage}
@@ -332,8 +334,7 @@ const CompaniesDetails = () => {
           onActivePageChange={setCurrentPage}
           className="pagination cursor-pointer"
           align={'end'}
-
-          />
+        />
       </CCard>
     </CContainer>
   )
