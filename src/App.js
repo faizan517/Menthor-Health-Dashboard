@@ -1,3 +1,4 @@
+document.body.style = 'background: white;';
 import React, { Suspense } from 'react';
 import { HashRouter, Route, Routes, Navigate } from 'react-router-dom';
 import { CSpinner } from '@coreui/react';

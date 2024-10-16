@@ -162,7 +162,7 @@ const Login = () => {
   }
 
   return (
-    <div  style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+    <div  style={{ display: 'flex', justifyContent: 'center', alignItems: 'center',backgroundColor:'white' }}>
       <div style={styles.container}>
         
         <h4 style={styles.title}>Sign in</h4>

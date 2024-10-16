@@ -1141,7 +1141,6 @@ const DynamicForm = (props) => {
         {formStructure.map((tab, index) => (
           <CCol
           md={4}
-          
           lg={3}
           xl={3}
             key={index}
