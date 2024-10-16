@@ -16,7 +16,7 @@ const Login = () => {
   const isMobile = useMediaQuery({ query: '(max-width: 767px)' });
 
   function handleClick() {
-    navigate("/home");
+    navigate("/dashboard");
   }
 
   const validateEmail = (email) => {

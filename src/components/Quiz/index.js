@@ -19,6 +19,7 @@ import { useMediaQuery } from 'react-responsive'
 import { Tab, Tabs } from 'react-tabs-scrollable'
 import 'react-tabs-scrollable/dist/rts.css'
 import Color from '../../utils/Color'
+import { MdKeyboardDoubleArrowLeft, MdKeyboardDoubleArrowRight } from 'react-icons/md'
 
 const styles = {
   heading: {
@@ -1129,45 +1130,37 @@ const DynamicForm = (props) => {
   return (
     <>
       {/* Tab navigation */}
-      {!isActive && (<CRow style={{ ...styles.tabsWrapper }}>
-        {/* Tabs Container */}
-        <div
-          ref={tabsContainerRef}
-          style={{
-            display: 'flex',
-            overflowX: isMobile ? 'scroll' : 'hidden', // Enable scrolling on mobile view
-            whiteSpace: 'nowrap', // Keep tabs in a single row
-            width: '100%', // Make sure the container is 100% width
-          }}
-        >
-          <Tabs
-            activeTab={currentTab}
-            onTabClick={onTabClick}
-            navBtnStyle={{ backgroundColor: Color.primary, border: 'none' }}
+      <CRow lg={12} style={{...styles.tabsWrapper}}>
+      {/* Left Arrow */}
+      <CCol style={{...styles.arrowButton,display: isMobile ? 'none':''}} onClick={scrollLeft}>
+        <MdKeyboardDoubleArrowLeft size={20} />
+      </CCol>
+
+      {/* Tabs Container */}
+      <CCol lg={11} md={9} sm={9}  style={{...styles.tabsContainer,overflowX : isMobile? 'scroll':'hidden'}} ref={tabsContainerRef}>
+        {formStructure.map((tab, index) => (
+          <CCol
+          md={4}
+          
+          lg={3}
+            key={index}
+            style={{
+              ...styles.tab,
+              ...(currentTab === index ? styles.activeTab : {}),
+              
+            }}
+            onClick={() => handleTabClick(index)}
           >
-            {/* Generating an array to loop through it */}
-            {formStructure.map((item, index) => (
-              <Tab
-                key={item.subheading}
-                style={{
-                  backgroundColor: currentTab === index ? Color.primary : 'white', // Active tab background color
-                  color: currentTab === index ? 'white' : 'black', // Active tab text color
-                  padding: '10px 20px', // Padding for the tabs
-                  cursor: 'pointer',
-                  margin: '0 5px', // Add margin between tabs
-                  borderRadius: 0,
-                  borderBottomRightRadius: 10,
-                  borderBottomLeftRadius: 10,
-                  transition: 'background-color 0.3s ease',
-                  flexShrink: 0, // Prevent shrinking when resizing
-                }}
-              >
-                {item.subheading}
-              </Tab>
-            ))}
-          </Tabs>
-        </div>
-      </CRow>)}
+            <span style={{ fontSize: isMobile ? 14: 20 }}>{tab.subheading}</span>
+          </CCol>
+        ))}
+      </CCol>
+
+      {/* Right Arrow */}
+      <CCol style={{...styles.arrowButton,display: isMobile ? 'none':''}} onClick={scrollRight}>
+        <MdKeyboardDoubleArrowRight size={20} />
+      </CCol>
+    </CRow>
 
       <CContainer
         style={{
