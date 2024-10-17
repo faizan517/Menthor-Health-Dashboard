@@ -94,41 +94,45 @@ const styles = {
   tabsWrapper: {
     display: 'flex',
     alignItems: 'center',
+    justifyContent: 'center', // Center the content
     position: 'relative',
     marginTop: '30px',
     borderTop: '2px solid #ddd',
     paddingTop: 30,
+    gap: '10px', // Add spacing between arrows and tabs
   },
   arrowButton: {
     cursor: 'pointer',
     padding: '10px',
     zIndex: 1,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center', // Center arrow icon
   },
   tabsContainer: {
     display: 'flex',
-    overflowX: 'hidden', // Hide overflowing tabs
-    // whiteSpace: 'nowrap',
+    overflowX: 'hidden', // Will change to 'scroll' for mobile
     scrollBehavior: 'smooth',
-    width: `${5 * 200}px`, // Visible width for 5 tabs
+    width: '80vw', // Adjust for mobile in component
   },
   tab: {
-    // flexShrink: 0,
-    // width: `${tabWidth}px`,
-    // padding: '5px 5px',
+    flexShrink: 0,
+    width: '30vw', // Dynamic width based on screen size
     cursor: 'pointer',
     backgroundColor: '#f0f0f0',
     borderBottomRightRadius: '10px',
     borderBottomLeftRadius: '10px',
-    // margin: '0 5px',
     textAlign: 'center',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    padding: '10px', // Ensure there's padding inside the tab
   },
   activeTab: {
     backgroundColor: '#007bff',
     color: '#fff',
   },
+  
 }
 
 const formStructure = [
@@ -1130,171 +1134,190 @@ const DynamicForm = (props) => {
   return (
     <>
       {/* Tab navigation */}
-      {!isActive && (  <CRow lg={10} xl={12} md={10} style={{...styles.tabsWrapper}}>
-      {/* Left Arrow */}
-      <CCol style={{...styles.arrowButton,display: isMobile ? 'none':''}} onClick={scrollLeft}>
-        <MdKeyboardDoubleArrowLeft size={20} />
-      </CCol>
+{!isActive && (
+  <CRow style={{ ...styles.tabsWrapper }}>
+    {/* Left Arrow */}
+    <CCol
+      style={{ 
+        ...styles.arrowButton, 
+        display: isMobile || formStructure.length <= 3 ? 'none' : '' // Hide if on mobile or few tabs
+      }} 
+      onClick={scrollLeft}
+    >
+      <MdKeyboardDoubleArrowLeft size={20} />
+    </CCol>
 
-      {/* Tabs Container */}
-      <CCol lg={7} xl={11} md={9} sm={9}  style={{...styles.tabsContainer,overflowX : isMobile? 'scroll':'hidden'}} ref={tabsContainerRef}>
-        {formStructure.map((tab, index) => (
-          <CCol
-          md={4}
-          lg={3}
-          xl={3}
-            key={index}
-            style={{
-              ...styles.tab,
-              ...(currentTab === index ? styles.activeTab : {}),
-              
-            }}
-            onClick={() => handleTabClick(index)}
-          >
-            <span style={{ fontSize: isMobile ? 14: 20 }}>{tab.subheading}</span>
-          </CCol>
-        ))}
-      </CCol>
+    {/* Tabs Container */}
+    <div
+      style={{
+        ...styles.tabsContainer,
+        overflowX: isMobile ? 'scroll' : 'hidden',
+        width: isMobile ? '90vw' : '75vw',
+      }}
+      ref={tabsContainerRef}
+    >
+      {formStructure.map((tab, index) => (
+        <div
+          key={index}
+          style={{
+            ...styles.tab,
+            ...(currentTab === index ? styles.activeTab : {}),
+            width: isMobile ? '30vw' : '25vw', // convert this in px then check
+          }}
+          onClick={() => handleTabClick(index)}
+        >
+          <span style={{ fontSize: isMobile ? 14 : 20 }}>{tab.subheading}</span>
+        </div>
+      ))}
+    </div>
 
-      {/* Right Arrow */}
-      <CCol style={{...styles.arrowButton,display: isMobile ? 'none':''}} onClick={scrollRight}>
-        <MdKeyboardDoubleArrowRight size={20} />
-      </CCol>
-    </CRow>)}
+    {/* Right Arrow */}
+    <CCol
+      style={{
+        ...styles.arrowButton,
+        display: isMobile || formStructure.length <= 3 ? 'none' : '' // Hide if on mobile or few tabs
+      }}
+      onClick={scrollRight}
+    >
+      <MdKeyboardDoubleArrowRight size={20} />
+    </CCol>
+  </CRow>
+)}
+<CContainer
+style={{
+  width:isMobile? '90vw':'',
+  boxShadow: '4px 4px 15px 15px rgba(0, 0, 0, 0.05)',
+  borderWidth: 0,
+  borderRadius: 10,
+  textAlign: 'left',
+  marginTop: 40,
+  ...styling,
+}}
+>
+<CRow>
+  <CCol className="mb-5 mt-5">
+    <text style={{ ...styles.answerFont, fontSize: 16, paddingLeft: 50, marginTop: 10 }}>
+      Note: Please skip questions that do not apply to you.
+    </text>
+  </CCol>
+</CRow>
 
-      <CContainer
-        style={{
-          boxShadow: '4px 4px 15px 15px rgba(0, 0, 0, 0.05)',
-          borderWidth: 0,
-          borderRadius: 10,
-          textAlign: 'left',
-          marginTop: 40,
-          ...styling,
-        }}
-      >
-        <CRow>
-          <CCol className="mb-5 mt-5">
-            <text style={{ ...styles.answerFont, fontSize: 16, paddingLeft: 50, marginTop: 10 }}>
-              Note: Please skip questions that do not apply to you.
-            </text>
-          </CCol>
-        </CRow>
+{/* Form content */}
+<form onSubmit={handleSubmit}>
+  {formStructure.slice(currentTab, currentTab + 1).map((section, sectionIndex) => (
+    <div key={sectionIndex}>
+      {/* First Tab for Personal Info */}
+      {currentTab === 0 && <Info onInputChange={handleInputChange} />}
 
-        {/* Form content */}
-        <form onSubmit={handleSubmit}>
-          {formStructure.slice(currentTab, currentTab + 1).map((section, sectionIndex) => (
-            <div key={sectionIndex}>
-              {/* First Tab for Personal Info */}
-              {currentTab === 0 && <Info onInputChange={handleInputChange} />}
+      {/* Render questions */}
+      {section.questions.map((question) => (
+        <div key={question.id} style={{ paddingLeft: 50, marginTop: 10 }}>
+          <p style={{ fontFamily: 'Inter', fontWeight: 500, fontSize: 14 }}>
+            {question.questionText}
+          </p>
 
-              {/* Render questions */}
-              {section.questions.map((question) => (
-                <div key={question.id} style={{ paddingLeft: 50, marginTop: 10 }}>
-                  <p style={{ fontFamily: 'Inter', fontWeight: 500, fontSize: 14 }}>
-                    {question.questionText}
-                  </p>
-
-                  {question.questionType === 'mcq' && (
-                    <CCol xs={12}>
-                      {question.options.map((option, index) => (
-                        <label key={index} style={styles.answerFont}>
-                          <input
-                            style={{ marginRight: 10 }}
-                            type="radio"
-                            name={`question-${question.id}`}
-                            value={option.answer}
-                            onChange={() => handleInputChange(question.id, option.marks)}
-                          />
-                          {option.answer}
-                        </label>
-                      ))}
-                    </CCol>
-                  )}
-
-                  {question.questionType === 'text' && (
-                    <textarea
-                      style={styles.answerText}
-                      name={`question-${question.id}`}
-                      onChange={(e) => handleInputChange(question.id, e.target.value)}
-                    />
-                  )}
-
-                  {question.questionType === 'multicheck' && (
-                    <CCol style={{ marginTop: 10 }}>
-                      {question.options.map((option, index) => (
-                        <label key={index} style={styles.answerFont}>
-                          <input
-                            style={{ marginRight: 10 }}
-                            type="checkbox"
-                            name={`question-${question.id}`}
-                            value={option.answer}
-                            onChange={(e) => {
-                              const currentMarks = responses[question.id] || []
-                              handleInputChange(
-                                question.id,
-                                e.target.checked
-                                  ? [...currentMarks, option.marks]
-                                  : currentMarks.filter((mark) => mark !== option.marks),
-                              )
-                            }}
-                          />
-                          {option.answer}
-                        </label>
-                      ))}
-                    </CCol>
-                  )}
-                </div>
+          {question.questionType === 'mcq' && (
+            <CCol xs={12}>
+              {question.options.map((option, index) => (
+                <label key={index} style={styles.answerFont}>
+                  <input
+                    style={{ marginRight: 10 }}
+                    type="radio"
+                    name={`question-${question.id}`}
+                    value={option.answer}
+                    onChange={() => handleInputChange(question.id, option.marks)}
+                  />
+                  {option.answer}
+                </label>
               ))}
-            </div>
-          ))}
+            </CCol>
+          )}
 
-          <div className="d-flex justify-content-end">
-            {currentTab === formStructure.length - 1 ? (
-              isReport ?(<CButton
-                style={{ backgroundColor: '#0048ff', color: 'white' }}
-                className="mb-3 mt-3"
-              >
-                PDF
-              </CButton>):(<CButton
-                style={{ backgroundColor: '#0048ff', color: 'white' }}
-                type="submit"
-                className="mb-3 mt-3"
-              >
-                Submit
-              </CButton>)
-            ) : (
-              <>
-                <div style={{ display: 'flex', justifyContent: 'space-between', width: '100vw' }}>
-                  <CButton
-                    style={{ backgroundColor: '#0048ff', color: 'white' }}
-                    type="button"
-                    onClick={() => handleTabClick(currentTab + 1)}
-                    className="mb-3 mt-3"
-                  >
-                    Skip
-                  </CButton>
+          {question.questionType === 'text' && (
+            <textarea
+              style={{...styles.answerText,width: isMobile ? '200px': '632px'}}
+              name={`question-${question.id}`}
+              onChange={(e) => handleInputChange(question.id, e.target.value)}
+            />
+          )}
 
-                  <CButton
-                    style={{ backgroundColor: '#0048ff', color: 'white' }}
-                    type="button"
-                    onClick={() => handleTabClick(currentTab + 1)}
-                    className="mb-3 mt-3"
-                  >
-                    Next
-                  </CButton>
-                </div>
-              </>
-            )}
-          </div>
-        </form>
+          {question.questionType === 'multicheck' && (
+            <CCol style={{ marginTop: 10 }}>
+              {question.options.map((option, index) => (
+                <label key={index} style={styles.answerFont}>
+                  <input
+                    style={{ marginRight: 10 }}
+                    type="checkbox"
+                    name={`question-${question.id}`}
+                    value={option.answer}
+                    onChange={(e) => {
+                      const currentMarks = responses[question.id] || []
+                      handleInputChange(
+                        question.id,
+                        e.target.checked
+                          ? [...currentMarks, option.marks]
+                          : currentMarks.filter((mark) => mark !== option.marks),
+                      )
+                    }}
+                  />
+                  {option.answer}
+                </label>
+              ))}
+            </CCol>
+          )}
+        </div>
+      ))}
+    </div>
+  ))}
 
-        {/* Show total marks if form is submitted */}
-        {totalMarks !== null && (
-          <div>
-            <h2>Your Total Marks: {totalMarks}</h2>
-          </div>
-        )}
-      </CContainer>
+  <div className="d-flex justify-content-end">
+    {currentTab === formStructure.length - 1 ? (
+      isReport ?(<CButton
+        style={{ backgroundColor: '#0048ff', color: 'white' }}
+        className="mb-3 mt-3"
+      >
+        PDF
+      </CButton>):(<CButton
+        style={{ backgroundColor: '#0048ff', color: 'white' }}
+        type="submit"
+        className="mb-3 mt-3"
+      >
+        Submit
+      </CButton>)
+    ) : (
+      <>
+        <div style={{ display: 'flex', justifyContent: 'space-between', width: '100vw' }}>
+          <CButton
+            style={{ backgroundColor: Color.gray, color: Color.borderGray }}
+            type="button"
+            onClick={() => handleTabClick(currentTab + 1)}
+            className="mb-3 mt-3"
+          >
+            Skip
+          </CButton>
+
+          <CButton
+            style={{ backgroundColor: '#0048ff', color: 'white' }}
+            type="button"
+            onClick={() => handleTabClick(currentTab + 1)}
+            className="mb-3 mt-3"
+          >
+            Next
+          </CButton>
+        </div>
+      </>
+    )}
+  </div>
+</form>
+
+{/* Show total marks if form is submitted */}
+{totalMarks !== null && (
+  <div>
+    <h2>Your Total Marks: {totalMarks}</h2>
+  </div>
+)}
+</CContainer>
+
     </>
   )
 }

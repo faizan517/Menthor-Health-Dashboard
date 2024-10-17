@@ -25,6 +25,7 @@ import { useNavigate } from 'react-router-dom'
 import EmployeeInfo from '../../components/EmployeeInfoCon'
 import PieChart from '../../components/PieChart'
 import { LuPlus } from 'react-icons/lu'
+import Color from '../../utils/Color'
 
 const styles = {
   cardBody: {
@@ -330,12 +331,21 @@ const Companies = () => {
         
         <CSmartPagination
           size="sm"
+          color={Color.primary}
+          
           activePage={currentPage}
           pages={2}
           onActivePageChange={setCurrentPage}
           className="pagination cursor-pointer"
           align={'end'}
 
+
+          // .page-link.active, .active > .page-link {
+          //     z-index: 3;
+          //     color: var(--cui-pagination-active-color);
+          //     background-color: var(--cui-pagination-active-bg);
+          //     border-color: var(--cui-pagination-active-border-color);
+          // }
           />
       </CCard>
 

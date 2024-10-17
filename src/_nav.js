@@ -13,7 +13,7 @@ import {
   cilSpeedometer,
   cilStar,
 } from '@coreui/icons'
-import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
+import { CNavGroup, CNavItem } from '@coreui/react'
 import { PiUser, PiDatabase, PiBuildings, PiChartBar, PiTable } from "react-icons/pi";
 import { IoDocumentTextOutline, IoHelpCircleOutline } from "react-icons/io5";
 import { RiDashboardHorizontalLine } from "react-icons/ri";

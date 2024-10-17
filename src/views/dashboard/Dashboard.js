@@ -42,35 +42,6 @@ import PieChart from '../../components/PieChart'
 
 const Dashboard = () => {
   const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
-  const progressExample = [
-    { title: 'Visits', value: '29.703 Users', percent: 40, color: 'success' },
-    { title: 'Unique', value: '24.093 Users', percent: 20, color: 'info' },
-    { title: 'Pageviews', value: '78.706 Views', percent: 60, color: 'warning' },
-    { title: 'New Users', value: '22.123 Users', percent: 80, color: 'danger' },
-    { title: 'Bounce Rate', value: 'Average Rate', percent: 40.15, color: 'primary' },
-  ]
-
-  const progressGroupExample1 = [
-    { title: 'Monday', value1: 34, value2: 78 },
-    { title: 'Tuesday', value1: 56, value2: 94 },
-    { title: 'Wednesday', value1: 12, value2: 67 },
-    { title: 'Thursday', value1: 43, value2: 91 },
-    { title: 'Friday', value1: 22, value2: 73 },
-    { title: 'Saturday', value1: 53, value2: 82 },
-    { title: 'Sunday', value1: 9, value2: 69 },
-  ]
-
-  const progressGroupExample2 = [
-    { title: 'Male', icon: cilUser, value: 53 },
-    { title: 'Female', icon: cilUserFemale, value: 43 },
-  ]
-
-  const progressGroupExample3 = [
-    { title: 'Organic Search', icon: cibGoogle, percent: 56, value: '191,235' },
-    { title: 'Facebook', icon: cibFacebook, percent: 15, value: '51,223' },
-    { title: 'Twitter', icon: cibTwitter, percent: 11, value: '37,564' },
-    { title: 'LinkedIn', icon: cibLinkedin, percent: 8, value: '27,319' },
-  ]
 
   const columns = [
     {
@@ -113,7 +84,7 @@ const Dashboard = () => {
 
   const tableExample = [
     {
-      user: { name: 'Quintin Ed', new: true, registered: 'Jan 1, 2023' },
+      user: { name: 'Quintin Ed', registered: 'Jan 1, 2023' },
       country: check,
       usage: {
         value: 74,
@@ -122,7 +93,7 @@ const Dashboard = () => {
       activity: '1 hour ago',
     },
     {
-      user: { name: 'Enéas Kwadwo', new: true, registered: 'Jan 1, 2023' },
+      user: { name: 'Enéas Kwadwo', new: false, registered: 'Jan 1, 2023' },
       country: error,
       usage: {
         value: 98,
@@ -213,58 +184,86 @@ const Dashboard = () => {
         Hello Admin 👋🏼,
       </text>
     </div>
-      <CRow sm={12} md={6} lg={12} style={{ display: 'flex', alignItems: 'flex-end',flex:'wrap' }}>
-        <CCol sm={6} md={2} lg={2}>
-          <CWidgetStatsC
-            className="mb-4"
-            icon={
-              <div style={styles.icons}>
-                <img src={group} style={{ textAlign: 'center' }} />
-              </div>
-            }
-            text="+25%"
-            value="89.9K"
-            title="Users"
-            style={{ boxShadow: '4px 4px 15px 15px rgba(0, 0, 0, 0.05)', borderWidth: 0, fontSize: isMobile ? '12px': '    '  }}
-          />
-        </CCol>
-        <CCol sm={2} md={2} lg={2}>
-          <CWidgetStatsC
-            // style={{height:'60%'}}
-            className="mb-4"
-            icon={<div style={{...styles.icons, backgroundColor:'#fce6e6'}}>
-            <img src={box} style={{ textAlign: 'center' }} />
-          </div>}
-            text="Widget helper text"
-            title="Company"
-            value="89.9K"
-            style={{ boxShadow: '4px 4px 15px 15px rgba(0, 0, 0, 0.05)', borderWidth: 0, fontSize: isMobile ? '12px': '    '  }}
-          />
-        </CCol>
-        <CCol sm={2} md={2} lg={2}>
-          <CWidgetStatsC
-            className="mb-4"
-            icon={<div style={styles.icons}>
-            <img src={puls} style={{ textAlign: 'center' }} />
-          </div>}
-            text="Widget helper text"
-            title="Bonus"
-            value="89.9K"
-            style={{ boxShadow: '4px 4px 15px 15px rgba(0, 0, 0, 0.05)', borderWidth: 0, fontSize: isMobile ? '13px': '    ' }}
-          />
-        </CCol>
-        <CCol sm={2} md={2} lg={2}>
-          <CWidgetStatsC
-            className="mb-4"
-            icon={<div style={{...styles.icons,backgroundColor:'#e9fbf6'}}>
-            <img src={history} style={{ textAlign: 'center' }} />
-          </div>}
-            text="Widget  text"
-            title="Session"
-            value="89.9K"
-            style={{ boxShadow: '4px 4px 15px 15px rgba(0, 0, 0, 0.05)', borderWidth: 0, fontSize: isMobile ? '12px': '    '  }}
-          />
-        </CCol>
+    <CRow className="g-4" sm={12} md={6} lg={12} style={{ display: 'flex', alignItems: 'flex-end',flex:'wrap' }}>
+      {/* First Column */}
+      <CCol xs={6} sm={6} md={2} lg={2}>
+        <CWidgetStatsC
+          className="mb-4"
+          icon={
+            <div style={styles.icons}>
+              <img src={group} style={{ textAlign: 'center' }} alt="Group Icon" />
+            </div>
+          }
+          text="+25%"
+          value="89.9K"
+          title="Users"
+          style={{
+            boxShadow: '4px 4px 15px 15px rgba(0, 0, 0, 0.05)',
+            borderWidth: 0,
+            fontSize: isMobile ? '12px' : '16px',
+          }}
+        />
+      </CCol>
+
+      {/* Second Column */}
+      <CCol xs={6} sm={6} md={2} lg={2}>
+        <CWidgetStatsC
+          className="mb-4"
+          icon={
+            <div style={{ ...styles.icons, backgroundColor: '#fce6e6' }}>
+              <img src={box} style={{ textAlign: 'center' }} alt="Box Icon" />
+            </div>
+          }
+          text="Widget helper text"
+          title="Company"
+          value="89.9K"
+          style={{
+            boxShadow: '4px 4px 15px 15px rgba(0, 0, 0, 0.05)',
+            borderWidth: 0,
+            fontSize: isMobile ? '12px' : '16px',
+          }}
+        />
+      </CCol>
+
+      {/* Third Column */}
+      <CCol xs={6} sm={6} md={2} lg={2} >
+        <CWidgetStatsC
+          className="mb-4"
+          icon={
+            <div style={styles.icons}>
+              <img src={puls} style={{ textAlign: 'center' }} alt="Puls Icon" />
+            </div>
+          }
+          text="Widget helper text"
+          title="Bonus"
+          value="89.9K"
+          style={{
+            boxShadow: '4px 4px 15px 15px rgba(0, 0, 0, 0.05)',
+            borderWidth: 0,
+            fontSize: isMobile ? '12px' : '16px',
+          }}
+        />
+      </CCol>
+
+      {/* Fourth Column */}
+      <CCol xs={6} sm={6} md={2} lg={2}>
+        <CWidgetStatsC
+          className="mb-4"
+          icon={
+            <div style={{ ...styles.icons, backgroundColor: '#e9fbf6' }}>
+              <img src={history} style={{ textAlign: 'center' }} alt="History Icon" />
+            </div>
+          }
+          text="Widget text"
+          title="Session"
+          value="89.9K"
+          style={{
+            boxShadow: '4px 4px 15px 15px rgba(0, 0, 0, 0.05)',
+            borderWidth: 0,
+            fontSize: isMobile ? '12px' : '16px',
+          }}
+        />
+      </CCol>
         {/* style={{display:'flex',flexDirection:'column',justifyContent:'center'}} */}
         <CCol sm={2} md={4} lg={4} > 
           <h4 className="card-title mb-2 color-black">Sessions By Company</h4>
@@ -274,7 +273,7 @@ const Dashboard = () => {
           borderRadius: 10,
           marginTop:10
         }}>
-            <PieChart styling={{display:'flex',paddigLeft:10}}/>
+            <PieChart />
 
 
           </CCard>

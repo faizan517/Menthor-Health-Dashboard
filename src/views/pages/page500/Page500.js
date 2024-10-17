@@ -25,6 +25,7 @@ import Info from '../../../components/PersonalInfo'
 import { Tabs, Tab } from "react-tabs-scrollable";
 import "react-tabs-scrollable/dist/rts.css";
 import { useMediaQuery } from 'react-responsive'
+import { useNavigate } from 'react-router-dom'
 
 const styles = {
   formContainer: {
@@ -113,6 +114,11 @@ const styles = {
 const Page500 = () => {
   const [activeTab, setActiveTab] = useState(0); // Manage active tab state
   const isMobile = useMediaQuery({ query: '(max-width: 767px)' });
+  const navigate = useNavigate()
+
+  function handleClick() {
+    navigate('/')
+  }
 
   const onTabClick = (e, index) => {
     console.log(e);
@@ -144,7 +150,7 @@ const Page500 = () => {
           
         </CCol>
         <CCol sm={3} md={4} lg={3} style={{...styles.logo,display:'flex',justifyContent:'center',marginTop: isMobile ? 20: 0}}>
-          <img src={mentorHealth} style={{  width: isMobile ?'50%' :  '100%', height: 'auto',  maxWidth: '400px'}} />
+          <img src={mentorHealth} style={{  width: isMobile ?'50%' :  '100%', height: 'auto',  maxWidth: '400px'}} onClick={handleClick}/>
         </CCol>
       </CRow>
       <CCol

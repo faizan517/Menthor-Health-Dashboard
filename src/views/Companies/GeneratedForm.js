@@ -8,7 +8,7 @@ const styles ={
 
 const FormGeneratedCard = () => {
   return (
-    <CContainer
+    <CContainer fluid
       style={{
         boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)', // Softer shadow for a sleek look
         borderRadius: '20px', // Rounded corners to match the image

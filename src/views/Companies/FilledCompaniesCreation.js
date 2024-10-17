@@ -118,9 +118,13 @@ const CompanyCreation = ({ onInputChange, companyName, companyAddress, companyEm
   function handleClick() {
     navigate('/generatedForm')
   }
+  function CompanyCreation() {
+    navigate('/companyCreation')
+  }
 
   return (
     <CContainer
+    fluid
       style={{
         boxShadow: '4px 4px 15px 15px rgba(0, 0, 0, 0.05)',
         borderWidth: 0,
@@ -142,7 +146,7 @@ const CompanyCreation = ({ onInputChange, companyName, companyAddress, companyEm
               marginTop: 20,
             }}
           >
-            <PiPencilSimple size={20} style={{ cursor: 'pointer' }} />
+            <PiPencilSimple size={20} style={{ cursor: 'pointer' }} onClick={CompanyCreation}/>
           </CCol>
         <CRow className="mb-3" style={{display:'flex',justifyContent:'center'}}>
           <CCol md={5} className="mb-3 mt-2">

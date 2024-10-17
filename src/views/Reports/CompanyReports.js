@@ -226,7 +226,7 @@ const  CompanyReports = () => {
     ]
   
   return (
-    <CContainer>
+    <CContainer fluid>
         <CRow style={{diplay:'flex',justifyContent:'center',alignItems:'center',}}>
             <CCol>
         <EmployeeInfo />
@@ -254,7 +254,7 @@ const  CompanyReports = () => {
         }}
       >
         <CRow className="my-4 p-3">
-          <CCol md={7}>
+        <CCol sm={4} md={5} lg={5} xl={8}>
             <h2 style={styles.mainHeading}>Companies</h2>
             <p style={styles.secHeading}>Active companies</p>
           </CCol>

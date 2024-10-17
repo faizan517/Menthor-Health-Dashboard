@@ -121,7 +121,7 @@ const CompanyCreation = ({ onInputChange, companyName, companyAddress, companyEm
 
   return (
     <CContainer
-    
+    fluid
       style={{
         boxShadow: '4px 4px 15px 15px rgba(0, 0, 0, 0.05)',
         borderWidth: 0,

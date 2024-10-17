@@ -83,7 +83,10 @@ const EmployeeInfo = (props) => {
     </CCard>
   ) : (
     <CCard
-      style={{ width: '20rem', borderRadius: '15px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}
+      style={{ width: '20rem', boxShadow: '4px 4px 15px 15px rgba(0, 0, 0, 0.05)',
+        borderWidth: 0,
+        borderRadius: 10,
+        marginTop:10 }}
     >
       <CCardBody>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>

@@ -3,11 +3,13 @@ import React from 'react';
 import { FaSearch, FaBell, FaInfoCircle } from 'react-icons/fa';
 import { IoIosNotificationsOutline } from "react-icons/io";
 import { IoInformationCircleOutline } from "react-icons/io5";
+import { useMediaQuery } from 'react-responsive';
 
 const SearchBar = () => {
+  const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
   return (
-    <CRow lg={12} md={6} sm={3} style={{...styles.searchContainer,backgroundColor:'white',boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',padding: '5px 10px', }}>
-      <CCol  style={styles.searchContainer}>
+    <CRow lg={12} md={6} style={{...styles.searchContainer,backgroundColor:'white',boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',padding: isMobile ? '5px 5px' : '5px 10px', maxWidth:isMobile ? '260px': '' }}>
+      <CCol style={{...styles.searchContainer, width:isMobile ? '150px': ''}}>
       <FaSearch style={styles.icon} />
       <input type="text" placeholder="Search" style={styles.input} />
       </CCol>
