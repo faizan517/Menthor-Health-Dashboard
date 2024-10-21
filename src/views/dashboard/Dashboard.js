@@ -24,14 +24,6 @@ import {
   cilUserFemale,
 } from '@coreui/icons'
 
-import group from '../../assets/brand/group.png'
-import box from '../../assets/brand/box.png'
-import puls from '../../assets/brand/puls.png'
-import history from '../../assets/brand/history.png'
-import check from '../../assets/brand/check_circle.png'
-import error from '../../assets/brand/error.png'
-import not from '../../assets/brand/red.png'
-
 
 import MainChart from './MainChart'
 import { CChartPie } from '@coreui/react-chartjs'
@@ -39,6 +31,8 @@ import { useMediaQuery } from 'react-responsive'
 import Color from '../../utils/Color'
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import PieChart from '../../components/PieChart'
+import Images from '../../utils/Images'
+import { Fonts } from '../../utils/Fonts'
 
 const Dashboard = () => {
   const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
@@ -85,7 +79,7 @@ const Dashboard = () => {
   const tableExample = [
     {
       user: { name: 'Quintin Ed', registered: 'Jan 1, 2023' },
-      country: check,
+      country: Images.check,
       usage: {
         value: 74,
         color: Color.primary,
@@ -94,7 +88,7 @@ const Dashboard = () => {
     },
     {
       user: { name: 'Enéas Kwadwo', new: false, registered: 'Jan 1, 2023' },
-      country: error,
+      country: Images.error,
       usage: {
         value: 98,
         color: Color.primary,
@@ -107,7 +101,7 @@ const Dashboard = () => {
         new: true,
         registered: 'Jan 1, 2023',
       },
-      country: check,
+      country: Images.check,
       usage: {
         value: 22,
         color: Color.primary,
@@ -120,7 +114,7 @@ const Dashboard = () => {
         new: true,
         registered: 'Jan 1, 2023',
       },
-      country: not,
+      country: Images.not,
       usage: {
         value: 43,
         color: Color.primary,
@@ -136,7 +130,7 @@ const Dashboard = () => {
 
   const styles = {
     heading: {
-      fontFamily:'poppins',fontWeight:500,fontSize:24
+      ...Fonts.Poppins,fontWeight:500,fontSize:24
     },
     icons: {
       height: 50,
@@ -175,6 +169,11 @@ const Dashboard = () => {
       fontSize: '14px',
       color: '#6c757d',
     },
+    ulHeading:{
+      ...Fonts.Sans,
+      fontWeight:700,
+      fontSize:14,
+    }
   }
 
   return (
@@ -191,7 +190,7 @@ const Dashboard = () => {
           className="mb-4"
           icon={
             <div style={styles.icons}>
-              <img src={group} style={{ textAlign: 'center' }} alt="Group Icon" />
+              <img src={Images.group} style={{ textAlign: 'center' }} alt="Group Icon" />
             </div>
           }
           text="+25%"
@@ -211,7 +210,7 @@ const Dashboard = () => {
           className="mb-4"
           icon={
             <div style={{ ...styles.icons, backgroundColor: '#fce6e6' }}>
-              <img src={box} style={{ textAlign: 'center' }} alt="Box Icon" />
+              <img src={Images.box} style={{ textAlign: 'center' }} alt="Box Icon" />
             </div>
           }
           text="Widget helper text"
@@ -231,7 +230,7 @@ const Dashboard = () => {
           className="mb-4"
           icon={
             <div style={styles.icons}>
-              <img src={puls} style={{ textAlign: 'center' }} alt="Puls Icon" />
+              <img src={Images.puls} style={{ textAlign: 'center' }} alt="Puls Icon" />
             </div>
           }
           text="Widget helper text"
@@ -251,7 +250,7 @@ const Dashboard = () => {
           className="mb-4"
           icon={
             <div style={{ ...styles.icons, backgroundColor: '#e9fbf6' }}>
-              <img src={history} style={{ textAlign: 'center' }} alt="History Icon" />
+              <img src={Images.history} style={{ textAlign: 'center' }} alt="History Icon" />
             </div>
           }
           text="Widget text"
@@ -291,7 +290,7 @@ const Dashboard = () => {
       >
         <br />
         <CCol sm={3}>
-          <h4 id="traffic" className="card-title mb-3 color-black" style={{paddingLeft:20}}>
+          <h4 id="traffic" className="card-title mb-3 color-black" style={{...styles.ulHeading,paddingLeft:20,fontSize:24}}>
             User Logs
           </h4>
         </CCol>
@@ -299,11 +298,11 @@ const Dashboard = () => {
           <CTableHead className="text-nowrap">
             <CTableRow >
               <CTableHeaderCell>{/* <CIcon icon={cilPeople} /> */}</CTableHeaderCell>
-              <CTableHeaderCell>User</CTableHeaderCell>
-              <CTableHeaderCell className="text-center">Status</CTableHeaderCell>
-              <CTableHeaderCell></CTableHeaderCell>
-              <CTableHeaderCell>Activity</CTableHeaderCell>
-              <CTableHeaderCell>Usage</CTableHeaderCell>
+              <CTableHeaderCell style={{...styles.ulHeading,color:Color.fontGray,fontWeight:500}}>User</CTableHeaderCell>
+              <CTableHeaderCell className="text-center" style={{...styles.ulHeading,color:Color.fontGray,fontWeight:500}}>Status</CTableHeaderCell>
+              <CTableHeaderCell style={{...styles.ulHeading,color:Color.fontGray,fontWeight:500}}></CTableHeaderCell>
+              <CTableHeaderCell style={{...styles.ulHeading,color:Color.fontGray,fontWeight:500}}>Activity</CTableHeaderCell>
+              <CTableHeaderCell style={{...styles.ulHeading,color:Color.fontGray,fontWeight:500}}>Usage</CTableHeaderCell>
             </CTableRow>
           </CTableHead>
           <CTableBody className="p-5">
@@ -311,7 +310,7 @@ const Dashboard = () => {
               <CTableRow v-for="item in tableItems" key={index} >
                 <CTableDataCell className="text-center">
                 </CTableDataCell>
-                <CTableDataCell>
+                <CTableDataCell style={styles.ulHeading}>
                   <div>{item.user.name}</div>
                 </CTableDataCell>
                <CTableDataCell className="text-center">
@@ -323,7 +322,7 @@ const Dashboard = () => {
                 </CTableDataCell>
                 <CTableDataCell>
       
-                  <div className="fw-semibold text-nowrap">{item.activity}</div>
+                  <div className="fw-semibold text-nowrap" style={styles.ulHeading}>{item.activity}</div>
                 </CTableDataCell>
                 <CTableDataCell style={{width:'30vw'}}>
                  
@@ -347,7 +346,7 @@ const Dashboard = () => {
         <CCardBody>
           <CRow>
             <CCol sm={5}>
-              <h4 id="traffic" className="card-title mb-0" style={{fontFamily:'poppins'}}>
+              <h4 id="traffic" className="card-title mb-0" style={{...styles.ulHeading,fontSize:20,}}>
                 Performence
               </h4>
             </CCol>

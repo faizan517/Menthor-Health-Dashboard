@@ -5,4 +5,5 @@ export default{
   white: '#fff',
   gray:'#d9d9d9',
   borderGray: '#8d8787',
+  fontGray:'#a3aed0',
   }

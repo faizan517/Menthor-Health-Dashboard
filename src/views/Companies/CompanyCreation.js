@@ -12,26 +12,27 @@ import {
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { PiPencilSimple } from 'react-icons/pi'
+import { Fonts } from '../../utils/Fonts'
 
 
 const styles = {
   heading: {
     padding: 10,
-    fontFamily: 'Inter',
+    ...Fonts.Inter,
     fontWeight: 400,
     fontSize: 14,
     marginBottom: 20,
   },
   answerFont: {
     padding: 10,
-    fontFamily: 'Inter',
+    ...Fonts.Inter,
     fontWeight: 400,
     fontSize: 14,
     marginBottom: 20,
   },
   answerText: {
     padding: 10,
-    fontFamily: 'Inter',
+    ...Fonts.Inter,
     fontWeight: 400,
     fontSize: 14,
     marginBottom: 20,
@@ -41,7 +42,7 @@ const styles = {
   },
   answerCheck: {
     padding: 10,
-    fontFamily: 'Inter',
+    ...Fonts.Inter,
     fontWeight: 400,
     fontSize: 14,
     marginBottom: 20,
@@ -54,14 +55,14 @@ const styles = {
     paddingTop: 30,
   },
   mainHead: {
-    fontFamily: 'Inter',
+    ...Fonts.Inter,
     fontWeight: 700,
     fontSize: '35px',
     textAlign: 'justify',
     lineHeight: 1.3,
   },
   tabHead: {
-    fontFamily: 'Inter',
+    ...Fonts.Inter,
     fontWeight: 400,
     fontSize: '20px',
     textAlign: 'justify',

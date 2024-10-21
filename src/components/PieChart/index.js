@@ -32,6 +32,7 @@ import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import Color from '../../utils/Color';
 import { useMediaQuery } from 'react-responsive';
+import { Fonts } from '../../utils/Fonts';
 
 const SessionsByCompany = (props) => {
   const isTab = useMediaQuery({ query: '(max-width: 1024px)' });
@@ -76,8 +77,8 @@ const SessionsByCompany = (props) => {
         </div>
         <ul style={{...styles.optionsList, display: isTab ?  'flex' : '',}}>
           {options.map((option, index) => (
-            <li key={index} style={{...styles.optionItem,padding:5}}>
-              <span style={{ color: option.color }}>{option.label}</span>
+            <li key={index} style={{padding: isTab ? 25 : 5}}>
+              <span style={{...styles.optionItem,color: option.color }}>{option.label}</span>
               <div style={styles.optionValue}>
                 8,085 <span style={styles.percentage}>{option.value}%</span>
               </div>
@@ -105,18 +106,21 @@ const styles = {
     lineHeight: '2',
   },
   optionItem: {
-    fontWeight: 'bold',
-    fontSize: '16px',
-    color: '#4d4d4d',
+    fontWeight: 700,
+    ...Fonts.Roboto,
+    fontSize: '14px',
+    textAlign:'center'
+    // color: '#4d4d4d',
   },
   optionValue: {
-    fontSize: '20px',
-    color: '#3a3a3a',
-    fontWeight: 'bold',
+    ...Fonts.Roboto,
+    fontSize: '18px',
+    fontWeight: 500,
   },
   percentage: {
-    fontSize: '14px',
-    color: '#6c757d',
+    ...Fonts.Roboto,
+    fontWeight: 500,
+    fontSize: '13px',
     marginLeft: '8px',
   },
   '@media (max-width: 1440px)': {

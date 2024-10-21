@@ -12,6 +12,7 @@ import {
   CFormInput,
 } from '@coreui/react'
 import Color from '../../utils/Color'
+import { Fonts } from '../../utils/Fonts'
 
 const styles = {
   input: {
@@ -25,7 +26,7 @@ const styles = {
   },
   inputCon: { display: 'flex', flexDirection: 'column', textAlign: 'left' },
   title: {
-    fontFamily: 'Inter',
+    ...Fonts.Inter,
     fontSize: '14px',
     fontWeight: 400,
   },

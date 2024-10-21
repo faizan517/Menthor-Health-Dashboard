@@ -3,6 +3,7 @@ import { FaUsers, FaUser } from 'react-icons/fa'; // Icons for total users and m
 import user from '../../assets/brand/user.png'
 import Twouser from '../../assets/brand/2user.png'
 import { useMediaQuery } from 'react-responsive';
+import { Fonts } from '../../utils/Fonts';
 
 const UserStatsCard = ({}) => {
   const isMobile = useMediaQuery({ query: '(max-width: 767px)' });
@@ -47,13 +48,13 @@ const UserStatsCard = ({}) => {
       margin: 0,
       fontSize: 32,
       fontWeight: 600,
-      fontFamily:'poppins',
+      ...Fonts.Poppins,
     },
     statChange: {
       fontSize: '12px',
       color: '#9C9C9C',
       fontWeight: 700,
-      fontFamily:'poppins',
+      ...Fonts.Poppins,
     },
     positiveChange: {
       color: '#4CAF50', // Green for positive change

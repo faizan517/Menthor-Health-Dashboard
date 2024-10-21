@@ -9,7 +9,7 @@ import {
   CFormSelect,
   CRow,
 } from '@coreui/react'
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import '../Quiz/style.css'
 // import Info from '../PersonalInfo'
 import './style.css'
@@ -20,18 +20,20 @@ import { Tab, Tabs } from 'react-tabs-scrollable'
 import 'react-tabs-scrollable/dist/rts.css'
 import Color from '../../utils/Color'
 import { MdKeyboardDoubleArrowLeft, MdKeyboardDoubleArrowRight } from 'react-icons/md'
+import Images from '../../utils/Images'
+import { Fonts } from '../../utils/Fonts'
 
 const styles = {
   heading: {
     padding: 10,
-    fontFamily: 'Inter',
+    ...Fonts.Inter,
     fontWeight: 400,
     fontSize: 14,
     marginBottom: 20,
   },
   answerFont: {
     padding: 10,
-    fontFamily: 'Inter',
+    ...Fonts.Inter,
     fontWeight: 400,
     fontSize: 14,
     marginBottom: 20,
@@ -39,7 +41,7 @@ const styles = {
   
   answerText: {
     padding: 10,
-    fontFamily: 'Inter',
+    ...Fonts.Inter,
     fontWeight: 400,
     fontSize: 14,
     marginBottom: 20,
@@ -49,7 +51,7 @@ const styles = {
   },
   answerCheck: {
     padding: 10,
-    fontFamily: 'Inter',
+    ...Fonts.Inter,
     fontWeight: 400,
     fontSize: 14,
     marginBottom: 20,
@@ -75,18 +77,18 @@ const styles = {
   // activeTab: {
   //   backgroundColor: '#006eff',
   //   color: 'white',
-  //   // fontFamily: 'Inter',
+  //   // ...Fonts.Inter,
   //   fontWeight: 700,
   // },
   mainHead: {
-    fontFamily: 'Inter',
+    ...Fonts.Inter,
     fontWeight: 700,
     fontSize: '35px',
     textAlign: 'justify',
     lineHeight: 1.3,
   },
   tabHead: {
-    fontFamily: 'Inter',
+    ...Fonts.Inter,
     fontWeight: 400,
     fontSize: '20px',
     textAlign: 'justify',
@@ -126,13 +128,38 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    padding: '10px', // Ensure there's padding inside the tab
+    // padding: '10px', // Ensure there's padding inside the tab
   },
   activeTab: {
     backgroundColor: '#007bff',
     color: '#fff',
   },
-  
+  container: {
+          height: '90vh', // Full screen height
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          textAlign: 'center',
+          boxShadow: '4px 4px 15px 15px rgba(0, 0, 0, 0.05)',
+      borderWidth: 0,
+      borderRadius: 10,
+        },
+        image: {
+          width: '80px', // Width of the smiley face
+          height: '80px', // Height of the smiley face
+          marginBottom: '20px',
+        },
+        text: {
+          fontSize: '24px',
+          ...Fonts.Inter,
+          fontWeight:400,
+        },
+        imgHeading:{
+          ...Fonts.Inter,
+          fontWeight:700,
+          fontSize:64
+        },
 }
 
 const formStructure = [
@@ -1073,10 +1100,12 @@ const Info = ({ onInputChange }) => {
 }
 
 const DynamicForm = (props) => {
-  const {isActive,styling,isReport,} = props
+  const {isActive,styling,isReport,scroll} = props
   const [responses, setResponses] = useState({})
   const [totalMarks, setTotalMarks] = useState(null)
   const [currentTab, setCurrentTab] = useState(0)
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
   const tabsContainerRef = useRef(null)
   const isMobile = useMediaQuery({ query: '(max-width: 767px)' })
 
@@ -1100,7 +1129,8 @@ const DynamicForm = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    let marks = 0
+    setIsSubmitted(true);
+    // let marks = 0
 
     // Calculate marks for questions
     formStructure.forEach((section) => {
@@ -1124,16 +1154,18 @@ const DynamicForm = (props) => {
 
   const handleTabClick = (index) => {
     setCurrentTab(index)
+    window.scrollTo({ top: 400, behavior: 'smooth' })
   }
 
   const onTabClick = (e, index) => {
     console.log(e)
     setCurrentTab(index)
   }
-
+  
   return (
     <>
-      {/* Tab navigation */}
+
+
 {!isActive && (
   <CRow style={{ ...styles.tabsWrapper }}>
     {/* Left Arrow */}
@@ -1162,7 +1194,7 @@ const DynamicForm = (props) => {
           style={{
             ...styles.tab,
             ...(currentTab === index ? styles.activeTab : {}),
-            width: isMobile ? '30vw' : '25vw', // convert this in px then check
+            width: isMobile ? '25vw' : '15vw', // convert this in px then check
           }}
           onClick={() => handleTabClick(index)}
         >
@@ -1183,6 +1215,16 @@ const DynamicForm = (props) => {
     </CCol>
   </CRow>
 )}
+{isSubmitted ? (
+       <CContainer style={styles.container}>
+              {/* Smiley Face */}
+              <img src={Images.smile} alt="Smiley Face" style={styles.image} />
+              {/* Text */}
+              <span style={styles.imgHeading}> Thankyou!</span>
+              <span style={{...styles.text,marginTop:10}}>Please tick mark to accept that the summary of this data will be shared with your employer. This form is intended solely to measure your health risk. The results of this form will allow your employer to analyze your and your colleagues&#39; health needs to provide you with the best and most personalized health benefits.</span>
+              <p style={{...styles.text,marginTop:100}}>You will get your assessment form report on your email</p>
+            </CContainer>
+    ) :(
 <CContainer
 style={{
   width:isMobile? '90vw':'',
@@ -1212,12 +1254,12 @@ style={{
       {/* Render questions */}
       {section.questions.map((question) => (
         <div key={question.id} style={{ paddingLeft: 50, marginTop: 10 }}>
-          <p style={{ fontFamily: 'Inter', fontWeight: 500, fontSize: 14 }}>
+          <p style={{ ...Fonts.Inter, fontWeight: 500, fontSize: 14 }}>
             {question.questionText}
           </p>
 
           {question.questionType === 'mcq' && (
-            <CCol xs={12}>
+            <CCol style={{display: isMobile ? 'flex' : '',flexDirection:'column',justifyContent:'flex-start'}}>
               {question.options.map((option, index) => (
                 <label key={index} style={styles.answerFont}>
                   <input
@@ -1242,7 +1284,7 @@ style={{
           )}
 
           {question.questionType === 'multicheck' && (
-            <CCol style={{ marginTop: 10 }}>
+            <CCol style={{ marginTop: 10,display: isMobile ? 'flex' : '',flexDirection:'column',justifyContent:'flex-start'}}>
               {question.options.map((option, index) => (
                 <label key={index} style={styles.answerFont}>
                   <input
@@ -1317,7 +1359,7 @@ style={{
   </div>
 )}
 </CContainer>
-
+    )}
     </>
   )
 }

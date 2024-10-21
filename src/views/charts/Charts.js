@@ -23,6 +23,7 @@ import {
 import UserStatsCard from '../../components/UserStatsCard'
 import { CiCirclePlus } from 'react-icons/ci'
 import { LuPlus } from 'react-icons/lu'
+import { Fonts } from '../../utils/Fonts'
 // import SearchBar from '../../components/search'
 
 
@@ -56,12 +57,12 @@ const styles = {
   },
   heading: {
     color: 'gray',
-    fontFamily: 'poppins',
+    ...Fonts.Poppins,
     fontWeight: 500,
     fontSize: 14,
   },
   title: {
-    fontFamily: 'poppins',
+    ...Fonts.Poppins,
     fontWeight: 500,
     fontSize: 14,
   },
@@ -76,16 +77,16 @@ const styles = {
     borderStyle: 'solid',
     borderColor: 'rgba(0, 176, 135, 1)',
     color: 'rgba(0, 176, 135, 1)',
-    fontFamily: 'poppins',
+    ...Fonts.Poppins,
     fontSize: 14,
   },
   mainHeading: {
-    fontFamily: 'poppins',
+    ...Fonts.Poppins,
     fontWeight: 600,
     fontSize: 22,
   },
   secHeading: {
-    fontFamily: 'poppins',
+    ...Fonts.Poppins,
     fontWeight: 400,
     fontSize: 14,
     color: 'rgba(22, 192, 152, 1)',
@@ -313,7 +314,7 @@ const UserTable = () => {
                         borderStyle: 'solid',
                         borderColor: 'rgba(223, 4, 4, 1)',
                         color: 'rgba(223, 4, 4, 1)',
-                        fontFamily: 'poppins',
+                        ...Fonts.Poppins,
                         fontSize: 14,
                       }}
                     >

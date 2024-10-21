@@ -1,16 +1,17 @@
 import React from 'react'
 import { CCard, CCardBody, CCardHeader, CBadge, CRow, CCol } from '@coreui/react'
+import { Fonts } from '../../utils/Fonts'
 
 const styles = {
   title: {
     display: 'flex',
     justifyContent: 'space-between',
-    fontFamily: 'poppins',
+    ...Fonts.Poppins,
     fontWeight: 500,
     fontSize: 16,
   },
   heading: {
-    fontFamily: 'poppins',
+    ...Fonts.Poppins,
     fontWeight: 500,
     fontSize: 24,
   },
@@ -25,7 +26,7 @@ const styles = {
     borderStyle: 'solid',
     borderColor: 'rgba(0, 176, 135, 1)',
     color: 'rgba(0, 176, 135, 1)',
-    fontFamily: 'poppins',
+    ...Fonts.Poppins,
     fontSize: 14,
   },
 }

@@ -15,8 +15,7 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilMagnifyingGlass } from '@coreui/icons'
-import mentorHealth from '../../../assets/brand/mentorhealth3.png'
-import banner from '../../../assets/brand/Heading design.png'
+
 
 import { MdHeight } from 'react-icons/md'
 import Quiz from '../../../components/Quiz'
@@ -26,18 +25,17 @@ import { Tabs, Tab } from "react-tabs-scrollable";
 import "react-tabs-scrollable/dist/rts.css";
 import { useMediaQuery } from 'react-responsive'
 import { useNavigate } from 'react-router-dom'
+import Images from '../../../utils/Images'
+import { Fonts } from '../../../utils/Fonts'
 
 const styles = {
   formContainer: {
-    fontFamily: 'Arial, sans-serif',
     textAlign: 'center',
   },
   header: {
     display: 'flex',
     justifyContent: 'space-between',
-    // backgroundColor: "#006eff",
     color: 'white',
-    // padding: "20px",
     borderRadius: '10px',
     position: 'relative',
   },
@@ -88,29 +86,19 @@ const styles = {
     fontWeight: 700,
   },
   mainHead: {
-    fontFamily: 'Inter',
+    ...Fonts.Inter,
     fontWeight: 700,
     fontSize: '35px',
     textAlign: 'justify',
     lineHeight:1.3
   },
   tabHead:{
-    fontFamily: 'Inter',
+    ...Fonts.Inter,
     fontWeight: 400,
     fontSize: '20px',
     textAlign: 'justify',
   }
 }
-// const tabsData = [
-//   'Personal Information',
-//   'Personal Health Habits',
-//   'Personal Medical History',
-//   'Women Health',
-//   'Lifestyle & Diet',
-//   'Mental & Emotional Health Risk',
-  // 'Occupational Health Risk',
-  // 'Health Benefits & Expenditure',
-// ];
 const Page500 = () => {
   const [activeTab, setActiveTab] = useState(0); // Manage active tab state
   const isMobile = useMediaQuery({ query: '(max-width: 767px)' });
@@ -146,11 +134,11 @@ const Page500 = () => {
       {/* Header Section */}
       <CRow lg={12} md={6} sm={3} style={{...styles.header, display:'flex',flexDirection:'row-reverse'}}>
         <CCol sm={6} md={6} lg={6} style={styles.headContainor}>
-        <img src={banner} style={{  width:  '100%', height: 'auto',}} />
+        <img src={Images.head} style={{  width:  '100%', height: 'auto',}} />
           
         </CCol>
         <CCol sm={3} md={4} lg={3} style={{...styles.logo,display:'flex',justifyContent:'center',marginTop: isMobile ? 20: 0}}>
-          <img src={mentorHealth} style={{  width: isMobile ?'50%' :  '100%', height: 'auto',  maxWidth: '400px'}} onClick={handleClick}/>
+          <img src={Images.logoBig} style={{  width: isMobile ?'50%' :  '100%', height: 'auto',  maxWidth: '400px'}} onClick={handleClick}/>
         </CCol>
       </CRow>
       <CCol
@@ -168,7 +156,7 @@ const Page500 = () => {
           style={{
             textAlign: 'justify',
             // width: '80vw',
-            fontFamily: 'Inter',
+            ...Fonts.Inter,
             fontWeight: 400,
             fontSize: '16px',
           }}

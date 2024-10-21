@@ -26,6 +26,7 @@ import EmployeeInfo from '../../components/EmployeeInfoCon'
 import PieChart from '../../components/PieChart'
 import { LuPlus } from 'react-icons/lu'
 import Color from '../../utils/Color'
+import { Fonts } from '../../utils/Fonts'
 
 const styles = {
   cardBody: {
@@ -57,12 +58,12 @@ const styles = {
   },
   heading: {
     color: 'gray',
-    fontFamily: 'poppins',
+    ...Fonts.Poppins,
     fontWeight: 500,
     fontSize: 14,
   },
   title: {
-    fontFamily: 'poppins',
+    ...Fonts.Poppins,
     fontWeight: 500,
     fontSize: 14,
     cursor:'pointer'
@@ -78,16 +79,16 @@ const styles = {
     borderStyle: 'solid',
     borderColor: 'rgba(0, 176, 135, 1)',
     color: 'rgba(0, 176, 135, 1)',
-    fontFamily: 'poppins',
+    ...Fonts.Poppins,
     fontSize: 14,
   },
   mainHeading: {
-    fontFamily: 'poppins',
+    ...Fonts.Poppins,
     fontWeight: 600,
     fontSize: 22,
   },
   secHeading: {
-    fontFamily: 'poppins',
+    ...Fonts.Poppins,
     fontWeight: 400,
     fontSize: 14,
     color: 'rgba(22, 192, 152, 1)',
@@ -316,7 +317,7 @@ const Companies = () => {
                         borderStyle: 'solid',
                         borderColor: 'rgba(223, 4, 4, 1)',
                         color: 'rgba(223, 4, 4, 1)',
-                        fontFamily: 'poppins',
+                        ...Fonts.Poppins,
                         fontSize: 14,
                       }}
                     >

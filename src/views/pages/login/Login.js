@@ -5,6 +5,8 @@ import { PiEyeSlashThin,PiEyeThin } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
 import { CContainer } from '@coreui/react';
 import { useMediaQuery } from 'react-responsive';
+import Images from '../../../utils/Images';
+import { Fonts } from '../../../utils/Fonts';
 
 
 const Login = () => {
@@ -59,13 +61,13 @@ const Login = () => {
     title: {
       // marginBottom: '20px',
       textAlign:'left',
-      fontFamily:'Poppins',
+      ...Fonts.Poppins,
       fontSize:'36px',fontWeight:700,
     },
     title2: {
       // marginBottom: '20px',
       textAlign:'left',
-      fontFamily:'Poppins',
+      ...Fonts.Poppins,
       fontSize:'16px',fontWeight:400,
       color:'rgba(163, 174, 208, 1)'
     },
@@ -79,13 +81,13 @@ const Login = () => {
       cursor: 'pointer',
       marginBottom: '10px',
       // paddingLeft: '20px',
-      fontFamily:'poppins',
+      ...Fonts.Poppins,
 
     },
     orText: {
       margin: '10px 0',
       color: '#777',
-      fontFamily:'Poppins',
+      ...Fonts.Poppins,
       fonWeight:500
     },
     inputGroup: {
@@ -95,7 +97,7 @@ const Login = () => {
     label: {
       display: 'block',
       marginBottom: '5px',
-      fontFamily:'poppins',
+      ...Fonts.Poppins,
       fontWeight:500,
     },
     input: {
@@ -125,7 +127,7 @@ const Login = () => {
       justifyContent: 'space-between',
       alignItems: 'center',
       margin: '10px 0',
-      fontFamily:'poppins',
+      ...Fonts.Poppins,
       fontWeight:500,
     },
     optionLink: {
@@ -140,7 +142,7 @@ const Login = () => {
       padding: '10px',
       width: '100%',
       cursor: 'pointer',
-      fontFamily:'poppins',
+      ...Fonts.Poppins,
       fontWeight:700,
       fonrSize:14,
       marginBottom:10,
@@ -148,14 +150,14 @@ const Login = () => {
     },
     registerText: {
       marginTop: '10px',
-      fontFamily:'poppins',
+      ...Fonts.Poppins,
       fontWeight:400,
       textAlign:'left'
     },
     registerLink: {
       color: 'rgba(0, 72, 255, 1)',
       textDecoration: 'none',
-      fontFamily:'poppins',
+      ...Fonts.Poppins,
       fontWeight:700,
       textAlign:'left'
     },
@@ -220,12 +222,12 @@ const Login = () => {
             Sign In
           </button>
         </form>
-        <p style={styles.registerText}>
+        {/* <p style={styles.registerText}>
           Not registered yet?{' '}
           <a href="/register" style={styles.registerLink}>
             Create an Account
           </a>
-        </p>
+        </p> */}
       </div>
       {!isMobile &&( <div
         style={{
@@ -240,7 +242,7 @@ const Login = () => {
         }}
       >
         <div>
-          <img src={mentorImage} alt="Mentor Health" style={{ textAlign: 'center', }} height={140} />{' '}
+          <img src={Images.logoWhite} alt="Mentor Health" style={{ textAlign: 'center', }} height={140} />{' '}
           {/* Use the imported image */}
         </div>
       </div>)}

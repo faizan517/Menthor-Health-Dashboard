@@ -24,6 +24,7 @@ import CIcon from '@coreui/icons-react'
 
 import avatar8 from './../../assets/images/avatars/8.jpg'
 import { FaPowerOff } from 'react-icons/fa6'
+import { Fonts } from '../../utils/Fonts'
 
 const AppHeaderDropdown = () => {
   return (
@@ -87,7 +88,7 @@ const AppHeaderDropdown = () => {
         <CDropdownDivider /> */}
         <CDropdownItem href="#">
         <FaPowerOff  size={25} color='red' className='p-1 text-align-center' />
-          <span style={{fontFamily:'poppins',fontWeight:500}}>
+          <span style={{...Fonts.Poppins,fontWeight:500}}>
           Logout
           </span>
         </CDropdownItem>

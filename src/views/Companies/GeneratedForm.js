@@ -1,9 +1,11 @@
 import React from 'react';
 import { CButton, CCardBody, CRow, CCol, CContainer } from '@coreui/react';
 import formIcon from '../../assets/brand/Order.png'; // Replace with your actual image path
+import Images from '../../utils/Images';
+import { Fonts } from '../../utils/Fonts';
 
 const styles ={
-  title:{ fontSize: '24px', fontFamily:'Inter',fontWeight: 500, marginBottom: '30px' }
+  title:{ fontSize: '24px', ...Fonts.Inter,fontWeight: 500, marginBottom: '30px' }
 }
 
 const FormGeneratedCard = () => {
@@ -21,7 +23,7 @@ const FormGeneratedCard = () => {
       <CCardBody>
         {/* Form Icon */}
         <div>
-          <img src={formIcon} alt="Form Icon" style={{ marginBottom: '20px' }} />
+          <img src={Images.formIcon} alt="Form Icon" style={{ marginBottom: '20px' }} />
         </div>
 
         {/* Title */}

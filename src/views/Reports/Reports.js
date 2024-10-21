@@ -25,6 +25,7 @@ import { useNavigate } from 'react-router-dom'
 import EmployeeInfo from '../../components/EmployeeInfoCon'
 import PieChart from '../../components/PieChart'
 import { LuPlus } from 'react-icons/lu'
+import { Fonts } from '../../utils/Fonts'
 
 const styles = {
   cardBody: {
@@ -56,12 +57,12 @@ const styles = {
   },
   heading: {
     color: 'gray',
-    fontFamily: 'poppins',
+    ...Fonts.Poppins,
     fontWeight: 500,
     fontSize: 14,
   },
   title: {
-    fontFamily: 'poppins',
+    ...Fonts.Poppins,
     fontWeight: 500,
     fontSize: 14,
     cursor:'pointer'
@@ -77,16 +78,16 @@ const styles = {
     borderStyle: 'solid',
     borderColor: 'rgba(0, 176, 135, 1)',
     color: 'rgba(0, 176, 135, 1)',
-    fontFamily: 'poppins',
+    ...Fonts.Poppins,
     fontSize: 14,
   },
   mainHeading: {
-    fontFamily: 'poppins',
+    ...Fonts.Poppins,
     fontWeight: 600,
     fontSize: 22,
   },
   secHeading: {
-    fontFamily: 'poppins',
+    ...Fonts.Poppins,
     fontWeight: 400,
     fontSize: 14,
     color: 'rgba(22, 192, 152, 1)',
@@ -264,13 +265,13 @@ const Reports = () => {
               value={search}
               onChange={handleSearch}
               className="me-2"
-              style={{ width: '250px', backgroundColor: 'rgba(249, 251, 255, 1)' }}
+              style={{  width:isMobile ? '100px' : '250px', backgroundColor: 'rgba(249, 251, 255, 1)' }}
             />
 
             <CFormSelect
               value={sortBy}
               onChange={handleSortChange}
-              style={{ width: '100px', backgroundColor: 'rgba(249, 251, 255, 1)' }}
+              style={{ width: isMobile ? '50px' : '100px',backgroundColor: 'rgba(249, 251, 255, 1)' }}
             >
               <option value="newest">Sort by: Newest</option>
               <option value="oldest">Sort by: Oldest</option>
@@ -310,7 +311,7 @@ const Reports = () => {
                         borderStyle: 'solid',
                         borderColor: 'rgba(223, 4, 4, 1)',
                         color: 'rgba(223, 4, 4, 1)',
-                        fontFamily: 'poppins',
+                        ...Fonts.Poppins,
                         fontSize: 14,
                       }}
                     >
