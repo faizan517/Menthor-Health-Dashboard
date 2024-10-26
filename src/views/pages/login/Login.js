@@ -1,53 +1,99 @@
 import React, { useState } from 'react'
-import mentorImage from '../../../assets/brand/mentorhealth2.png' // Import the image here
-import { FcGoogle } from "react-icons/fc";
-import { PiEyeSlashThin,PiEyeThin } from "react-icons/pi";
-import { useNavigate } from "react-router-dom";
-import { CContainer } from '@coreui/react';
-import { useMediaQuery } from 'react-responsive';
-import Images from '../../../utils/Images';
-import { Fonts } from '../../../utils/Fonts';
-
+import { FcGoogle } from 'react-icons/fc'
+import { PiEyeSlashThin, PiEyeThin } from 'react-icons/pi'
+import { useNavigate } from 'react-router-dom'
+import { CContainer } from '@coreui/react'
+import { useMediaQuery } from 'react-responsive'
+import Images from '../../../utils/Images'
+import axios from 'axios'
+import { toast } from 'react-toastify'
 
 const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [errors, setErrors] = useState({})
   const [showPassword, setShowPassword] = useState(false)
-  const navigate = useNavigate();
-  const isMobile = useMediaQuery({ query: '(max-width: 767px)' });
-
-  function handleClick() {
-    navigate("/dashboard");
-  }
+  const [loader , setLoader] = useState(false)
+  const navigate = useNavigate()
+  const isMobile = useMediaQuery({ query: '(max-width: 767px)' })
 
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     return emailRegex.test(email)
   }
 
-  const handleSubmit = (event) => {
-    
-    event.preventDefault()
-    let formErrors = {}
+  const handleSubmit = async (event) => {
+    // Prevent default form submission behavior
+    event.preventDefault();
 
-    // if (!email) {
-    //   formErrors.email = 'Email is required'
-    // } else if (!validateEmail(email)) {
-    //   formErrors.email = 'Must be a valid email'
-    // }
+    let formErrors = {};
 
-    // if (!password) {
-    //   formErrors.password = 'Password is required'
-    // }
+    // Validate email
+    if (!email) {
+      formErrors.email = 'Email is required';
+    } else if (!validateEmail(email)) {
+      formErrors.email = 'Must be a valid email';
+    }
 
-    // if (Object.keys(formErrors).length === 0) {
-    //   console.log('Form submitted:', { email, password })
-    //   // Handle login logic here
-    // } else {
-    //   setErrors(formErrors)
-    // }
-  }
+    // Validate password
+    if (!password) {
+      formErrors.password = 'Password is required';
+    }
+
+    // If there are form errors, show them and stop execution
+    if (Object.keys(formErrors).length > 0) {
+      setErrors(formErrors);
+      // setLoader(false);
+      return; // Stop the function from proceeding to the API call
+    }
+
+    // setLoader(true); // Start loader before the API request
+
+    // Make the API request if no form errors
+    try {
+      const response = await axios.post('http://localhost:5000/api/auth/login', {
+        email,
+        password,
+      });
+
+      // Assuming you get a success response
+      console.log('Login successful:', response.data);
+      toast.success('Login successful!');
+      
+      // Save token in localStorage
+      localStorage.setItem('token', response.data.token);
+
+      // Flush state and reset loader
+      flushState();
+      
+      // Redirect to dashboard on successful login
+      navigate('/dashboard');
+
+    } catch (error) {
+      // Handle errors from the API
+      toast.error(error.response?.data?.message || 'Login failed, please try again');
+      
+      // Log error and show form error feedback
+      if (error.response) {
+        console.log('API error:', error.response.data);
+        setErrors({ apiError: error.response.data.message || 'Login failed' });
+      } else {
+        console.error('Unexpected error:', error);
+        setErrors({ apiError: 'Unexpected error, please try again later.' });
+      }
+
+      // setLoader(false); // Stop loader on failure
+    }
+};
+
+// Function to reset form state and loader
+const flushState = () => {
+  setEmail('');
+  setPassword('');
+  setLoader(false);
+  setErrors({}); // Clear errors when resetting
+};
+
 
   // Inline styles
   const styles = {
@@ -60,16 +106,18 @@ const Login = () => {
     },
     title: {
       // marginBottom: '20px',
-      textAlign:'left',
-      ...Fonts.Poppins,
-      fontSize:'36px',fontWeight:700,
+      textAlign: 'left',
+      fontFamily: 'Poppins',
+      fontSize: '36px',
+      fontWeight: 700,
     },
     title2: {
       // marginBottom: '20px',
-      textAlign:'left',
-      ...Fonts.Poppins,
-      fontSize:'16px',fontWeight:400,
-      color:'rgba(163, 174, 208, 1)'
+      textAlign: 'left',
+      fontFamily: 'Poppins',
+      fontSize: '16px',
+      fontWeight: 400,
+      color: 'rgba(163, 174, 208, 1)',
     },
     googleButton: {
       // backgroundColor: '#4285F4',
@@ -81,14 +129,13 @@ const Login = () => {
       cursor: 'pointer',
       marginBottom: '10px',
       // paddingLeft: '20px',
-      ...Fonts.Poppins,
-
+      fontFamily: 'poppins',
     },
     orText: {
       margin: '10px 0',
       color: '#777',
-      ...Fonts.Poppins,
-      fonWeight:500
+      fontFamily: 'Poppins',
+      fonWeight: 500,
     },
     inputGroup: {
       marginBottom: '30px',
@@ -97,8 +144,8 @@ const Login = () => {
     label: {
       display: 'block',
       marginBottom: '5px',
-      ...Fonts.Poppins,
-      fontWeight:500,
+      fontFamily: 'poppins',
+      fontWeight: 500,
     },
     input: {
       width: '100%',
@@ -127,8 +174,8 @@ const Login = () => {
       justifyContent: 'space-between',
       alignItems: 'center',
       margin: '10px 0',
-      ...Fonts.Poppins,
-      fontWeight:500,
+      fontFamily: 'poppins',
+      fontWeight: 500,
     },
     optionLink: {
       color: 'rgba(0, 72, 255, 1)',
@@ -142,36 +189,41 @@ const Login = () => {
       padding: '10px',
       width: '100%',
       cursor: 'pointer',
-      ...Fonts.Poppins,
-      fontWeight:700,
-      fonrSize:14,
-      marginBottom:10,
-      
+      fontFamily: 'poppins',
+      fontWeight: 700,
+      fonrSize: 14,
+      marginBottom: 10,
     },
     registerText: {
       marginTop: '10px',
-      ...Fonts.Poppins,
-      fontWeight:400,
-      textAlign:'left'
+      fontFamily: 'poppins',
+      fontWeight: 400,
+      textAlign: 'left',
     },
     registerLink: {
       color: 'rgba(0, 72, 255, 1)',
       textDecoration: 'none',
-      ...Fonts.Poppins,
-      fontWeight:700,
-      textAlign:'left'
+      fontFamily: 'poppins',
+      fontWeight: 700,
+      textAlign: 'left',
     },
   }
 
   return (
-    <div  style={{ display: 'flex', justifyContent: 'center', alignItems: 'center',backgroundColor:'white' }}>
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'white',
+      }}
+    >
       <div style={styles.container}>
-        
         <h4 style={styles.title}>Sign in</h4>
         <h4 style={styles.title2}>Enter your email and password to sign in!</h4>
-        <br/>
-        
-      <form onSubmit={handleSubmit}>
+        <br />
+
+        <form onSubmit={handleSubmit}>
           <div style={styles.inputGroup}>
             <label htmlFor="email" style={styles.label}>
               Email*
@@ -204,8 +256,7 @@ const Login = () => {
                 style={styles.showPasswordButton}
                 onClick={() => setShowPassword(!showPassword)}
               >
-                {showPassword ? <PiEyeThin />
- : <PiEyeSlashThin />}
+                {showPassword ? <PiEyeThin /> : <PiEyeSlashThin />}
               </button>
             </div>
             {errors.password && <span style={styles.error}>{errors.password}</span>}
@@ -218,34 +269,44 @@ const Login = () => {
               Forgot password?
             </a>
           </div>
-          <button type="submit" style={styles.signinButton} onClick={handleClick}>
+          <button type="submit" style={styles.signinButton} 
+          //  loading={loader}
+          //   disabled={loader} 
+            >
             Sign In
           </button>
         </form>
-        {/* <p style={styles.registerText}>
+        <p style={styles.registerText}>
           Not registered yet?{' '}
           <a href="/register" style={styles.registerLink}>
             Create an Account
           </a>
-        </p> */}
+        </p>
       </div>
-      {!isMobile &&( <div
-        style={{
-          height: '100vh',
-          width: '50vw',
-          // backgroundColor: 'red',
-          borderBottomLeftRadius: '20%',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          background: 'linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 72, 255, 1))',
-        }}
-      >
-        <div>
-          <img src={Images.logoWhite} alt="Mentor Health" style={{ textAlign: 'center', }} height={140} />{' '}
-          {/* Use the imported image */}
+      {!isMobile && (
+        <div
+          style={{
+            height: '100vh',
+            width: '50vw',
+            // backgroundColor: 'red',
+            borderBottomLeftRadius: '20%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            background: 'linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 72, 255, 1))',
+          }}
+        >
+          <div>
+            <img
+              src={Images.logoWhite}
+              alt="Mentor Health"
+              style={{ textAlign: 'center' }}
+              height={140}
+            />{' '}
+            {/* Use the imported image */}
+          </div>
         </div>
-      </div>)}
+      )}
     </div>
   )
 }

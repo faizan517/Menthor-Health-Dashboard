@@ -1,8 +1,8 @@
 import { CCard, CCol, CContainer, CRow } from '@coreui/react'
 import React from 'react'
-import PieChart from '../../components/PieChart'
 import EmployeeInfo from '../../components/EmployeeInfoCon'
 import DynamicForm from '../../components/Quiz'
+import CircularChart from '../../components/CircularChart'
 
 const dummyFormStructure = [
   {
@@ -52,7 +52,7 @@ export default function EmployeeForm() {
               marginTop: 10,
             }}
           >
-            <PieChart />
+            <CircularChart/>
           </CCard>
         </CCol>
       </CRow>

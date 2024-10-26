@@ -1,8 +1,8 @@
 import React from 'react'
 import { CContainer, CRow, CCol, CCard, CCardBody, CCardHeader, CImage } from '@coreui/react'
 import Images from '../../../utils/Images'
-import { Chart } from 'chart.js'
-import SessionsByCompany from '../../../components/PieChart'
+// import { Chart } from 'chart.js'
+import CircularChart from '../../../components/CircularChart'
 
 const styles = {
   container:{
@@ -180,7 +180,7 @@ const ThankYouPage = () => {
                   <h5>Health Risk Assessment</h5>
                   </div>
                   <CCol lg={6} >
-                  <SessionsByCompany/>
+                  <CircularChart/>
                   </CCol>
                   </CCol>
               </CRow>

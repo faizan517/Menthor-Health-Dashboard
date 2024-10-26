@@ -1,9 +1,10 @@
 import { CCol, CRow } from '@coreui/react';
 import React from 'react';
-import { FaSearch, FaBell, FaInfoCircle } from 'react-icons/fa';
+import { FaSearch, FaBell, FaInfoCircle, FaPowerOff } from 'react-icons/fa';
 import { IoIosNotificationsOutline } from "react-icons/io";
 import { IoInformationCircleOutline } from "react-icons/io5";
 import { useMediaQuery } from 'react-responsive';
+import { Navigate } from 'react-router-dom';
 
 const SearchBar = () => {
   const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
@@ -14,8 +15,11 @@ const SearchBar = () => {
       <input type="text" placeholder="Search" style={styles.input} />
       </CCol>
       <CCol >
-      <IoIosNotificationsOutline style={styles.icon} size={25} />
-      <IoInformationCircleOutline style={styles.icon} size={25} />
+      {/* <IoIosNotificationsOutline style={styles.icon} size={25} />
+      <IoInformationCircleOutline style={styles.icon} size={25} /> */}
+      <a href='#'>
+      <FaPowerOff size={30} color='red' className='p-1 text-align-center' />
+      </a>
       </CCol>
     </CRow>
   );

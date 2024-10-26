@@ -30,9 +30,9 @@ import { CChartPie } from '@coreui/react-chartjs'
 import { useMediaQuery } from 'react-responsive'
 import Color from '../../utils/Color'
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
-import PieChart from '../../components/PieChart'
 import Images from '../../utils/Images'
 import { Fonts } from '../../utils/Fonts'
+import CircularChart from '../../components/CircularChart'
 
 const Dashboard = () => {
   const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
@@ -272,7 +272,7 @@ const Dashboard = () => {
           borderRadius: 10,
           marginTop:10
         }}>
-            <PieChart />
+            <CircularChart />
 
 
           </CCard>

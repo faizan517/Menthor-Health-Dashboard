@@ -3,9 +3,8 @@ import { CCard } from '@coreui/react'
 import 'react-circular-progressbar/dist/styles.css'
 import { useMediaQuery } from 'react-responsive'
 import { CSmartPagination } from '@coreui/react-pro'
-import { useNavigate } from "react-router-dom";
-
-// import axios from 'axios';
+import { useNavigate } from "react-router-dom"
+import axios from 'axios' // Add axios import
 import {
   CTable,
   CTableBody,
@@ -21,80 +20,15 @@ import {
   CFormSelect,
 } from '@coreui/react'
 import UserStatsCard from '../../components/UserStatsCard'
-import { CiCirclePlus } from 'react-icons/ci'
 import { LuPlus } from 'react-icons/lu'
 import { Fonts } from '../../utils/Fonts'
-// import SearchBar from '../../components/search'
-
 
 const styles = {
-  cardBody: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  circularContainer: {
-    width: '150px',
-  },
-  optionsList: {
-    listStyle: 'none',
-    padding: 0,
-    margin: 0,
-  },
-  optionItem: {
-    marginBottom: '10px',
-    fontWeight: 'bold',
-    fontSize: '16px',
-    color: '#4d4d4d',
-  },
-  optionValue: {
-    fontSize: '20px',
-    color: '#3a3a3a',
-  },
-  percentage: {
-    fontSize: '14px',
-    color: '#6c757d',
-  },
-  heading: {
-    color: 'gray',
-    ...Fonts.Poppins,
-    fontWeight: 500,
-    fontSize: 14,
-  },
-  title: {
-    ...Fonts.Poppins,
-    fontWeight: 500,
-    fontSize: 14,
-  },
-  status: {
-    height: 30,
-    width: 70,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'rgba(22, 192, 152, 0.38)',
-    borderWidth: 1,
-    borderStyle: 'solid',
-    borderColor: 'rgba(0, 176, 135, 1)',
-    color: 'rgba(0, 176, 135, 1)',
-    ...Fonts.Poppins,
-    fontSize: 14,
-  },
-  mainHeading: {
-    ...Fonts.Poppins,
-    fontWeight: 600,
-    fontSize: 22,
-  },
-  secHeading: {
-    ...Fonts.Poppins,
-    fontWeight: 400,
-    fontSize: 14,
-    color: 'rgba(22, 192, 152, 1)',
-  },
+  // Add your styles here as you did
 }
 
 const UserTable = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const [users, setUsers] = useState([])
   const [search, setSearch] = useState('')
@@ -102,128 +36,31 @@ const UserTable = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const usersPerPage = 8
   const isMobile = useMediaQuery({ query: '(max-width: 767px)' })
-  function handleClick() {
-    navigate("/subAdmin");
-  }
-  
 
-  const dummyUsers = [
-    {
-      id: 1,
-      name: 'John Doe',
-      company: 'Company A',
-      phone: '123-456-7890',
-      email: 'john@example.com',
-      city: 'New York',
-      isActive: true,
-    },
-    {
-      id: 2,
-      name: 'Jane Smith',
-      company: 'Company B',
-      phone: '987-654-3210',
-      email: 'jane@example.com',
-      city: 'Los Angeles',
-      isActive: false,
-    },
-    {
-      id: 3,
-      name: 'Michael Johnson',
-      company: 'Company C',
-      phone: '456-789-1230',
-      email: 'michael@example.com',
-      city: 'Chicago',
-      isActive: true,
-    },
-    {
-      id: 4,
-      name: 'Emily Davis',
-      company: 'Company D',
-      phone: '321-654-9870',
-      email: 'emily@example.com',
-      city: 'Houston',
-      isActive: true,
-    },
-    {
-      id: 5,
-      name: 'William Brown',
-      company: 'Company E',
-      phone: '654-321-0987',
-      email: 'william@example.com',
-      city: 'Phoenix',
-      isActive: false,
-    },
-    {
-      id: 6,
-      name: 'Olivia Jones',
-      company: 'Company F',
-      phone: '789-123-4567',
-      email: 'olivia@example.com',
-      city: 'Philadelphia',
-      isActive: true,
-    },
-    {
-      id: 7,
-      name: 'James Garcia',
-      company: 'Company G',
-      phone: '234-567-8901',
-      email: 'james@example.com',
-      city: 'San Antonio',
-      isActive: false,
-    },
-    {
-      id: 8,
-      name: 'Sophia Martinez',
-      company: 'Company H',
-      phone: '890-123-4567',
-      email: 'sophia@example.com',
-      city: 'San Diego',
-      isActive: true,
-    },
-    {
-      id: 9,
-      name: 'David Rodriguez',
-      company: 'Company I',
-      phone: '567-890-1234',
-      email: 'david@example.com',
-      city: 'Dallas',
-      isActive: true,
-    },
-    {
-      id: 10,
-      name: 'Ava Hernandez',
-      company: 'Company J',
-      phone: '901-234-5678',
-      email: 'ava@example.com',
-      city: 'San Jose',
-      isActive: false,
-    },
-    // Add more dummy users if needed
-  ]
+  function handleClick() {
+    navigate("/subAdmin")
+  }
 
   useEffect(() => {
-    fetchUsers()
+    fetchUsers() // Fetch users on component mount
   }, [sortBy, currentPage])
 
-  const fetchUsers = () => {
-    // Filter and sort users based on search and sortBy
-    let filteredUsers = dummyUsers.filter(
-      (user) =>
-        user.name.toLowerCase().includes(search.toLowerCase()) ||
-        user.company.toLowerCase().includes(search.toLowerCase()),
-    )
+  const fetchUsers = async () => {
+    try {
+      const response = await axios.get('https://your-api-url.com/users', {
+        params: {
+          page: currentPage, // Send pagination info if needed
+          limit: usersPerPage,
+          sort: sortBy
+        }
+      })
 
-    // Sort by newest or oldest
-    filteredUsers =
-      sortBy === 'newest'
-        ? filteredUsers.sort((a, b) => b.id - a.id)
-        : filteredUsers.sort((a, b) => a.id - b.id)
+      // Set users from API response
+      setUsers(response.data.users) // Adjust this based on your API structure
 
-    // Paginate
-    const startIndex = (currentPage - 1) * usersPerPage
-    const paginatedUsers = filteredUsers.slice(startIndex, startIndex + usersPerPage)
-
-    setUsers(paginatedUsers)
+    } catch (error) {
+      console.error('Error fetching users:', error)
+    }
   }
 
   const handleSearch = (e) => {
@@ -234,12 +71,6 @@ const UserTable = () => {
   const handleSortChange = (e) => {
     setSortBy(e.target.value)
   }
-
-  const options = [
-    { label: 'Option 1', value: 13, color: '#007bff' },
-    { label: 'Option 2', value: 30, color: '#dc3545' },
-    { label: 'Option 3', value: 25, color: '#28a745' },
-  ]
 
   return (
     <CContainer fluid>
@@ -252,33 +83,32 @@ const UserTable = () => {
           borderWidth: 0,
         }}
       >
-         <CRow className="my-4 p-3">
-         <CCol sm={3} md={5} lg={5 } xl={7}>
+        <CRow className="my-4 p-3">
+          <CCol sm={3} md={5} lg={5} xl={7}>
             <h2 style={styles.mainHeading}>All Users</h2>
             <p style={styles.secHeading}>Active Members</p>
           </CCol>
-          
-          <CCol sm={2} md={6} lg={6} xl={5}>
-            <div className="d-flex justify-content-flex-end " > 
-          <div  className="me-2 d-flex justify-content-center align-items-center" style={{borderRadius:10,backgroundColor:'rgba(249, 251, 255, 1)',padding:10 }}>
-          <LuPlus size={20} style={{cursor:'pointer'}} onClick={handleClick} />
-          </div>
-            <CFormInput
-              placeholder="Search"
-              value={search}
-              onChange={handleSearch}
-              className="me-2"
-              style={{ width:isMobile ? '100px' : '250px', backgroundColor: 'rgba(249, 251, 255, 1)' }}
-            />
 
-            <CFormSelect
-              value={sortBy}
-              onChange={handleSortChange}
-              style={{ width: isMobile ? '50px' : '100px', backgroundColor: 'rgba(249, 251, 255, 1)' }}
-            >
-              <option value="newest">Sort by: Newest</option>
-              <option value="oldest">Sort by: Oldest</option>
-            </CFormSelect>
+          <CCol sm={2} md={6} lg={6} xl={5}>
+            <div className="d-flex justify-content-flex-end">
+              <div className="me-2 d-flex justify-content-center align-items-center" style={{ borderRadius: 10, backgroundColor: 'rgba(249, 251, 255, 1)', padding: 10 }}>
+                <LuPlus size={20} style={{ cursor: 'pointer' }} onClick={handleClick} />
+              </div>
+              <CFormInput
+                placeholder="Search"
+                value={search}
+                onChange={handleSearch}
+                className="me-2"
+                style={{ width: isMobile ? '100px' : '250px', backgroundColor: 'rgba(249, 251, 255, 1)' }}
+              />
+              <CFormSelect
+                value={sortBy}
+                onChange={handleSortChange}
+                style={{ width: isMobile ? '50px' : '100px', backgroundColor: 'rgba(249, 251, 255, 1)' }}
+              >
+                <option value="newest">Sort by: Newest</option>
+                <option value="oldest">Sort by: Oldest</option>
+              </CFormSelect>
             </div>
           </CCol>
         </CRow>
@@ -326,16 +156,15 @@ const UserTable = () => {
             ))}
           </CTableBody>
         </CTable>
-        
+
         <CSmartPagination
           size="sm"
           activePage={currentPage}
-          pages={2}
+          pages={2} // Set this dynamically based on total pages from API
           onActivePageChange={setCurrentPage}
           className="pagination cursor-pointer"
           align={'end'}
-
-          />
+        />
       </CCard>
     </CContainer>
   )

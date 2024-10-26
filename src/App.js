@@ -4,6 +4,8 @@ import { HashRouter, Route, Routes, Navigate } from 'react-router-dom';
 import { CSpinner } from '@coreui/react';
 import './scss/style.scss';
 import Color from './utils/Color';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; // Import toastify styles
 
 // Containers
 const DefaultLayout = React.lazy(() => import('./layout/DefaultLayout'));
@@ -16,6 +18,7 @@ const Page500 = React.lazy(() => import('./views/pages/page500/Page500'));
 
 const App = () => {
   return (
+    <>
     <HashRouter>
       <Suspense
         fallback={
@@ -34,6 +37,8 @@ const App = () => {
         </Routes>
       </Suspense>
     </HashRouter>
+    <ToastContainer position="bottom-left" autoClose={3000} hideProgressBar={false} />
+    </>
   );
 };
 

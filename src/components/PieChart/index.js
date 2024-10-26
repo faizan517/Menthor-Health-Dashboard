@@ -1,138 +1,57 @@
-// import { CCardBody } from '@coreui/react'
-// import { CChartPie } from '@coreui/react-chartjs'
-// import React from 'react'
-// import Color from '../../utils/Color'
-
-// const PieChart =() => {
-//   return (
-//     <CCardBody
-//     style={{ boxShadow: '4px 4px 15px 15px rgba(0, 0, 0, 0.05)', borderWidth: 0 }}
-//   >
-//     <CChartPie
-//       data={{
-//         labels: ['Red', 'Green', 'Yellow'],
-//         datasets: [
-//           {
-//             data: [300, 50, 100],
-//             backgroundColor: [Color.primary, '#df0404', '#20c997'],
-//             // hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
-//           },
-//         ],
-//       }}
-//       style={{ borderWidth: 0 }}
-//     />
-//   </CCardBody>
-//   )
-// }
-// export default PieChart
-
+import { CCardBody } from '@coreui/react';
+import { CChartPie } from '@coreui/react-chartjs';
 import React from 'react';
-import { CCard, CCardHeader, CCardBody } from '@coreui/react';
-import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
-import 'react-circular-progressbar/dist/styles.css';
-import Color from '../../utils/Color';
-import { useMediaQuery } from 'react-responsive';
-import { Fonts } from '../../utils/Fonts';
 
-const SessionsByCompany = (props) => {
-  const isTab = useMediaQuery({ query: '(max-width: 1024px)' });
-
-  const {styling}=props
-  const options = [
-    { label: 'Danger', value: 13, color: Color.primary }, // Red for Danger
-    { label: 'Neutral', value: 30, color: '#FF3B30' }, // Blue for Neutral
-    { label: 'Good', value: 25, color: '#20c997' },   // Green for Good
-  ];
-
+const PieChart = () => {
   return (
-      <CCardBody style={{...styles.cardBody, flexDirection: isTab ? 'column-reverse' : ''}}>
-        <div style={styles.circularContainer}>
-          {/* Nested Circular Progress Bars */}
-          <div style={{ position: 'relative', height: '150px', width: '150px' }}>
-            {options.map((option, index) => (
-              <div
-                key={index}
-                style={{
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  width: '100%',
-                  height: '100%',
-                  transform: `scale(${1 - index * 0.3})`,
-                  padding: `${index * 8}px`, // Add padding for larger gaps
-
-                }}
-              >
-                <CircularProgressbar
-                  value={option.value}
-                  strokeWidth={10} 
-                  styles={buildStyles({
-                    pathColor: option.color,
-                    trailColor: '#edf0f5',
-                  })}
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-        <ul style={{...styles.optionsList, display: isTab ?  'flex' : '',}}>
-          {options.map((option, index) => (
-            <li key={index} style={{padding: isTab ? 25 : 5}}>
-              <span style={{...styles.optionItem,color: option.color }}>{option.label}</span>
-              <div style={styles.optionValue}>
-                8,085 <span style={styles.percentage}>{option.value}%</span>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </CCardBody>
+    <CCardBody
+      style={{
+        boxShadow: '4px 4px 15px 15px rgba(0, 0, 0, 0.05)',
+        borderWidth: 0,
+        padding: '20px',
+        maxWidth: '500px', // Adjust the width for a similar look
+      }}
+    >
+      <CChartPie
+        data={{
+          labels: ['Less than 18', '18-30', '30-50', '50+'], // Update labels
+          datasets: [
+            {
+              data: [20, 30, 25, 25], // Adjusted data to match proportions
+              backgroundColor: ['#20c997', '#f9e547', '#4e79f7', '#df0404'], // Updated colors to match image
+              borderWidth: 0, // Remove border if needed
+            },
+          ],
+        }}
+        options={{
+          plugins: {
+            legend: {
+              display: true, // Show legend
+              position: 'right', // Position it to the right
+              labels: {
+                boxWidth: 20, // Size of the color box in the legend
+                padding: 20, // Spacing between legend items
+              },
+            },
+            title: {
+              display: true,
+              text: 'Employee different age ranges', // Chart title
+              padding: {
+                top: 10,
+                bottom: 20,
+              },
+              font: {
+                size: 18,
+              },
+            },
+          },
+          responsive: true,
+          maintainAspectRatio: false, // Set this to false to allow custom sizing
+        }}
+        style={{ height: '300px' }} // Adjust the height to fit
+      />
+    </CCardBody>
   );
 };
 
-const styles = {
-  cardBody: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  circularContainer: {
-    width: '150px',
-    height: '150px',
-  },
-  optionsList: {
-    listStyle: 'none',
-    padding: 0,
-    margin: 0,
-    lineHeight: '2',
-  },
-  optionItem: {
-    fontWeight: 700,
-    ...Fonts.Roboto,
-    fontSize: '14px',
-    textAlign:'center'
-    // color: '#4d4d4d',
-  },
-  optionValue: {
-    ...Fonts.Roboto,
-    fontSize: '18px',
-    fontWeight: 500,
-  },
-  percentage: {
-    ...Fonts.Roboto,
-    fontWeight: 500,
-    fontSize: '13px',
-    marginLeft: '8px',
-  },
-  '@media (max-width: 1440px)': {
-    cardBody: {
-      flexDirection: 'column', // Stack the content on smaller screens
-      textAlign: 'center',
-      backgroundColor:'red'
-    },
-    circularContainer: {
-      marginTop: '100px', // Add some space between text and circle on mobile
-    },
-  },
-};
-
-export default SessionsByCompany;
+export default PieChart;

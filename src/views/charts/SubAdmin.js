@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState } from 'react'
+import axios from 'axios'
 import {
   CButton,
   CCol,
@@ -13,6 +14,8 @@ import {
 import { useForm } from 'react-hook-form'
 import { PiPencilSimple } from 'react-icons/pi'
 import { Fonts } from '../../utils/Fonts'
+import { toast } from 'react-toastify'
+import { Navigate } from 'react-router-dom'
 
 const styles = {
   heading: {
@@ -81,20 +84,14 @@ const styles = {
   },
   tabsContainer: {
     display: 'flex',
-    overflowX: 'hidden', // Hide overflowing tabs
-    // whiteSpace: 'nowrap',
+    overflowX: 'hidden',
     scrollBehavior: 'smooth',
-    // width: `${5 * 200}px`, // Visible width for 5 tabs
   },
   tab: {
-    // flexShrink: 0,
-    // width: `${tabWidth}px`,
-    // padding: '5px 5px',
     cursor: 'pointer',
     backgroundColor: '#f0f0f0',
     borderBottomRightRadius: '10px',
     borderBottomLeftRadius: '10px',
-    // margin: '0 5px',
     textAlign: 'center',
     display: 'flex',
     alignItems: 'center',
@@ -106,13 +103,35 @@ const styles = {
   },
 }
 
-const SubAdmin = ({ onInputChange }) => {
+
+const SubAdmin = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm()
 
+  // Handle form submission with Axios
+  const onSubmit = async (data) => {
+    try {
+      const response = await axios.post('https://your-api-url.com/api/subadmin', data)
+       console.log('Login successful:', response.data);
+      toast.success('Login successful!');
+      flushState();
+      console.log('Response:', response.data)
+      Navigate("/company")
+      // You can handle success messages or redirection here
+    } catch (error) {
+      toast.error(error.response?.data?.message || 'Login failed, please try again');
+      console.error('Error:', error)
+      // Handle error cases (e.g., show an error message to the user)
+    }
+  }
+  const flushState = () => {
+    setEmail('');
+    setPassword('');
+    setLoader(false);
+  };
   return (
     <CContainer
       style={{
@@ -123,17 +142,14 @@ const SubAdmin = ({ onInputChange }) => {
         marginTop: 40,
       }}
     >
-      <CForm>
-        {/* <CRow className="mb-3"> */}
-
-            {/* <CCol lg={11} style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center',marginTop:20 }}>
-            <PiPencilSimple size={20} style={{ cursor: 'pointer' }} />
-          </CCol> */}
-        <CRow className="mb-3 " style={{display:'flex',justifyContent:'center'}}>
+      <CForm onSubmit={handleSubmit(onSubmit)}>
+        {/* Role Field */}
+        <CRow className="mb-3" style={{ display: 'flex', justifyContent: 'center' }}>
           <CCol md={5} className="mb-3 mt-5">
             <div className="mb-3" style={styles.inputCon}>
               <CFormLabel style={styles.title}>Role</CFormLabel>
               <CFormSelect
+                {...register('role', { required: 'Role is required' })}
                 style={styles.input}
                 aria-label="Default select example"
                 options={[
@@ -141,103 +157,115 @@ const SubAdmin = ({ onInputChange }) => {
                   { label: 'Super Admin', value: '1' },
                   { label: 'Admin', value: '2' },
                 ]}
-                onChange={(e) => onInputChange('firstName', e.target.value)}
               />
-              <CFormFeedback invalid>{errors.gender?.message}</CFormFeedback>
+              {errors.role && <CFormFeedback invalid>{errors.role.message}</CFormFeedback>}
             </div>
           </CCol>
-          <CCol lg={5} style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center',marginTop:20 }}>
-          <PiPencilSimple size={20} style={{ cursor: 'pointer' }} />
-
+          <CCol
+            lg={5}
+            style={{
+              display: 'flex',
+              justifyContent: 'flex-end',
+              alignItems: 'center',
+              marginTop: 20,
+            }}
+          >
+            <PiPencilSimple size={20} style={{ cursor: 'pointer' }} />
           </CCol>
-          
         </CRow>
-        <CRow className="mb-3 " style={{display:'flex',justifyContent:'center'}}>
+
+        {/* First Name and Last Name Fields */}
+        <CRow className="mb-3" style={{ display: 'flex', justifyContent: 'center' }}>
           <CCol md={5}>
             <div className="mb-3" style={styles.inputCon}>
               <CFormLabel style={styles.title}>First Name</CFormLabel>
               <CFormInput
+                {...register('firstName', { required: 'First name is required' })}
                 style={styles.input}
                 type="text"
-                onChange={(e) => onInputChange('firstName', e.target.value)}
               />
-              <CFormFeedback invalid>{errors.firstName?.message}</CFormFeedback>
+              {errors.firstName && (
+                <CFormFeedback invalid>{errors.firstName.message}</CFormFeedback>
+              )}
             </div>
           </CCol>
           <CCol md={5}>
             <div className="mb-3" style={styles.inputCon}>
               <CFormLabel style={styles.title}>Last Name</CFormLabel>
               <CFormInput
+                {...register('lastName', { required: 'Last name is required' })}
                 style={styles.input}
                 type="text"
-                onChange={(e) => onInputChange('lastName', e.target.value)}
               />
-              <CFormFeedback invalid>{errors.lastName?.message}</CFormFeedback>
+              {errors.lastName && <CFormFeedback invalid>{errors.lastName.message}</CFormFeedback>}
             </div>
           </CCol>
         </CRow>
-        <CRow className="mb-3 " style={{display:'flex',justifyContent:'center'}}>
+
+        {/* Date of Birth and Gender Fields */}
+        <CRow className="mb-3" style={{ display: 'flex', justifyContent: 'center' }}>
           <CCol md={5}>
             <div className="mb-3" style={styles.inputCon}>
               <CFormLabel style={styles.title}>Date of Birth</CFormLabel>
               <CFormInput
+                {...register('dob', { required: 'Date of Birth is required' })}
                 style={styles.input}
                 type="date"
-                onChange={(e) => onInputChange('dob', e.target.value)}
               />
-              <CFormFeedback invalid>{errors.dob?.message}</CFormFeedback>
+              {errors.dob && <CFormFeedback invalid>{errors.dob.message}</CFormFeedback>}
             </div>
           </CCol>
           <CCol md={5}>
             <div className="mb-3" style={styles.inputCon}>
               <CFormLabel style={styles.title}>Gender</CFormLabel>
               <CFormSelect
+                {...register('gender', { required: 'Gender is required' })}
                 style={styles.input}
                 aria-label="Default select example"
                 options={[
-                  'Open this select menu',
-                  { label: 'Male', value: '1' },
-                  { label: 'Female', value: '2' },
+                  'Select Gender',
+                  { label: 'Male', value: 'Male' },
+                  { label: 'Female', value: 'Female' },
                 ]}
-                onChange={(e) => onInputChange('firstName', e.target.value)}
               />
-              <CFormFeedback invalid>{errors.gender?.message}</CFormFeedback>
+              {errors.gender && <CFormFeedback invalid>{errors.gender.message}</CFormFeedback>}
             </div>
           </CCol>
         </CRow>
 
-        <CRow className="mb-3 " style={{display:'flex',justifyContent:'center'}}>
+        {/* Designation and Email Fields */}
+        <CRow className="mb-3" style={{ display: 'flex', justifyContent: 'center' }}>
           <CCol md={5}>
             <div className="mb-3" style={styles.inputCon}>
               <CFormLabel style={styles.title}>Designation</CFormLabel>
               <CFormInput
+                {...register('designation', { required: 'Designation is required' })}
                 style={styles.input}
                 type="text"
-                onChange={(e) => onInputChange('companyName', e.target.value)}
               />
             </div>
           </CCol>
-
           <CCol md={5}>
             <div className="mb-3" style={styles.inputCon}>
               <CFormLabel style={styles.title}>Email</CFormLabel>
               <CFormInput
+                {...register('email', { required: 'Email is required' })}
                 style={styles.input}
                 type="email"
-                onChange={(e) => onInputChange('occupation', e.target.value)}
               />
             </div>
           </CCol>
         </CRow>
 
-        <CRow className="mb-3 " style={{display:'flex',justifyContent:'center'}}>
+        {/* Password and Confirm Password Fields */}
+        <CRow className="mb-3" style={{ display: 'flex', justifyContent: 'center' }}>
           <CCol md={5}>
             <div className="mb-3" style={styles.inputCon}>
               <CFormLabel style={styles.title}>Password</CFormLabel>
               <CFormInput
+                {...register('password', { required: 'Password is required' })}
                 style={styles.input}
                 type="password"
-                onChange={(e) => onInputChange('occupation', e.target.value)}
               />
             </div>
           </CCol>
@@ -245,26 +273,15 @@ const SubAdmin = ({ onInputChange }) => {
             <div className="mb-3" style={styles.inputCon}>
               <CFormLabel style={styles.title}>Confirm Password</CFormLabel>
               <CFormInput
+                {...register('confirmPassword', { required: 'Confirm Password is required' })}
                 style={styles.input}
                 type="password"
-                onChange={(e) => onInputChange('occupation', e.target.value)}
               />
             </div>
           </CCol>
-          <text
-            style={{
-              ...styles.title,
-              textAlign: 'left',
-              fontSize: 16,
-              fontWeight: 500,
-              color: 'white',
-            }}
-          >
-            Table for BMI formula calculation and ranges given below
-          </text>
         </CRow>
+
         <div className="d-flex justify-content-end">
-          {/* {currentTab === formStructure.length - 1 ? ( */}
           <CButton
             style={{ backgroundColor: '#0048ff', color: 'white' }}
             type="submit"

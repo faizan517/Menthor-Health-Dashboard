@@ -1,6 +1,5 @@
 import { CBadge, CCard, CCol, CContainer, CFormInput, CFormSelect, CRow, CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow } from '@coreui/react'
 // import React from 'react'
-import PieChart from '../../components/PieChart'
 import EmployeeInfo from '../../components/EmployeeInfoCon'
 import React, { useState, useEffect } from 'react'
 // import { CCard } from '@coreui/react'
@@ -10,6 +9,7 @@ import { CSmartPagination } from '@coreui/react-pro'
 import { useNavigate } from 'react-router-dom'
 import UserStatsCard from '../../components/UserStatsCard'
 import { Fonts } from '../../utils/Fonts'
+import CircularChart from '../../components/CircularChart'
 
 const styles = {
     cardBody: {
@@ -240,7 +240,7 @@ const  CompanyReports = () => {
           borderRadius: 10,
           marginTop:10
         }}>
-            <PieChart/>
+            <CircularChart/>
             </CCard>
             </CCol>
             

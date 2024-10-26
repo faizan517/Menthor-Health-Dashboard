@@ -20,7 +20,9 @@ import reports from './../assets/brand/reports.png';
 import user2 from './../assets/brand/2user.png';
 import user from './../assets/brand/user.png';
 import group from './../assets/brand/group.png';
-import thankYou from './../assets/brand/thankyou.gif'
+import thankYou from './../assets/brand/thankyou.gif';
+import formula from './../assets/images/Formula.png';
+
 
 const Images = {
     logo,
@@ -46,6 +48,7 @@ const Images = {
     user,
     group,
     thankYou,
+    formula,
 };
 
 export default Images;

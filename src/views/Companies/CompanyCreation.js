@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {
   CButton,
   CCol,
@@ -8,12 +8,11 @@ import {
   CFormInput,
   CFormLabel,
   CRow,
-} from '@coreui/react'
-import { useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
-import { PiPencilSimple } from 'react-icons/pi'
-import { Fonts } from '../../utils/Fonts'
-
+} from '@coreui/react';
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { Fonts } from '../../utils/Fonts';
 
 const styles = {
   heading: {
@@ -23,106 +22,54 @@ const styles = {
     fontSize: 14,
     marginBottom: 20,
   },
-  answerFont: {
-    padding: 10,
+  title: {
     ...Fonts.Inter,
     fontWeight: 400,
     fontSize: 14,
-    marginBottom: 20,
+    marginBottom: 10,
   },
-  answerText: {
+  input: {
     padding: 10,
     ...Fonts.Inter,
     fontWeight: 400,
     fontSize: 14,
     marginBottom: 20,
-    maxWidth: '600px',
-    width: '632px',
     borderRadius: 5,
   },
-  answerCheck: {
-    padding: 10,
-    ...Fonts.Inter,
-    fontWeight: 400,
-    fontSize: 14,
-    marginBottom: 20,
-  },
-  tabs: {
-    display: 'flex',
-    justifyContent: 'center',
-    marginTop: '30px',
-    borderTop: '2px solid #ddd',
-    paddingTop: 30,
-  },
-  mainHead: {
-    ...Fonts.Inter,
-    fontWeight: 700,
-    fontSize: '35px',
-    textAlign: 'justify',
-    lineHeight: 1.3,
-  },
-  tabHead: {
-    ...Fonts.Inter,
-    fontWeight: 400,
-    fontSize: '20px',
-    textAlign: 'justify',
-  },
-  tabsWrapper: {
-    display: 'flex',
-    alignItems: 'center',
-    position: 'relative',
-    marginTop: '30px',
-    borderTop: '2px solid #ddd',
-    paddingTop: 30,
-  },
-  arrowButton: {
-    cursor: 'pointer',
-    padding: '10px',
-    zIndex: 1,
-  },
-  tabsContainer: {
-    display: 'flex',
-    overflowX: 'hidden', // Hide overflowing tabs
-    // whiteSpace: 'nowrap',
-    scrollBehavior: 'smooth',
-    // width: `${5 * 200}px`, // Visible width for 5 tabs
-  },
-  tab: {
-    // flexShrink: 0,
-    // width: `${tabWidth}px`,
-    // padding: '5px 5px',
-    cursor: 'pointer',
-    backgroundColor: '#f0f0f0',
-    borderBottomRightRadius: '10px',
-    borderBottomLeftRadius: '10px',
-    // margin: '0 5px',
-    textAlign: 'center',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  activeTab: {
-    backgroundColor: '#007bff',
-    color: '#fff',
-  },
-}
+};
 
-const CompanyCreation = ({ onInputChange, companyName, companyAddress, companyEmail, companyType, city, isFilled }) => {
+const CompanyCreation = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm()
+  } = useForm();
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  function handleClick() {
-    navigate('/filledCompanyCreation')
-  }
-
+  // Handle form submission with Axios
+  const onSubmit = async (data) => {
+    event.preventDefault()
+    try {
+      const response = await axios.post('http://localhost:5000/api/auth/createCompany', data);
+      toast.success('Login successful!');
+      flushState();
+      console.log('Response:', response.data);
+      // Redirect to another page or show success message
+      navigate('/filledCompanyCreation'); // Redirect after successful submission
+    } catch (error) {
+      console.error('Error:', error);
+      // Handle error cases (e.g., show an error message to the user)
+    }
+  };
+  const flushState = () => {
+    setEmail('');
+    setPassword('');
+    setLoader(false);
+  };
   return (
     <CContainer
-    fluid
+      fluid
       style={{
         boxShadow: '4px 4px 15px 15px rgba(0, 0, 0, 0.05)',
         borderWidth: 0,
@@ -133,96 +80,80 @@ const CompanyCreation = ({ onInputChange, companyName, companyAddress, companyEm
         flexDirection: 'column',
       }}
     >
-      <CForm>
-        <CRow className="mb-3 mt-5" style={{display:'flex',justifyContent:'center'}}>
+      <CForm onSubmit={handleSubmit(onSubmit)}>
+        <CRow className="mb-3 mt-5" style={{ display: 'flex', justifyContent: 'center' }}>
           <CCol md={5} className="mb-3 mt-2">
             <div className="mb-3" style={styles.inputCon}>
               <CFormLabel style={styles.title}>Company Name</CFormLabel>
               <CFormInput
+                {...register('companyName', { required: 'Company name is required' })}
                 style={styles.input}
-                value={companyName} // Controlled component
                 type="text"
-                onChange={(e) => onInputChange('companyName', e.target.value)}
               />
-              <CFormFeedback invalid>{errors.firstName?.message}</CFormFeedback>
+              {errors.companyName && <CFormFeedback invalid>{errors.companyName.message}</CFormFeedback>}
             </div>
           </CCol>
-          <CCol md={5} className="mb-3 mt-2" >
+          <CCol md={5} className="mb-3 mt-2">
             <div className="mb-3" style={styles.inputCon}>
               <CFormLabel style={styles.title}>Company Address</CFormLabel>
               <CFormInput
+                {...register('companyAddress', { required: 'Company address is required' })}
                 style={styles.input}
-                value={companyAddress} // Controlled component
                 type="text"
-                onChange={(e) => onInputChange('companyAddress', e.target.value)}
               />
-              <CFormFeedback invalid>{errors.lastName?.message}</CFormFeedback>
+              {errors.companyAddress && <CFormFeedback invalid>{errors.companyAddress.message}</CFormFeedback>}
             </div>
           </CCol>
         </CRow>
-        <CRow className="mb-3" style={{display:'flex',justifyContent:'center'}}>
-          <CCol md={5} >
+        <CRow className="mb-3" style={{ display: 'flex', justifyContent: 'center' }}>
+          <CCol md={5}>
             <div className="mb-3" style={styles.inputCon}>
               <CFormLabel style={styles.title}>Company Email</CFormLabel>
               <CFormInput
+                {...register('companyEmail', { required: 'Company email is required' })}
                 style={styles.input}
-                value={companyEmail} // Controlled component
                 type="email"
-                onChange={(e) => onInputChange('companyEmail', e.target.value)}
               />
+              {errors.companyEmail && <CFormFeedback invalid>{errors.companyEmail.message}</CFormFeedback>}
             </div>
           </CCol>
-
-          <CCol md={5} >
+          <CCol md={5}>
             <div className="mb-3" style={styles.inputCon}>
               <CFormLabel style={styles.title}>Company Type</CFormLabel>
               <CFormInput
+                {...register('companyType', { required: 'Company type is required' })}
                 style={styles.input}
-                value={companyType} // Controlled component
                 type="text"
-                onChange={(e) => onInputChange('companyType', e.target.value)}
               />
+              {errors.companyType && <CFormFeedback invalid>{errors.companyType.message}</CFormFeedback>}
             </div>
           </CCol>
         </CRow>
-
         <CRow className="mb-3">
-          <CCol md={1}></CCol>
-          <CCol md={5} >
+          <CCol md={5}>
             <div className="mb-3" style={styles.inputCon}>
               <CFormLabel style={styles.title}>City</CFormLabel>
               <CFormInput
+                {...register('city', { required: 'City is required' })}
                 style={styles.input}
-                value={city} // Controlled component
                 type="text"
-                onChange={(e) => onInputChange('city', e.target.value)}
               />
+              {errors.city && <CFormFeedback invalid>{errors.city.message}</CFormFeedback>}
             </div>
           </CCol>
-          <text
-            style={{
-              ...styles.title,
-              textAlign: 'left',
-              fontSize: 16,
-              fontWeight: 500,
-              color: 'white',
-            }}
-          >
-            Table for BMI formula calculation and ranges given below
-          </text>
         </CRow>
         <div className="d-flex justify-content-end">
           <CButton
             style={{ backgroundColor: '#0048ff', color: 'white' }}
             className="mb-3 mt-3"
-            onClick={handleClick}
+            type="submit"
           >
             Submit
           </CButton>
         </div>
       </CForm>
     </CContainer>
-  )
-}
+  );
+};
 
-export default CompanyCreation
+export default CompanyCreation;

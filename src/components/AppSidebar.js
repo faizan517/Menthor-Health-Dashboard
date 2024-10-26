@@ -60,9 +60,10 @@ const AppSidebar = () => {
       </CSidebarHeader >
       <AppSidebarNav items={navigation} />
       <CHeaderNav style={{marginLeft:10}}>
-          <AppHeaderDropdown />
+          {/* <AppHeaderDropdown /> */}
       <CNavItem>
-            <CNavLink href="#" style={{padding:6}}>Jhon Sam</CNavLink>
+      {/* href="#" */}
+            <CNavLink style={{padding:6,cursor:'default'}}>Jhon Sam</CNavLink>
           </CNavItem>
         </CHeaderNav>
       {/* <CSidebarFooter className="border-top d-none d-lg-flex">
