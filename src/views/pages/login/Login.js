@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import mentorImage from '../../../assets/brand/mentorhealth2.png' // Import the image here
 import { FcGoogle } from 'react-icons/fc'
 import { PiEyeSlashThin, PiEyeThin } from 'react-icons/pi'
 import { useNavigate } from 'react-router-dom'
@@ -6,16 +7,19 @@ import { CContainer } from '@coreui/react'
 import { useMediaQuery } from 'react-responsive'
 import Images from '../../../utils/Images'
 import axios from 'axios'
-import { toast } from 'react-toastify'
+
 
 const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [errors, setErrors] = useState({})
   const [showPassword, setShowPassword] = useState(false)
-  const [loader , setLoader] = useState(false)
   const navigate = useNavigate()
   const isMobile = useMediaQuery({ query: '(max-width: 767px)' })
+
+  function handleClick() {
+    navigate('/dashboard')
+  }
 
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -23,77 +27,50 @@ const Login = () => {
   }
 
   const handleSubmit = async (event) => {
-    // Prevent default form submission behavior
-    event.preventDefault();
-
-    let formErrors = {};
-
+    event.preventDefault()
+    let formErrors = {}
     // Validate email
     if (!email) {
-      formErrors.email = 'Email is required';
+      formErrors.email = 'Email is required'
     } else if (!validateEmail(email)) {
-      formErrors.email = 'Must be a valid email';
+      formErrors.email = 'Must be a valid email'
     }
 
     // Validate password
     if (!password) {
-      formErrors.password = 'Password is required';
+      formErrors.password = 'Password is required'
     }
 
-    // If there are form errors, show them and stop execution
-    if (Object.keys(formErrors).length > 0) {
-      setErrors(formErrors);
-      // setLoader(false);
-      return; // Stop the function from proceeding to the API call
-    }
+    // If there are no form errors, make the API request
+    if (Object.keys(formErrors).length === 0) {
+      try {
+        const response = await axios.post('http://localhost:5000/api/auth/login', {
+          email,
+          password,
+        })
+        console.log(response)
+        const token = response.data.token;
+        localStorage.setItem('token', token);
+        console.log(token)
+        // Assuming you get a success response
+        console.log('Login successful:', response.data)
 
-    // setLoader(true); // Start loader before the API request
+        // Redirect to dashboard on successful login
+        navigate('/dashboard')
 
-    // Make the API request if no form errors
-    try {
-      const response = await axios.post('http://localhost:5000/api/auth/login', {
-        email,
-        password,
-      });
-
-      // Assuming you get a success response
-      console.log('Login successful:', response.data);
-      toast.success('Login successful!');
-      
-      // Save token in localStorage
-      localStorage.setItem('token', response.data.token);
-
-      // Flush state and reset loader
-      flushState();
-      
-      // Redirect to dashboard on successful login
-      navigate('/dashboard');
-
-    } catch (error) {
-      // Handle errors from the API
-      toast.error(error.response?.data?.message || 'Login failed, please try again');
-      
-      // Log error and show form error feedback
-      if (error.response) {
-        console.log('API error:', error.response.data);
-        setErrors({ apiError: error.response.data.message || 'Login failed' });
-      } else {
-        console.error('Unexpected error:', error);
-        setErrors({ apiError: 'Unexpected error, please try again later.' });
+      } catch (error) {
+        // Handle errors from the API
+        if (error.response) {
+          console.log('API error:', error.response.data)
+          setErrors({ apiError: error.response.data.message || 'Login failed' })
+        } else {
+          console.error('Unexpected error:', error)
+        }
       }
-
-      // setLoader(false); // Stop loader on failure
+    } else {
+      setErrors(formErrors)
     }
-};
-
-// Function to reset form state and loader
-const flushState = () => {
-  setEmail('');
-  setPassword('');
-  setLoader(false);
-  setErrors({}); // Clear errors when resetting
-};
-
+  }
 
   // Inline styles
   const styles = {
@@ -269,19 +246,16 @@ const flushState = () => {
               Forgot password?
             </a>
           </div>
-          <button type="submit" style={styles.signinButton} 
-          //  loading={loader}
-          //   disabled={loader} 
-            >
+          <button type="submit" style={styles.signinButton} >
             Sign In
           </button>
         </form>
-        <p style={styles.registerText}>
+        {/* <p style={styles.registerText}>
           Not registered yet?{' '}
           <a href="/register" style={styles.registerLink}>
             Create an Account
           </a>
-        </p>
+        </p> */}
       </div>
       {!isMobile && (
         <div

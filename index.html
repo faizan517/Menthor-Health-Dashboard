@@ -39,7 +39,31 @@
         src: local("DMSansRegular"),
          url("./src/utils/DM_Sans/static/DMSans_24pt-Regular.ttf") format("truetype");
        }
+       .custom-pagination .page-item {
+        border-radius: 10px; /* Rounded corners like the image */
+        margin: 0 2px; /* Small margin between items */
+      }
       
+      .custom-pagination .page-item.active .page-link {
+        background-color: #0056ff; /* Blue background for active */
+        color: #ffffff; /* White text for active */
+        font-weight: bold; /* Bold text for active */
+         /* Remove default border */
+      }
+      
+      .custom-pagination .page-item .page-link {
+        background-color: #f1f1f1; /* Light background for inactive */
+        color: #333; /* Darker text for inactive */
+        border: none; /* Remove default border */
+      }
+      
+      .custom-pagination .page-item:hover .page-link {
+        background-color: #e0e0e0; /* Light gray background on hover */
+      }
+      
+      .custom-pagination .page-item.disabled .page-link {
+        color: #ccc; /* Gray text for disabled */
+      }
     </style>
   </head>
   <body>

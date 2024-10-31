@@ -1,54 +1,81 @@
 import { CCardBody } from '@coreui/react';
 import { CChartPie } from '@coreui/react-chartjs';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { Fonts } from '../../utils/Fonts';
+import Color from '../../utils/Color';
+
+const styles = {
+  heading: {
+    ...Fonts.Inter,
+    fontSize: '20px',
+    fontWeight: 600,
+    color: Color.primary,
+    padding: 10
+  }
+};
 
 const PieChart = () => {
+  const [chartData, setChartData] = useState([20, 30, 25, 25]); // Default data
+  const [labels, setLabels] = useState(['Less than 18', '18-30', '30-50', '50+']); // Default labels
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('YOUR_API_ENDPOINT');
+        
+        // Check if response data contains the necessary properties
+        if (response.data && Array.isArray(response.data.labels) && Array.isArray(response.data.data)) {
+          setLabels(response.data.labels);
+          setChartData(response.data.data);
+        } else {
+          console.warn("API response does not contain expected 'labels' or 'data' arrays.");
+        }
+      } catch (error) {
+        console.error("Error fetching chart data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <CCardBody
       style={{
-        boxShadow: '4px 4px 15px 15px rgba(0, 0, 0, 0.05)',
+        boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
         borderWidth: 0,
-        padding: '20px',
-        maxWidth: '500px', // Adjust the width for a similar look
+        borderRadius: 10,
+        paddingLeft: '10px',
+        maxWidth: '500px',
       }}
     >
+      <h2 style={styles.heading}>Employee different age ranges</h2>
       <CChartPie
         data={{
-          labels: ['Less than 18', '18-30', '30-50', '50+'], // Update labels
+          labels: labels, // Use dynamic labels
           datasets: [
             {
-              data: [20, 30, 25, 25], // Adjusted data to match proportions
-              backgroundColor: ['#20c997', '#f9e547', '#4e79f7', '#df0404'], // Updated colors to match image
-              borderWidth: 0, // Remove border if needed
+              data: chartData, // Use dynamic data
+              backgroundColor: ['#20c997', '#f9e547', '#4e79f7', '#df0404'],
+              borderWidth: 0,
             },
           ],
         }}
         options={{
           plugins: {
             legend: {
-              display: true, // Show legend
-              position: 'right', // Position it to the right
-              labels: {
-                boxWidth: 20, // Size of the color box in the legend
-                padding: 20, // Spacing between legend items
-              },
-            },
-            title: {
               display: true,
-              text: 'Employee different age ranges', // Chart title
-              padding: {
-                top: 10,
-                bottom: 20,
-              },
-              font: {
-                size: 18,
+              position: 'right',
+              labels: {
+                boxWidth: 20,
+                padding: 20,
               },
             },
           },
           responsive: true,
-          maintainAspectRatio: false, // Set this to false to allow custom sizing
+          maintainAspectRatio: false,
         }}
-        style={{ height: '300px' }} // Adjust the height to fit
+        style={{ height: '300px' }}
       />
     </CCardBody>
   );

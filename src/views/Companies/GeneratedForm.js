@@ -1,8 +1,8 @@
 import React from 'react';
 import { CButton, CCardBody, CRow, CCol, CContainer } from '@coreui/react';
-import formIcon from '../../assets/brand/Order.png'; // Replace with your actual image path
 import Images from '../../utils/Images';
 import { Fonts } from '../../utils/Fonts';
+import Color from '../../utils/Color';
 
 const styles ={
   title:{ fontSize: '24px', ...Fonts.Inter,fontWeight: 500, marginBottom: '30px' }
@@ -23,7 +23,7 @@ const FormGeneratedCard = () => {
       <CCardBody>
         {/* Form Icon */}
         <div>
-          <img src={Images.formIcon} alt="Form Icon" style={{ marginBottom: '20px' }} />
+          <img src={Images.order} alt="Form Icon" style={{ marginBottom: '20px' }} />
         </div>
 
         {/* Title */}
@@ -32,7 +32,7 @@ const FormGeneratedCard = () => {
         </span>
 
         {/* Buttons Row */}
-        <CRow className="justify-content-center align-items-center mt-5">
+        <CRow className="d-flex justify-content-center align-items-center mt-5">
           {/* Copy Link Button */}
           <CCol xs="auto">
             <CButton
@@ -41,10 +41,7 @@ const FormGeneratedCard = () => {
                 padding: '10px 20px',
                 borderRadius: '12px',
                 border: '1px solid #D1D5DB',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '8px', // Add gap between icon and text
+                
               }}
             >
               {/* Copy Link Icon (you can add icon here if needed) */}
@@ -60,8 +57,7 @@ const FormGeneratedCard = () => {
           {/* Email Button */}
           <CCol xs="auto">
             <CButton
-              color="primary"
-              style={{ backgroundColor: '#0048ff', color: 'white',padding: '10px 20px', }}
+              style={{ backgroundColor: Color.primary, color: 'white',padding: '10px 20px', }}
             type="submit"
             className="mb-3 mt-3"
             >

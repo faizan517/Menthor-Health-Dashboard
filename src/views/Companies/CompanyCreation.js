@@ -49,24 +49,31 @@ const CompanyCreation = () => {
 
   // Handle form submission with Axios
   const onSubmit = async (data) => {
-    event.preventDefault()
+    const token = localStorage.getItem('token');
+
+    // Check if token exists
+    if (!token) {
+      console.error('No token found, user may not be logged in');
+      // Optionally, redirect to login or show a message
+      return;
+    }
+
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/createCompany', data);
-      toast.success('Login successful!');
-      flushState();
+      const response = await axios.post('http://localhost:5000/api/companies', data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       console.log('Response:', response.data);
-      // Redirect to another page or show success message
-      navigate('/filledCompanyCreation'); // Redirect after successful submission
+      // Redirect after successful submission
+      navigate('/filledCompanyCreation'); 
     } catch (error) {
-      console.error('Error:', error);
+      console.error('Error:', error.response ? error.response.data : error.message);
       // Handle error cases (e.g., show an error message to the user)
+      // Optionally set an error state to display it in the UI
     }
   };
-  const flushState = () => {
-    setEmail('');
-    setPassword('');
-    setLoader(false);
-  };
+
   return (
     <CContainer
       fluid
@@ -86,22 +93,22 @@ const CompanyCreation = () => {
             <div className="mb-3" style={styles.inputCon}>
               <CFormLabel style={styles.title}>Company Name</CFormLabel>
               <CFormInput
-                {...register('companyName', { required: 'Company name is required' })}
+                {...register('name', { required: 'Company name is required' })}
                 style={styles.input}
                 type="text"
               />
-              {errors.companyName && <CFormFeedback invalid>{errors.companyName.message}</CFormFeedback>}
+              {errors.name && <CFormFeedback invalid>{errors.name.message}</CFormFeedback>}
             </div>
           </CCol>
           <CCol md={5} className="mb-3 mt-2">
             <div className="mb-3" style={styles.inputCon}>
               <CFormLabel style={styles.title}>Company Address</CFormLabel>
               <CFormInput
-                {...register('companyAddress', { required: 'Company address is required' })}
+                {...register('address', { required: 'Company address is required' })}
                 style={styles.input}
                 type="text"
               />
-              {errors.companyAddress && <CFormFeedback invalid>{errors.companyAddress.message}</CFormFeedback>}
+              {errors.address && <CFormFeedback invalid>{errors.address.message}</CFormFeedback>}
             </div>
           </CCol>
         </CRow>
@@ -110,26 +117,26 @@ const CompanyCreation = () => {
             <div className="mb-3" style={styles.inputCon}>
               <CFormLabel style={styles.title}>Company Email</CFormLabel>
               <CFormInput
-                {...register('companyEmail', { required: 'Company email is required' })}
+                {...register('email', { required: 'Company email is required' })}
                 style={styles.input}
                 type="email"
               />
-              {errors.companyEmail && <CFormFeedback invalid>{errors.companyEmail.message}</CFormFeedback>}
+              {errors.email && <CFormFeedback invalid>{errors.email.message}</CFormFeedback>}
             </div>
           </CCol>
           <CCol md={5}>
             <div className="mb-3" style={styles.inputCon}>
               <CFormLabel style={styles.title}>Company Type</CFormLabel>
               <CFormInput
-                {...register('companyType', { required: 'Company type is required' })}
+                {...register('category', { required: 'Company type is required' })}
                 style={styles.input}
                 type="text"
               />
-              {errors.companyType && <CFormFeedback invalid>{errors.companyType.message}</CFormFeedback>}
+              {errors.category && <CFormFeedback invalid>{errors.category.message}</CFormFeedback>}
             </div>
           </CCol>
         </CRow>
-        <CRow className="mb-3">
+        <CRow className="mb-3" style={{ display: 'flex', justifyContent: 'center' }}>
           <CCol md={5}>
             <div className="mb-3" style={styles.inputCon}>
               <CFormLabel style={styles.title}>City</CFormLabel>
@@ -139,6 +146,17 @@ const CompanyCreation = () => {
                 type="text"
               />
               {errors.city && <CFormFeedback invalid>{errors.city.message}</CFormFeedback>}
+            </div>
+          </CCol>
+          <CCol md={5}>
+            <div className="mb-3" style={styles.inputCon}>
+              <CFormLabel style={styles.title}>Phone</CFormLabel>
+              <CFormInput
+                {...register('phone', { required: 'Phone is required' })}
+                style={styles.input}
+                type="text"
+              />
+              {errors.phone && <CFormFeedback invalid>{errors.phone.message}</CFormFeedback>}
             </div>
           </CCol>
         </CRow>

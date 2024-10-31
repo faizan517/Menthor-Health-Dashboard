@@ -1,15 +1,10 @@
-import React, {useState} from  'react'
-import {
-  CButton,
-  CCol,
-  CContainer,
-  CRow,
-} from '@coreui/react'
+import React, { useState } from 'react'
+import { CButton, CCol, CContainer, CRow } from '@coreui/react'
 
 import axios from 'axios'
 import { toast } from 'react-toastify'
 import Info from '../../../components/Info'
-import "react-tabs-scrollable/dist/rts.css";
+// import 'react-tabs-scrollable/dist/rts.css'
 import { useMediaQuery } from 'react-responsive'
 import { useNavigate } from 'react-router-dom'
 import Images from '../../../utils/Images'
@@ -47,26 +42,7 @@ const styles = {
     margin: 0,
     display: 'flex',
     alignItems: 'center',
-    justifyContent:'center'
-  },
-  tabs: {
-    display: 'flex',
     justifyContent: 'center',
-    marginTop: '30px',
-    borderTop: '2px solid #ddd',
-    paddingTop:30,
-  },
-  tab: {
-    padding: '5px',
-    width:'50vw',
-    cursor: 'pointer',
-    backgroundColor: '#f0f0f0',
-    fontWeight: 'bold',
-    color: '#333',
-    borderBottomRightRadius:10,
-    borderBottomLeftRadius:10,
-    textAlign:'center'
-
   },
   activeTab: {
     backgroundColor: '#006eff',
@@ -74,14 +50,7 @@ const styles = {
     // fontFamily: 'Inter',
     fontWeight: 700,
   },
-  mainHead: {
-    ...Fonts.Inter,
-    fontWeight: 700,
-    fontSize: '35px',
-    textAlign: 'justify',
-    lineHeight:1.3
-  },
-  tabHead:{
+  tabHead: {
     ...Fonts.Inter,
     fontWeight: 400,
     fontSize: '20px',
@@ -181,7 +150,6 @@ const styles = {
     color: '#fff',
   },
   container: {
-    height: '90vh', // Full screen height
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
@@ -190,6 +158,8 @@ const styles = {
     boxShadow: '4px 4px 15px 15px rgba(0, 0, 0, 0.05)',
     borderWidth: 0,
     borderRadius: 10,
+    marginTop: 50,
+    padding:20
   },
   image: {
     width: '80px', // Width of the smiley face
@@ -208,7 +178,6 @@ const styles = {
   },
 }
 const Page500 = (props) => {
-  
   const { isActive, styling, isReport, scroll } = props
   const [responses, setResponses] = useState({}) // To store form responses
   const [totalMarks, setTotalMarks] = useState(null) // To store calculated marks
@@ -230,37 +199,6 @@ const Page500 = (props) => {
     setResponses((prev) => ({ ...prev, [field]: value }))
   }
 
-  // const validateTab = () => {
-  //   const currentSection = formStructure[currentTab]
-  //   let valid = true
-  //   let errorMessages = {}
-
-  //   // Validate personal info if on first tab
-  //   if (currentTab === 0) {
-  //     if (!personalInfo.name) {
-  //       valid = false
-  //       errorMessages.name = 'Name is required.'
-  //     }
-  //     if (!personalInfo.email) {
-  //       valid = false
-  //       errorMessages.email = 'Email is required.'
-  //     }
-  //     // Add any other required fields for personal info
-  //   } else {
-  //     // Validate the form questions for other tabs
-  //     currentSection.questions.forEach((question) => {
-  //       if (question.required && !responses[question.id]) {
-  //         valid = false
-  //         errorMessages[question.id] = `${question.questionText} is required.`
-  //       }
-  //     })
-  //   }
-
-  //   setErrors(errorMessages)
-  //   return valid
-  // }
-
-  // Function to handle submitting personal info
   const handlePersonalInfoSubmit = async () => {
     try {
       const response = await axios.post(
@@ -285,7 +223,7 @@ const Page500 = (props) => {
     // Calculate marks for form questions
     formStructure.forEach((section) => {
       section.questions.forEach((question) => {
-        const response = responses[question.id]
+        const response = responses[question.name]
 
         if (question.questionType === 'mcq' && response) {
           marks += response // MCQ marks
@@ -321,7 +259,7 @@ const Page500 = (props) => {
     setCurrentTab(index)
     window.scrollTo({ top: 400, behavior: 'smooth' })
   }
-  const [activeTab, setActiveTab] = useState(0); // Manage active tab state
+  const [activeTab, setActiveTab] = useState(0) // Manage active tab state
   const navigate = useNavigate()
 
   function handleClick() {
@@ -329,102 +267,122 @@ const Page500 = (props) => {
   }
 
   const onTabClick = (e, index) => {
-    console.log(e);
-    setActiveTab(index);
-  };
-  
+    console.log(e)
+    setActiveTab(index)
+  }
 
   const TabScreen = ({ activeTab, idx, ...props }) => {
     return (
-      <div
-        className="animate__animated animate__fadeInLeft"
-        role="tabpanel"
-        {...props}
-      >
+      <div className="animate__animated animate__fadeInLeft" role="tabpanel" {...props}>
         {activeTab === idx && <div className="mx-4">Tab screen {idx}</div>}
       </div>
-    );
-  };
+    )
+  }
 
   return (
-    <CContainer  style={styles.formContainer}>
+    <CContainer style={styles.formContainer}>
       {/* Header Section */}
-      <CRow lg={12} md={6} sm={3} style={{...styles.header, display:'flex',flexDirection:'row-reverse'}}>
-        <CCol sm={6} md={6} lg={6} style={styles.headContainor}>
-        <img src={Images.head} style={{  width:  '100%', height: 'auto',}} />
-          
-        </CCol>
-        <CCol sm={3} md={4} lg={3} style={{...styles.logo,display:'flex',justifyContent:'center',marginTop: isMobile ? 20: 0}}>
-          <img src={Images.logoBig} style={{  width: isMobile ?'50%' :  '100%', height: 'auto',  maxWidth: '400px'}} onClick={handleClick}/>
-        </CCol>
-      </CRow>
-      <CCol
-      
-        style={{
-          textAlign: 'justify',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          marginTop: 50,
-        }}
+      <CRow
+        lg={12}
+        md={6}
+        sm={3}
+        style={{ ...styles.header, display: 'flex', flexDirection: 'row-reverse' }}
       >
-        <text
+        <CCol sm={6} md={6} lg={6} style={styles.headContainor}>
+          <img src={Images.head} style={{ width: '100%', height: 'auto' }} />
+        </CCol>
+        <CCol
+          sm={3}
+          md={4}
+          lg={3}
           style={{
-            textAlign: 'justify',
-            ...Fonts.Inter,
-            fontWeight: 400,
-            fontSize: '16px',
+            ...styles.logo,
+            display: 'flex',
+            justifyContent: 'center',
+            marginTop: isMobile ? 20 : 0,
           }}
         >
-          Mentor Health is your dedicated health partner. Your well-being is our priority. Please
-          take just 5 minutes out of your day to fill out this form. This personalized health
-          journey is designed to evaluate your risks, understand your health needs, and maximize
-          health benefits. Through this collaboration, we'll develop strategies to reduce your
-          health costs and promote healthy living through preventive care. Together, we can ensure
-          you lead a healthier, happier life.
-        </text>
-      </CCol>
-
+          <img
+            src={Images.logoBig}
+            style={{ width: isMobile ? '50%' : '100%', height: 'auto', maxWidth: '400px' }}
+            onClick={handleClick}
+          />
+        </CCol>
+      </CRow>
+      {!isSubmitted && (
+        <CCol
+          style={{
+            textAlign: 'justify',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            marginTop: 50,
+          }}
+        >
+          <text
+            style={{
+              textAlign: 'justify',
+              ...Fonts.Inter,
+              fontWeight: 400,
+              fontSize: '16px',
+            }}
+          >
+            Mentor Health is your dedicated health partner. Your well-being is our priority. Please
+            take just 5 minutes out of your day to fill out this form. This personalized health
+            journey is designed to evaluate your risks, understand your health needs, and maximize
+            health benefits. Through this collaboration, we'll develop strategies to reduce your
+            health costs and promote healthy living through preventive care. Together, we can ensure
+            you lead a healthier, happier life.
+          </text>
+        </CCol>
+      )}
       {/* <Quiz/> */}
 
-      <>
       {/* Tabs Navigation */}
-      <TabsComponent
-        currentTab={currentTab}
-        formStructure={formStructure}
-        handleTabClick={handleTabClick}
-        isMobile={isMobile}
-      />
-
+      {!isSubmitted && (
+        <TabsComponent
+          currentTab={currentTab}
+          formStructure={formStructure}
+          handleTabClick={handleTabClick}
+          isMobile={isMobile}
+        />
+      )}
       {/* Form Content */}
-      <CContainer
-        style={{
-          width: isMobile ? '90vw' : '',
-          boxShadow: '4px 4px 15px 15px rgba(0, 0, 0, 0.05)',
-          borderWidth: 0,
-          borderRadius: 10,
-          textAlign: 'left',
-          marginTop: 40,
-          ...styling,
-        }}
-      >
-        {!isSubmitted ? (
+      {!isSubmitted ? (
+        <CContainer
+          style={{
+            width: isMobile ? '90vw' : '',
+            boxShadow: '4px 4px 15px 15px rgba(0, 0, 0, 0.05)',
+            borderWidth: 0,
+            borderRadius: 10,
+            textAlign: 'left',
+            marginTop: 40,
+            ...styling,
+          }}
+        >
           <form onSubmit={handleSubmit}>
             {formStructure.slice(currentTab, currentTab + 1).map((section, sectionIndex) => (
               <div key={sectionIndex}>
                 {/* First Tab for Personal Info */}
                 {currentTab === 0 && <Info onInputChange={handlePersonalInfoChange} />}
                 {/* Static Heading*/}
-                {currentTab && <CRow>
-                  <CCol className="mb-5 mt-5">
-                    <text
-                      style={{ ...styles.answerFont, fontSize: 16, paddingLeft: 50, marginTop: 10 }}
-                    >
-                      Note: Please skip questions that do not apply to you.
-                    </text>
-                  </CCol>
-                </CRow>}
+                {currentTab && (
+                  <CRow>
+                    <CCol className="mb-5 mt-5">
+                      <text
+                        style={{
+                          ...styles.answerFont,
+                          fontSize: 16,
+                          paddingLeft: 50,
+                          marginTop: 50,
+                        }}
+                      >
+                        Note: Please skip questions that do not apply to you.
+                      </text>
+                    </CCol>
+                  </CRow>
+                )}
                 {/* Render questions for each section */}
                 {section.questions.map((question) => (
                   <div key={question.id} style={{ paddingLeft: 50, marginTop: 10 }}>
@@ -531,25 +489,27 @@ const Page500 = (props) => {
               )}
             </div>
           </form>
-        ) : (
-          <CContainer style={styles.container}>
-            <img src={Images.smile} alt="Smiley Face" style={styles.image} />
-            <span style={styles.imgHeading}>Thank you!</span>
-            <span style={{ ...styles.text, marginTop: 10 }}>
-              You will receive your assessment form report via email.
-            </span>
-          </CContainer>
-        )}
 
-        {/* Show total marks if form is submitted */}
-        {/* {totalMarks !== null && (
+          {/* Show total marks if form is submitted */}
+          {/* {totalMarks !== null && (
           <div>
             <h2>Your Total Marks: {totalMarks}</h2>
           </div>
         )} */}
-      </CContainer>
-      </>
-
+        </CContainer>
+      ) : (
+        <CContainer style={styles.container}>
+          <img src={Images.smile} alt="Smiley Face" style={styles.image} />
+          <span style={styles.imgHeading}>Thank you!</span>
+          <span style={{ ...styles.text, marginTop: 10 }}>
+            Please tick mark to accept that the summary of this data will be shared with your
+            employer. This form is intended solely to measure your health risk. The results of this
+            form will allow your employer to analyze your and your colleagues&#39; health needs to
+            provide you with the best and most personalized health benefits.
+          </span>
+          <div style={{...styles.text, fontWeight:400,display:'flex',alignItems:'flex-end',justifyContent:'flex-end',height:300}}>You will get your assessment form report on your email</div>
+        </CContainer>
+      )}
     </CContainer>
   )
 }

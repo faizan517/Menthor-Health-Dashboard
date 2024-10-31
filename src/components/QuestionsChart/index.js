@@ -10,13 +10,13 @@ const styles = {
         fontWeight:600,
         color: Color.primary, 
         marginBottom: '20px',
-        marginTop:'10px' 
+        marginTop:'10px',
     },
     title:{
       ...Fonts.Inter,
       fontSize:16,
       color: Color.black,
-      fontWeight:500
+      fontWeight:500,
     }
 
 }
@@ -27,15 +27,16 @@ const QuestionsChart = (props) => {
   return (
     <CCardBody
       style={{
-        boxShadow: '4px 4px 15px 15px rgba(0, 0, 0, 0.05)',
+        boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
         borderWidth: 0,
         borderRadius:10,
+        padding:10
       }}
     >
     <CContainer>
       <h3 style={{...styles.heading,paddingTop:10}}>Prevalent Health Condition</h3>
-      <CRow>
-        <CCol md={6}>
+      <CRow style={{display:'flex',justifyContent:'center',}}>
+        <CCol md={5} >
           <CTable >
             <CTableHead>
               <CTableRow>
@@ -54,7 +55,7 @@ const QuestionsChart = (props) => {
           </CTable>
         </CCol>
         {/* <div style={{width:1}}></div> */}
-        <CCol md={6}>
+        <CCol md={5}>
           <CTable>
             <CTableHead>
               <CTableRow>

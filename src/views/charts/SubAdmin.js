@@ -14,8 +14,6 @@ import {
 import { useForm } from 'react-hook-form'
 import { PiPencilSimple } from 'react-icons/pi'
 import { Fonts } from '../../utils/Fonts'
-import { toast } from 'react-toastify'
-import { Navigate } from 'react-router-dom'
 
 const styles = {
   heading: {
@@ -103,7 +101,6 @@ const styles = {
   },
 }
 
-
 const SubAdmin = () => {
   const {
     register,
@@ -114,24 +111,15 @@ const SubAdmin = () => {
   // Handle form submission with Axios
   const onSubmit = async (data) => {
     try {
-      const response = await axios.post('https://your-api-url.com/api/subadmin', data)
-       console.log('Login successful:', response.data);
-      toast.success('Login successful!');
-      flushState();
+      const response = await axios.post('http://localhost:5000/api/auth/createAdmin', data)
       console.log('Response:', response.data)
-      Navigate("/company")
       // You can handle success messages or redirection here
     } catch (error) {
-      toast.error(error.response?.data?.message || 'Login failed, please try again');
       console.error('Error:', error)
       // Handle error cases (e.g., show an error message to the user)
     }
   }
-  const flushState = () => {
-    setEmail('');
-    setPassword('');
-    setLoader(false);
-  };
+
   return (
     <CContainer
       style={{
@@ -152,12 +140,11 @@ const SubAdmin = () => {
                 {...register('role', { required: 'Role is required' })}
                 style={styles.input}
                 aria-label="Default select example"
-                options={[
-                  'Select Admin',
-                  { label: 'Super Admin', value: '1' },
-                  { label: 'Admin', value: '2' },
-                ]}
-              />
+              >
+                <option value="">Select</option>
+                <option value="sub-admin">Sub Admin</option>
+                <option value="admin">Admin</option>
+              </CFormSelect>
               {errors.role && <CFormFeedback invalid>{errors.role.message}</CFormFeedback>}
             </div>
           </CCol>
@@ -208,11 +195,11 @@ const SubAdmin = () => {
             <div className="mb-3" style={styles.inputCon}>
               <CFormLabel style={styles.title}>Date of Birth</CFormLabel>
               <CFormInput
-                {...register('dob', { required: 'Date of Birth is required' })}
+                {...register('dateOfBirth', { required: 'Date of Birth is required' })}
                 style={styles.input}
                 type="date"
               />
-              {errors.dob && <CFormFeedback invalid>{errors.dob.message}</CFormFeedback>}
+              {errors.dateOfBirth && <CFormFeedback invalid>{errors.dateOfBirth.message}</CFormFeedback>}
             </div>
           </CCol>
           <CCol md={5}>
@@ -222,12 +209,12 @@ const SubAdmin = () => {
                 {...register('gender', { required: 'Gender is required' })}
                 style={styles.input}
                 aria-label="Default select example"
-                options={[
-                  'Select Gender',
-                  { label: 'Male', value: 'Male' },
-                  { label: 'Female', value: 'Female' },
-                ]}
-              />
+              >
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </CFormSelect>
               {errors.gender && <CFormFeedback invalid>{errors.gender.message}</CFormFeedback>}
             </div>
           </CCol>
@@ -257,23 +244,13 @@ const SubAdmin = () => {
           </CCol>
         </CRow>
 
-        {/* Password and Confirm Password Fields */}
+        {/* Password Fields */}
         <CRow className="mb-3" style={{ display: 'flex', justifyContent: 'center' }}>
           <CCol md={5}>
             <div className="mb-3" style={styles.inputCon}>
               <CFormLabel style={styles.title}>Password</CFormLabel>
               <CFormInput
                 {...register('password', { required: 'Password is required' })}
-                style={styles.input}
-                type="password"
-              />
-            </div>
-          </CCol>
-          <CCol md={5}>
-            <div className="mb-3" style={styles.inputCon}>
-              <CFormLabel style={styles.title}>Confirm Password</CFormLabel>
-              <CFormInput
-                {...register('confirmPassword', { required: 'Confirm Password is required' })}
                 style={styles.input}
                 type="password"
               />
@@ -295,4 +272,4 @@ const SubAdmin = () => {
   )
 }
 
-export default SubAdmin
+export default SubAdmin;

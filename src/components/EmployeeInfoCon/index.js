@@ -1,6 +1,8 @@
 import React from 'react'
-import { CCard, CCardBody, CCardHeader, CBadge, CRow, CCol } from '@coreui/react'
+import { CCard, CCardBody, CCardHeader, CBadge, CRow, CCol, CContainer } from '@coreui/react'
 import { Fonts } from '../../utils/Fonts'
+import Color from '../../utils/Color'
+import { useMediaQuery } from 'react-responsive'
 
 const styles = {
   title: {
@@ -45,14 +47,22 @@ const EmployeeInfo = (props) => {
     companyEmail="methologik@gmail.com",
     companyAddress="13 Commercial, Street, DHA, Karachi",
     companyName="Methologik",
-    companyStatus="Completed"
+    companyStatus="Completed",
+    isUser,
+    isEmployee,
   } = props
-  return isCompany ? (
-    <CCard
-      style={{ borderRadius: '15px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}
+  const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
+
+  return (
+    <>
+    {isEmployee && (  <CCard
+      style={{ height:'16rem', boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
+        borderWidth: 0,
+        borderRadius: 10,
+        marginTop:10 }}
     >
       <CCardBody>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center',textAlign:'left' }}>
           <span style={styles.heading}>{name}</span>
           <CBadge style={styles.status}>{status}</CBadge>
         </div>
@@ -82,9 +92,10 @@ const EmployeeInfo = (props) => {
         </CRow>
       </CCardBody>
     </CCard>
-  ) : (
-    <CCard
-      style={{ width: '20rem', boxShadow: '4px 4px 15px 15px rgba(0, 0, 0, 0.05)',
+      )}
+  <>
+  {isCompany &&  (<CCard
+      style={{ height:'16rem', boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
         borderWidth: 0,
         borderRadius: 10,
         marginTop:10 }}
@@ -122,8 +133,53 @@ const EmployeeInfo = (props) => {
           </CCol>
         </CRow>
       </CCardBody>
+    </CCard>)}
+  </>
+
+
+    <>
+    {isUser && (
+    <CCard
+      style={{ height:'16rem', boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
+        borderWidth: 0,
+        borderRadius: 10,
+        marginTop:10 }}
+    >
+      <CCardBody style={{display:'flex',flexDirection:'column',justifyContent:'space-around'}}>
+        <CRow className="mt-3" >
+          <CCol>
+          <CRow style={styles.title}>
+            <div style={{ ...styles.title, fontSize: 14, color: '#A0AEC0' }}>Total Users</div>
+            <div style={{ ...styles.title, fontSize: 32, fontWeight:600, color:Color.black }}> 5,423</div>
+          </CRow>
+          </CCol>
+          <CCol>
+          <CRow style={styles.title}>
+            <div style={{ ...styles.title, fontSize: 14, color: '#A0AEC0' }}>Male</div>
+            <div style={{ ...styles.title, fontSize: 32, fontWeight:600, color:Color.black }}>3,423</div>
+          </CRow>
+          </CCol>
+        <CCol >
+          <CRow style={styles.title}>
+            <div style={{ ...styles.title, fontSize: 14, color: '#A0AEC0' }}>female</div>
+            <div style={{ ...styles.title, fontSize: 32, fontWeight:600, color:Color.black }}>2000</div>
+          </CRow>
+        </CCol>
+        </CRow>
+        {/* <CRow className="mt-3"> */}
+        {/* </CRow> */}
+        <CRow className="mt-3">
+          <CRow style={styles.title}>
+            <div style={{ ...styles.title, fontSize: 14, color: '#A0AEC0' }}>Who Filled the form</div>
+            <div style={{ ...styles.title, fontSize: 32, fontWeight:600, color:Color.black }}>3,300</div>
+          </CRow>
+        </CRow>
+      </CCardBody>
     </CCard>
-  )
+  )}
+  </>
+    </>
+)
 }
 
 export default EmployeeInfo

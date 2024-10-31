@@ -28,15 +28,15 @@ const _nav = [
       color: 'info',
     },
   },
-  {
-    component: CNavItem,
-    name: 'ManageForm',
-    to: '/manageForm',
-    icon: <PiTable className="nav-icon" />,
-    badge: {
-      color: 'info',
-    },
-  },
+  // {
+  //   component: CNavItem,
+  //   name: 'ManageForm',
+  //   to: '/manageForm',
+  //   icon: <PiTable className="nav-icon" />,
+  //   badge: {
+  //     color: 'info',
+  //   },
+  // },
   {
     component: CNavItem,
     name: 'Companies',
@@ -70,24 +70,24 @@ const _nav = [
   //     color: 'info',
   //   },
   // },
-  {
-    component: CNavItem,
-    name: 'Data Export',
-    to: '/dataExport',
-    icon: <PiDatabase className="nav-icon" />,
-    badge: {
-      color: 'info',
-    },
-  },
-  {
-    component: CNavItem,
-    name: 'Help & Support',
-    to: '/support',
-    icon: <IoHelpCircleOutline className="nav-icon" />,
-    badge: {
-      color: 'info',
-    },
-  },
+  // {
+  //   component: CNavItem,
+  //   name: 'Data Export',
+  //   to: '/dataExport',
+  //   icon: <PiDatabase className="nav-icon" />,
+  //   badge: {
+  //     color: 'info',
+  //   },
+  // },
+  // {
+  //   component: CNavItem,
+  //   name: 'Help & Support',
+  //   to: '/support',
+  //   icon: <IoHelpCircleOutline className="nav-icon" />,
+  //   badge: {
+  //     color: 'info',
+  //   },
+  // },
   // {
   //   component: CNavTitle,
   //   name: 'Theme',
@@ -352,7 +352,7 @@ const _nav = [
       {
         component: CNavItem,
         name: 'Quiz',
-        to: '/500',
+        to: '/form',
       },
     ],
   },

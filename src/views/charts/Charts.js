@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react'
-import { CCard } from '@coreui/react'
-import 'react-circular-progressbar/dist/styles.css'
-import { useMediaQuery } from 'react-responsive'
-import { CSmartPagination } from '@coreui/react-pro'
-import { useNavigate } from "react-router-dom"
-import axios from 'axios' // Add axios import
+import React, { useState, useEffect } from 'react';
+import { CCard } from '@coreui/react';
+import 'react-circular-progressbar/dist/styles.css';
+import { useMediaQuery } from 'react-responsive';
+import { CSmartPagination } from '@coreui/react-pro';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import {
   CTable,
   CTableBody,
@@ -18,59 +18,77 @@ import {
   CRow,
   CCol,
   CFormSelect,
-} from '@coreui/react'
-import UserStatsCard from '../../components/UserStatsCard'
-import { LuPlus } from 'react-icons/lu'
-import { Fonts } from '../../utils/Fonts'
+} from '@coreui/react';
+import UserStatsCard from '../../components/UserStatsCard';
+import { LuPlus } from 'react-icons/lu';
+import { Fonts } from '../../utils/Fonts';
 
 const styles = {
   // Add your styles here as you did
-}
+};
 
 const UserTable = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const [users, setUsers] = useState([]);
+  const [search, setSearch] = useState('');
+  const [sortBy, setSortBy] = useState('newest');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1); // Store the total pages from the API
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const usersPerPage = 8;
+  const isMobile = useMediaQuery({ query: '(max-width: 767px)' });
+  const [data,setData] = useState([])
+  // Replace with your token
+  const token = localStorage.getItem('token');
 
-  const [users, setUsers] = useState([])
-  const [search, setSearch] = useState('')
-  const [sortBy, setSortBy] = useState('newest')
-  const [currentPage, setCurrentPage] = useState(1)
-  const usersPerPage = 8
-  const isMobile = useMediaQuery({ query: '(max-width: 767px)' })
-
-  function handleClick() {
-    navigate("/subAdmin")
-  }
+  const handleClick = () => {
+    navigate("/subAdmin");
+  };
 
   useEffect(() => {
-    fetchUsers() // Fetch users on component mount
-  }, [sortBy, currentPage])
+    fetchUsers(); // Fetch users on component mount and when sorting or page changes
+  }, []);
 
   const fetchUsers = async () => {
+    setLoading(true);
+    setError(null);
+
     try {
-      const response = await axios.get('https://your-api-url.com/users', {
+      const response = await axios.get('http://localhost:5000/api/auth/all', {
         params: {
-          page: currentPage, // Send pagination info if needed
+          page: currentPage,
           limit: usersPerPage,
-          sort: sortBy
-        }
-      })
-
-      // Set users from API response
-      setUsers(response.data.users) // Adjust this based on your API structure
-
+          sort: sortBy,
+        },
+        headers: {
+          Authorization: `Bearer ${token}`, // Include the Bearer token here
+        },
+      });
+      console.log('API Response:', response.data); // Log the entire response
+      setData(response.data);
+      // if (response.data && response.data.users) {
+      //   setUsers(response.data.users);
+      //   setTotalPages(response.data.totalPages || 1); // Assuming API provides total pages
+      // } else {
+      //   throw new Error('Invalid response structure');
+      // }
     } catch (error) {
-      console.error('Error fetching users:', error)
+      console.error('Error fetching users:', error.response ? error.response.data : error.message);
+      setError('Failed to fetch users. Please try again.');
+    } finally {
+      setLoading(false);
     }
-  }
+  };
 
   const handleSearch = (e) => {
-    setSearch(e.target.value)
-    setCurrentPage(1) // Reset to the first page on search
-  }
+    setSearch(e.target.value);
+    setCurrentPage(1); // Reset to the first page on search
+  };
 
   const handleSortChange = (e) => {
-    setSortBy(e.target.value)
-  }
+    setSortBy(e.target.value);
+  };
 
   return (
     <CContainer fluid>
@@ -113,61 +131,67 @@ const UserTable = () => {
           </CCol>
         </CRow>
 
-        <CTable responsive hover>
-          <CTableHead>
-            <CTableRow>
-              <CTableHeaderCell style={styles.heading}>User Name</CTableHeaderCell>
-              <CTableHeaderCell style={styles.heading}>Company</CTableHeaderCell>
-              <CTableHeaderCell style={styles.heading}>Phone Number</CTableHeaderCell>
-              <CTableHeaderCell style={styles.heading}>Email</CTableHeaderCell>
-              <CTableHeaderCell style={styles.heading}>City</CTableHeaderCell>
-              <CTableHeaderCell style={styles.heading}>Status</CTableHeaderCell>
-            </CTableRow>
-          </CTableHead>
-          <CTableBody>
-            {users.map((user) => (
-              <CTableRow key={user.id}>
-                <CTableDataCell style={styles.title}>{user.name}</CTableDataCell>
-                <CTableDataCell style={styles.title}>{user.company}</CTableDataCell>
-                <CTableDataCell style={styles.title}>{user.phone}</CTableDataCell>
-                <CTableDataCell style={styles.title}>{user.email}</CTableDataCell>
-                <CTableDataCell style={styles.title}>{user.city}</CTableDataCell>
-                <CTableDataCell>
-                  {user.isActive ? (
-                    <CBadge style={styles.status}>Active</CBadge>
-                  ) : (
-                    <CBadge
-                      style={{
-                        ...styles.status,
-                        backgroundColor: 'rgba(255, 197, 197, 1)',
-                        borderWidth: 1,
-                        borderStyle: 'solid',
-                        borderColor: 'rgba(223, 4, 4, 1)',
-                        color: 'rgba(223, 4, 4, 1)',
-                        ...Fonts.Poppins,
-                        fontSize: 14,
-                      }}
-                    >
-                      Inactive
-                    </CBadge>
-                  )}
-                </CTableDataCell>
+        {loading ? (
+          <p>Loading users...</p>
+        ) : error ? (
+          <p>{error}</p>
+        ) : (
+          <CTable responsive hover>
+            <CTableHead>
+              <CTableRow>
+                <CTableHeaderCell style={styles.heading}>User Name</CTableHeaderCell>
+                <CTableHeaderCell style={styles.heading}>Company</CTableHeaderCell>
+                <CTableHeaderCell style={styles.heading}>Phone Number</CTableHeaderCell>
+                <CTableHeaderCell style={styles.heading}>Email</CTableHeaderCell>
+                <CTableHeaderCell style={styles.heading}>City</CTableHeaderCell>
+                <CTableHeaderCell style={styles.heading}>Status</CTableHeaderCell>
               </CTableRow>
-            ))}
-          </CTableBody>
-        </CTable>
+            </CTableHead>
+            <CTableBody>
+              {data.map((user) => (
+                <CTableRow key={user.id}>
+                  <CTableDataCell style={styles.title}>{user.first_name}</CTableDataCell>
+                  <CTableDataCell style={styles.title}>{user.role}</CTableDataCell>
+                  <CTableDataCell style={styles.title}>{user.designation}</CTableDataCell>
+                  <CTableDataCell style={styles.title}>{user.email}</CTableDataCell>
+                  <CTableDataCell style={styles.title}>{user.gender}</CTableDataCell>
+                  <CTableDataCell>
+                    {user.isActive ? (
+                      <CBadge style={styles.status}>Active</CBadge>
+                    ) : (
+                      <CBadge
+                        style={{
+                          ...styles.status,
+                          backgroundColor: 'rgba(255, 197, 197, 1)',
+                          borderWidth: 1,
+                          borderStyle: 'solid',
+                          borderColor: 'rgba(223, 4, 4, 1)',
+                          color: 'rgba(223, 4, 4, 1)',
+                          ...Fonts.Poppins,
+                          fontSize: 14,
+                        }}
+                      >
+                        Inactive
+                      </CBadge>
+                    )}
+                  </CTableDataCell>
+                </CTableRow>
+              ))}
+            </CTableBody>
+          </CTable>
+        )}
 
         <CSmartPagination
           size="sm"
           activePage={currentPage}
-          pages={2} // Set this dynamically based on total pages from API
+          pages={totalPages} // Dynamically set total pages
           onActivePageChange={setCurrentPage}
           className="pagination cursor-pointer"
           align={'end'}
         />
       </CCard>
     </CContainer>
-  )
-}
+  );
+};
 
-export default UserTable
+export default UserTable;

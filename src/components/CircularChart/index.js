@@ -17,6 +17,7 @@ const CircularChart = (props) => {
   ];
 
   return (
+    
       <CCardBody style={{...styles.cardBody, flexDirection: isTab ? 'column-reverse' : ''}}>
         <div style={styles.circularContainer}>
           {/* Nested Circular Progress Bars */}
@@ -66,6 +67,11 @@ const styles = {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
+    boxShadow: '4px 4px 15px 15px rgba(0, 0, 0, 0.05)',
+        borderWidth: 0,
+        padding: '20px',
+        maxWidth: '500px',
+        borderRadius:10 
   },
   circularContainer: {
     width: '150px',

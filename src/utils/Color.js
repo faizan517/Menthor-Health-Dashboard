@@ -10,5 +10,10 @@ export default{
   green:'#00AC4F',
   purple:'#A43DFF',
   yellow:'#E4E414',
-
+  chartGray:'#F1F1F1',
+  barBorder:'#2B3674',
+  barBorderRed:'#6D0707',
+  barBorderPurple:'#7A1ECA',
+  barBorderYellow:'#A5A50C',
+  barBorderGreen:'#124127'
   }
